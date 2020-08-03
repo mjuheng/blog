@@ -1,8 +1,8 @@
 module.exports = {
   "title": "QiJieH\'s Blog",
   "description": "于朝阳升起处,我将踏上旅程",
-  "base": ".vuepress/dist",
-  "dest": "docs",
+  "base": "blog",
+  "dest": ".vuepress/dist",
   "head": [
     [
       "link",
