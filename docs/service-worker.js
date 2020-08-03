@@ -27,7 +27,7 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "92ba9a554880552579f1b1cddabb07a5"
+    "revision": "66a92e796fe7d4116154d62a5235f911"
   },
   {
     "url": "assets/css/0.styles.605b745b.css",
@@ -90,8 +90,8 @@ self.__precacheManifest = [
     "revision": "bbb13da129bebc39243315fbddf9d88a"
   },
   {
-    "url": "assets/js/app.90bce037.js",
-    "revision": "c4717e63aa72ebc1730b506f8bc458b7"
+    "url": "assets/js/app.26442586.js",
+    "revision": "2ab87ee6dbb8259d72046cfd7dbae9b1"
   },
   {
     "url": "assets/js/vendors~flowchart.b1222c5f.js",
@@ -99,39 +99,39 @@ self.__precacheManifest = [
   },
   {
     "url": "blogs/FrontEnd/2020-8/tips.html",
-    "revision": "aba8db9e08d587cf907bac61bdfa0a5e"
+    "revision": "1c370c53e743e8297cfa92ee9a23bb5f"
   },
   {
     "url": "blogs/FrontEnd/2020-8/依托于 GithubPage 的静态博客部署方案.html",
-    "revision": "3ea75f4f1857648713642f4dcac52f2f"
+    "revision": "a8c45b8fa889e79aadeb45829a474585"
   },
   {
     "url": "categories/FrondEnd/index.html",
-    "revision": "21a1d9258e558380a4c22c81be1784d3"
+    "revision": "a7e0892b09db29473a883fe13b2df79c"
   },
   {
     "url": "categories/index.html",
-    "revision": "be4c28df83d956091770d5fefdb006da"
+    "revision": "fb9272f4b92155ebb5478a5e179fb787"
   },
   {
     "url": "index.html",
-    "revision": "bff7557a627d07db5654c093f7678e3c"
+    "revision": "938502ab67c75c0c0340a7bb9e271780"
   },
   {
     "url": "tag/githubpage/index.html",
-    "revision": "7f54e651be4b7cefe88861c022d37ab5"
+    "revision": "f1b9d5e7cfca6695f02020bbbe5ddd0d"
   },
   {
     "url": "tag/index.html",
-    "revision": "66b23a59c705dd38566d913bce4db394"
+    "revision": "5b47ba4778e7cb4844850260ed89990e"
   },
   {
     "url": "tag/vuepress/index.html",
-    "revision": "8abc0186be4730a73d0d3ec6b4bb9eec"
+    "revision": "192551ab65c499ea92117ef277c4868c"
   },
   {
     "url": "timeline/index.html",
-    "revision": "e26cb8f2b367286b74bb384a2f1b7a52"
+    "revision": "a02e201d2bba25a8643ec0f61a738dba"
   },
   {
     "url": "web-img/author.jpg",
