@@ -8,16 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@master
         with:
           persist-credentials: false
 
-      - name: Build
-        run: npm install && npm run build
-
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
+      - name: Build and Deploy
+        uses: testthedocs/github-pages-deploy-action@master
+        env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: .vuepress/dist
+          BUILD_DIR: .vuepress/dist 
+          BUILD_SCRIPT: npm install && npm run build 
