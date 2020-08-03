@@ -1,7 +1,7 @@
 module.exports = {
   "title": "QiJieH\'s Blog",
   "description": "于朝阳升起处,我将踏上旅程",
-  "base": "/blog/",
+  "base": ".vuepress/dist",
   "dest": "docs",
   "head": [
     [
