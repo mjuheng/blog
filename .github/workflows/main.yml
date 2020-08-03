@@ -15,7 +15,7 @@ jobs:
           persist-credentials: false
 
     - name: Build
-        run: |
+        run:
           npm install
           npm run build
 
