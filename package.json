@@ -2,6 +2,7 @@
   "name": "my-blog",
   "version": "1.0.0",
   "author": "QiJieH",
+  "homepage": "https://qijieh.github.io/blog",
   "scripts": {
     "dev": "vuepress dev .",
     "build": "vuepress build ."
