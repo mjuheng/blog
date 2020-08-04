@@ -75,13 +75,6 @@ module.exports = {
       //   "link": "https://vuepress-theme-reco.recoluan.com"
       // }
     ],
-    vssueConfig: {
-      platform: 'github',
-      owner: 'QiJieH',
-      repo: 'blog',
-      clientId: process.env.VSSUEID,
-      clientSecret: process.env.VSSUESECRET
-    },
     logo: "/web-img/author.jpg",
     search: true,
     searchMaxSuggestions: 10,
@@ -133,19 +126,18 @@ module.exports = {
     [
       '@vuepress-reco/vuepress-plugin-loading-page',false
     ],
-    // [
-    //   '@vuepress-reco/comments', {
-    //     solution: 'vssue',
-    //     options: {
-    //       title: 'QiJieH\'s blog comments',
-    //       platform: 'github',
-    //       owner: 'QiJieH',
-    //       repo: 'blog',
-    //       clientId: process.env.VSSUEID,
-    //       clientSecret: process.env.VSSUESECRET,
-    //     }
-    //   }
-    // ],
+    [
+      '@vuepress-reco/comments', {
+        solution: 'vssue',
+        options: {
+          platform: 'github',
+          owner: 'QiJieH',
+          repo: 'blog',
+          clientId: process.env.VSSUEID,
+          clientSecret: process.env.VSSUESECRET,
+        }
+      }
+    ],
     [
       'img-lazy'
     ],
