@@ -11,7 +11,7 @@ tagline: 于朝阳升起处,我将踏上旅程
 #   background: '#fff',
 #   borderRadius: '1rem',
 # }
-bgImage: 'web-img/banner02.png'
+bgImage: '/web-img/banner02.png'
 bgImageStyle: {
   height: '450px'
 }
