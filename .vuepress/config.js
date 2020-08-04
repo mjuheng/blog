@@ -1,9 +1,9 @@
 module.exports = {
-  "title": "QiJieH\'s Blog",
-  "description": "于朝阳升起处,我将踏上旅程",
-  "base": "/blog/",
-  "dest": ".vuepress/dist",
-  "head": [
+  title: "QiJieH\'s Blog",
+  description: "于朝阳升起处,我将踏上旅程",
+  base: "/blog/",
+  dest: ".vuepress/dist",
+  head: [
     [
       "link",
       {
@@ -19,9 +19,12 @@ module.exports = {
       }
     ]
   ],
-  "theme": "reco",
-  "themeConfig": {
-    "nav": [
+
+  theme: "reco",
+  themeConfig: {
+
+
+    nav: [
       // {
       //   "text": "Home",
       //   "link": "/",
@@ -44,9 +47,11 @@ module.exports = {
       //   ]
       // }
     ],
-    "sidebar": "auto",
-    "type": "blog",
-    "blogConfig": {
+
+
+    sidebar: "auto",
+    type: "blog",
+    blogConfig: {
     //   "category": {
     //     "location": 2,
     //     "text": "Category"
@@ -56,7 +61,7 @@ module.exports = {
     //     "text": "Tag"
     //   }
     },
-    "friendLink": [
+    friendLink: [
       // {
       //   "title": "午后南杂",
       //   "desc": "Enjoy when you can, and endure when you must.",
@@ -70,20 +75,27 @@ module.exports = {
       //   "link": "https://vuepress-theme-reco.recoluan.com"
       // }
     ],
-    "logo": "/web-img/author.jpg",
-    "search": true,
-    "searchMaxSuggestions": 10,
-    "lastUpdated": "Last Updated",
-    "author": "QiJieH",
-    "authorAvatar": "/web-img/author.jpg",
-    "record": "1.0.0",
-    "startYear": "2020",
+    vssueConfig: {
+      platform: 'github',
+      owner: 'QiJieH',
+      repo: 'blog',
+      clientId: process.env.VSSUEID,
+      clientSecret: process.env.VSSUESECRET
+    },
+    logo: "/web-img/author.jpg",
+    search: true,
+    searchMaxSuggestions: 10,
+    lastUpdated: "Last Updated",
+    author: "QiJieH",
+    authorAvatar: "/web-img/author.jpg",
+    record: "1.0.0",
+    startYear: "2020",
 
-    "modePicker": false, // 默认 true，false 不显示模式调节按钮，true 则显示
-    "mode" : 'light' // 默认 auto，auto 跟随系统，dark 暗色模式，light 亮色模式
+    modePicker: false, // 默认 true，false 不显示模式调节按钮，true 则显示
+    mode : 'light' // 默认 auto，auto 跟随系统，dark 暗色模式，light 亮色模式
     
   },
-  "plugins": [
+  plugins: [
     [
       "meting", {
         meting: {
@@ -121,25 +133,25 @@ module.exports = {
     [
       '@vuepress-reco/vuepress-plugin-loading-page',false
     ],
-    [
-      '@vuepress-reco/comments', {
-        solution: 'vssue',
-        options: {
-          title: 'vssue',
-          platform: 'github',
-          owner: 'QiJieH',
-          repo: 'blog',
-          clientId: process.env.VSSUEID,
-          clientSecret: process.env.VSSUESECRET,
-        }
-      }
-    ],
+    // [
+    //   '@vuepress-reco/comments', {
+    //     solution: 'vssue',
+    //     options: {
+    //       title: 'QiJieH\'s blog comments',
+    //       platform: 'github',
+    //       owner: 'QiJieH',
+    //       repo: 'blog',
+    //       clientId: process.env.VSSUEID,
+    //       clientSecret: process.env.VSSUESECRET,
+    //     }
+    //   }
+    // ],
     [
       'img-lazy'
     ],
 
   ],
-  "markdown": {
-    "lineNumbers": false
+  markdown: {
+    lineNumbers: false
   }
 }
