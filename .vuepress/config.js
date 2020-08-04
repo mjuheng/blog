@@ -125,9 +125,9 @@ module.exports = {
       '@vuepress-reco/comments', {
         solution: 'vssue',
         options: {
-          title: 'vuepress-theme-reco',
+          title: 'vssue',
           platform: 'github',
-          owner: 'qijieh',
+          owner: 'QiJieH',
           repo: 'blog',
           clientId: process.env.VSSUEID,
           clientSecret: process.env.VSSUESECRET,
