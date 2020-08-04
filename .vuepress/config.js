@@ -127,10 +127,10 @@ module.exports = {
         options: {
           title: 'vuepress-theme-reco',
           platform: 'github',
-          owner: 'OWNER_OF_REPO',
-          repo: 'NAME_OF_REPO',
-          clientId: 'YOUR_CLIENT_ID',
-          clientSecret: 'YOUR_CLIENT_SECRET',
+          owner: 'qijieh',
+          repo: 'blog',
+          clientId: process.env.VSSUEID,
+          clientSecret: process.env.VSSUESECRET,
         }
       }
     ],

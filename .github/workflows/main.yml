@@ -13,6 +13,9 @@ jobs:
           persist-credentials: false
 
       - name: Build
+        env:
+        VSSUEID: ${{ secrets.VSSUE_CLIENT_ID }}
+        VSSUESECRET: ${{ secrets.VSSUE_CLIENT_SECRET }}
         run: npm install && npm run build
 
       - name: Deploy
