@@ -1685,7 +1685,7 @@ git push
 >
 > - 部分 action 配置错误，以下错误是以为在 Deploy 中设置生成目录 `.vuepress/dist` ，却在 `config.js` 中设置 `dest` 为 `docs` ，导致虚拟机编译 `npm run build` 后没有生成文件在 `.vuepress/dist` 下，进而致使 Deploy 环节无法从 `.vuepress/dist` 目录拉取代码到 `gh-pages` 分支。
 >
->   ```yaml {{10}}
+>   ```yaml {10}
 >   # 部署到分支
 >         - name: Deploy
 >           uses: JamesIves/github-pages-deploy-action@3.5.9
@@ -1698,7 +1698,7 @@ git push
 >             FOLDER: .vuepress/dist
 >   ```
 >
->   ```js {{2}}
+>   ```js {2}
 >   module.exports = {
 >     dest: ".vuepress/dist",  // 确保这个目录与 FOLDER 保存一致
 >   }
