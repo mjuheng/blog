@@ -1122,6 +1122,8 @@ jobs:
             gitee-password: ${{ secrets.GITEE_PASSWORD }}
             # 注意替换为你的 Gitee 仓库
             gitee-repo: qijieh/blog
+            # 构建分支
+            branch: gh-pages
 ```
 
 :::
@@ -1511,6 +1513,8 @@ Name 是存储系统环境变量的名称，你可以随意填写只需修改 wo
             gitee-password: ${{ secrets.GITEE_PASSWORD }}
             # 注意替换为你的 Gitee 仓库
             gitee-repo: qijieh/blog
+            # 构建分支
+            branch: gh-pages
 ```
 
 
@@ -1529,16 +1533,19 @@ Name 是存储系统环境变量的名称，你可以随意填写只需修改 wo
 :::
 访问到我们的 Gitee 账户密码。
 
-```yaml
+```yaml {8}
 # 更新部署 gitee pages
       - name: Build Gitee Pages
         uses: yanglbme/gitee-pages-action@v1.1.3
         with:
             # 注意替换为你的 Gitee 用户名
             gitee-username: QiJieH
+            # 注意在 Settings->Secrets 配置 GITEE_PASSWORD : gitee password
             gitee-password: ${{ secrets.GITEE_PASSWORD }}
             # 注意替换为你的 Gitee 仓库
             gitee-repo: qijieh/blog
+            # 构建分支
+            branch: gh-pages
 ```
 
 
@@ -1624,7 +1631,7 @@ module.exports = {
 
 添加成功后在我们的 workflow 文件中添加相应代码，**将其添加进编译过程的环境中**
 
-```yaml
+```yaml {5,6}
       # 构建
       - name: Build
         env:
@@ -1638,7 +1645,7 @@ module.exports = {
 
 这样在虚拟机运行时在环境中就拥有了 `VSSUEID` 和 `VSSUESECRET` 两个变量，而 node 为我们提供在一个 `process.env` 方法，让我们能够**在编译的时候访问当前进程的环境变量**，我们只需要在 `config.js` 的 Vssue 配置中使用该方法即可
 
-```javascript
+```javascript {13,14}
 // .vuepress/config.js
 module.exports = {
   theme: 'reco',
