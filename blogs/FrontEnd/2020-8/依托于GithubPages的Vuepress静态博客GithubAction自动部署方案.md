@@ -1264,7 +1264,7 @@ jobs:
    3. `Deploy` ：使用 [JamesIves/github-pages-deploy-action](https://github.com/marketplace/actions/deploy-to-github-pages) 将生成的网页源码部署到 `gh-pages` 分支上
 3. 当 `build-and-deploy` 执行完毕后，运行 `sync-to-gitee` 任务，其一共有两步 `step` 
    1. `Sync to Gitee` ：使用 [wearerequired/git-mirror-action](https://github.com/wearerequired/git-mirror-action) 强制同步 Gitee 仓库
-   2. `Build Gitee Pages` ：使用 [yanglbme/gitee-pages-action](https://github.com/yanglbme/gitee-pages-action) 更新 Gitee Pages 服务
+   2. `Build Gitee Pages` ：使用 [yanglbme/gitee-pages-action](https://github.com/yanglbme/gitee-pages-action) 更新 Gitee Pages 服务，设置 `gh-pages` 分支的根目录为渲染目录
 
 
 
@@ -1356,7 +1356,7 @@ Name 是存储系统环境变量的名称，你可以随意填写只需修改 wo
 :::
 的方式即可访问预先设置好的环境变量。
 
-```yml
+```yaml {5}
 - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.5.9
         with:
@@ -1475,7 +1475,7 @@ Name 是存储系统环境变量的名称，你可以随意填写只需修改 wo
 :::
 与 Gitee 仓库进行 SSH 验证，获得 Gitee 仓库的操作权限。
 
-```yaml
+```yaml {5}
       # 克隆项目至 gitee
       - name: Sync to Gitee
         uses: wearerequired/git-mirror-action@v1.0.1
@@ -1564,7 +1564,7 @@ Name 是存储系统环境变量的名称，你可以随意填写只需修改 wo
 
 由于 reco 主题已经将 Vssue 集合在了官方插件 [comment](https://vuepress-theme-reco.recoluan.com/views/plugins/comments.html) 中，我们无需额外 `npm install`  ，通过参考 [文档](https://vuepress-theme-reco.recoluan.com/views/plugins/comments.html) 在项目的 `.vuepress/config.js` 中引入插件
 
-```javascript
+```javascript {13,14}
 // .vuepress/config.js
 module.exports = {
   theme: 'reco',
