@@ -161,7 +161,6 @@ module.exports = {
       // https://vuepress.github.io/zh/plugins/smooth-scroll
       'vuepress-plugin-smooth-scroll'
     ],
-    
 
   ],
   markdown: {

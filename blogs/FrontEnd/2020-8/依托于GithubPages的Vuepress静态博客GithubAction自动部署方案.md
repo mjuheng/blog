@@ -52,9 +52,9 @@ Github & Gitee 双端自动部署。
 
 
 
-> Github My Blog : https://qijieh.github.io/blog
+> Github My Blog : [https://qijieh.github.io/blog](https://qijieh.github.io/blog)
 >
-> Gitee My Blog : https://qijieh.gitee.io/blog
+> Gitee My Blog : [https://qijieh.gitee.io/blog](https://qijieh.gitee.io/blog)
 
 
 
@@ -228,11 +228,6 @@ npm run dev
 部署站点的基础路径，如果你想让你的网站部署到一个子路径下，你将需要设置它。如 GitHub pages，如果你想将你的网站部署到 `https://foo.github.io/bar/`，那么 `base` 应该被设置成 `"/bar/"`，它的值应当总是以斜杠开始，并以斜杠结束。
 
 `base` 将会作为前缀自动地插入到所有以 `/` 开始的其他选项的链接中，所以你只需要指定一次。
-
-**参考:**
-
-- [Base URL](https://www.vuepress.cn/guide/assets.html#基础路径)
-- [部署指南 > GitHub Pages](https://www.vuepress.cn/guide/deploy.html#github-pages)
 
 
 
@@ -511,7 +506,7 @@ module.exports = {
 
 
 
-> 参考博文：https://vuepress-theme-reco.recoluan.com/views/other/reco-optimization.html
+> 参考博文：[vuepress-theme-reco个人向优化](https://vuepress-theme-reco.recoluan.com/views/other/reco-optimization.html)
 
 
 
@@ -573,7 +568,17 @@ tags:
 根据具体场景新建md文章，并修改存储路径。删除主题的测试文章，添加一篇自己的测试博文 （建议长度一定，拥有标题结构和代码块，方便后期测试）。
 
 
+这是一个博文存储结构的示例：
 
+    blogs
+    ├── FrontEnd
+    │   ├── 2020-8
+    │   │   └── article01.md
+    │   └── 2020-7
+    ├── Java
+    │   ├── 2020-8
+    │   └── 2020-7
+    └── Python
 
 
 
@@ -600,7 +605,7 @@ tags:
 
 
 
-添加完成后，运行命令，查看添加成功与否
+**添加完成后，运行命令，查看添加成功与否**
 
 ```powershell
 npm run dev
@@ -794,9 +799,9 @@ module.exports = {
 
 本博客同时部署到了 Github 和 Gitee 上，你可以尝试访问
 
-> Github My Blog : https://qijieh.github.io/blog
+> Github My Blog : [https://qijieh.github.io/blog](https://qijieh.github.io/blog)
 >
-> Gitee My Blog : https://qijieh.gitee.io/blog
+> Gitee My Blog : [https://qijieh.gitee.io/blog](https://qijieh.gitee.io/blog)
 
 
 
@@ -808,7 +813,7 @@ module.exports = {
 
 
 
-这种差异增加了我们博客双端部署的难度，因为 Vuepress 对于部署到非根路径的项目有着相应配置 [参考基础路径](https://www.vuepress.cn/guide/assets.html) ，如果对部署到二级路径的项目没有设置 `config.js` 文件中的 `base` 值，将会导致网页资源的错误加载。
+这种差异增加了我们博客双端部署的难度，因为 Vuepress 对于部署到非根路径的项目有着相应配置参考 [基础路径](https://www.vuepress.cn/guide/assets.html) ，如果对部署到二级路径的项目没有设置 `config.js` 文件中的 `base` 值，将会导致网页资源的错误加载。
 
 
 
@@ -972,7 +977,7 @@ git push
 
 
 
-3. 这样 Github 仓库的代码便会同步至该仓库下，接下来只需要开启该仓库的 Gitee Pages 服务 ：**服务 > Gitee Pages **
+3. 这样 Github 仓库的代码便会同步至该仓库下，接下来只需要开启该仓库的 Gitee Pages 服务 ：**服务 > Gitee Pages**
 
 <img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805211627.png" style=" width:750px;border:solid 3px #eaecef" alt="GiteePages服务设置"/>
 
@@ -1175,7 +1180,7 @@ jobs:
 
 #### 基本字段说明
 
-**1. `name` **
+**1. `name`**
 
 `name ` 字段是 workflow 的名称。如果省略该字段，默认为当前 workflow 的文件名。
 
@@ -1196,7 +1201,7 @@ on:
 
 当推送至 `master` 分支时，触发 workflow。
 
-**3. `jobs` **
+**3. `jobs`**
 
 `jobs` 字段是 workflow 的主体当满足 `on` 的条件时就会运行 `jobs` 中的各项任务
 
@@ -1206,7 +1211,7 @@ jobs:
   sync-to-gitee:
 ```
 
-**4. `needs` **
+**4. `needs`**
 
 `needs` 字段当前 `job` 的依赖关系，只有当 `needs` 中的 `job` 运行完成后才会执行当前 `job`
 
@@ -1219,7 +1224,7 @@ jobs:
 
 其可以是一个 `job` 数组 `[job1,job2]`
 
-**5. `runs-on` **
+**5. `runs-on`**
 
 当前 `job` 运行的虚拟机环境，必填字段
 
@@ -1273,7 +1278,7 @@ jobs:
 - `master` ：存储 vuepress 构建代码
 - `gh-pages` ：存储编译生成的网页源码
 
-该分支必须命名为 `gh-pages` ，否则无法使用 Github Pages 服务，你无需手动创建，JamesIves/github-pages-deploy-action 会自动帮我们创建该分支。
+该分支必须命名为 `gh-pages` ，否则无法使用 Github Pages 服务，你无需手动创建，`JamesIves/github-pages-deploy-action` 会自动帮我们创建该分支。
 
 :::
 
@@ -1283,7 +1288,11 @@ jobs:
 
 #### workflow敏感数据
 
-在某些 `step` 中，访问仓库，操作仓库等等一系列操作，会需要进行身份验证，这样就涉及到一些仓库令牌，访问密码之类的敏感数值，我们不能直接将其明文暴露在 `yml` 文件中，所以我们使用了系统环境变量的方式存储在了你的仓库（虚拟机）中，通过 `${{ }}` 方法，能让我们从虚拟机中拿到这些数值。
+在某些 `step` 中，访问仓库，操作仓库等等一系列操作，会需要进行身份验证，这样就涉及到一些仓库令牌，访问密码之类的敏感数值，我们不能直接将其明文暴露在 `yml` 文件中，所以我们使用了系统环境变量的方式存储在了你的仓库（虚拟机）中，通过 
+::: v-pre
+`${{ secret.NAME }}`
+:::
+方法，能让我们从虚拟机中拿到这些数值。
 
 
 
@@ -1318,21 +1327,25 @@ jobs:
 
 
 
-Note 仅用于提示令牌信息，**需要注意勾选 Scopes 中的 `repo` 和 `workflow` **，点击 Generate token 按钮生成 token
+`Note` 仅用于提示令牌信息，**需要注意勾选 `Scopes` 中的 `repo` 和 `workflow`**，点击 `Generate token` 按钮生成 `token`
 
 <img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806155101.png" style="width:780px;border:solid 3px #eaecef" alt="Generate token"/>
 
 
 
-之后页面会跳转会 Personal access token ，并出现蓝色提示框，里面的字符串便是生成的个人令牌，这串数值只会显示这一次，当你离开当前页面后就会被永久隐藏，请务必保管好。
+之后页面会跳转会 `Personal access token` ，并出现蓝色提示框，里面的字符串便是生成的个人令牌，这串数值只会显示这一次，当你离开当前页面后就会被永久隐藏，请务必保管好。
 
 <img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806155442.png" style="width:780px;border:solid 3px #eaecef" alt="Generate token sucess"/>
 
-虽然你可以将其直接复制到 `.giyhub/workflowes/main.yml` 文件的 `Deploy.with.ACCESS_TOKEN` ，但是这样是十分不安全的。接下来我们将其保存至仓库的 Secrets 下。
+虽然你可以将其直接复制到 `.giyhub/workflowes/main.yml` 文件的 `Deploy.with.ACCESS_TOKEN` ，但是这样是十分不安全的。**接下来我们将其保存至仓库的 Secrets 下。**
 
 > Secrets are environment variables that are **encrypted** and only exposed to selected actions. Anyone with **collaborator** access to this repository can use these secrets in a workflow.
 
-Secrets 相当于当前虚拟机的系统环境变量，在该仓库运行的 workflow 文件可以通过 `${{secrets.NAME}}` 访问这些系统变量。
+Secrets 相当于当前虚拟机的系统环境变量，在该仓库运行的 workflow 文件可以通过
+::: v-pre
+`${{secrets.NAME}}`
+:::
+访问这些系统变量。
 
 **仓库 > Setting > Secrets > New Secrets** 按照以下方式填写
 
@@ -1340,7 +1353,11 @@ Secrets 相当于当前虚拟机的系统环境变量，在该仓库运行的 wo
 
 
 
-Name 是存储系统环境变量的名称，你可以随意填写只需修改 workflow 文件中的变量名即可。点击 Add secret 即可完成仓库系统环境的添加，只后只要在 workflow 文件中以 `${{ secrets.ACCESS_TOKEN }}` 的方式即可访问预先设置好的环境变量。
+Name 是存储系统环境变量的名称，你可以随意填写只需修改 workflow 文件中的变量名即可。点击 Add secret 即可完成仓库系统环境的添加，只后只要在 workflow 文件中以
+::: v-pre
+`${{ secrets.ACCESS_TOKEN }}`
+:::
+的方式即可访问预先设置好的环境变量。
 
 ```yml
 - name: Deploy
@@ -1442,7 +1459,11 @@ Name 是存储系统环境变量的名称，你可以随意填写只需修改 wo
 
 点击确定即可，可以不用管 SHA256 。
 
-接下来，只需要将配套的将我们的 私钥`id_rsa` 储存在 Github 仓库的 Secrects 中，这样 workflow文件就能通过读取系统环境变量 `${{secrect.Name}}` 的方式用私钥与 Gitee 上的公钥进行配对，以此验证身份，获得仓库操作权限。
+接下来，只需要将配套的将我们的 私钥`id_rsa` 储存在 Github 仓库的 Secrects 中，这样 workflow文件就能通过读取系统环境变量
+::: v-pre
+`${{secrect.Name}}`
+:::
+的方式用私钥与 Gitee 上的公钥进行配对，以此验证身份，获得仓库操作权限。
 
 
 
@@ -1452,7 +1473,11 @@ Name 是存储系统环境变量的名称，你可以随意填写只需修改 wo
 
 
 
-通过 `${{ secrtes.GITEE_RSA_PRIVATE_KEY }}` 与 Gitee 仓库进行 SSH 验证，获得 Gitee 仓库的操作权限。
+通过
+::: v-pre
+`${{ secrtes.GITEE_RSA_PRIVATE_KEY }}`
+:::
+与 Gitee 仓库进行 SSH 验证，获得 Gitee 仓库的操作权限。
 
 ```yaml
       # 克隆项目至 gitee
@@ -1504,7 +1529,11 @@ Name 是存储系统环境变量的名称，你可以随意填写只需修改 wo
 
 
 
-点击 Add secret ，这样 workflow 文件便可以提供系统环境变量的方式 `${{ GITEE_PASSWORD }}` 访问到我们的 Gitee 账户密码。
+点击 Add secret ，这样 workflow 文件便可以提供系统环境变量的方式
+::: v-pre
+`${{ GITEE_PASSWORD }}`
+:::
+访问到我们的 Gitee 账户密码。
 
 ```yaml
 # 更新部署 gitee pages
@@ -1522,7 +1551,7 @@ Name 是存储系统环境变量的名称，你可以随意填写只需修改 wo
 
 
 
-##### Vssue评论插件
+#### Vssue评论插件
 
 <img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806184726.png" style="width:700px; border:solid 3px #eaecef" alt="Secret Gitee Password" />
 
@@ -1587,7 +1616,11 @@ module.exports = {
 
 其中的 `Client ID` 和 `Client Secret` 便是 Vssue 插件需要的配置值了。
 
-将 `Client ID` 和 `Client Secret` 直接填写在 `config.js` 的 Vssue 插件配置中是不理智的，我们依旧可以使用 Github 仓库的 Secret 来存储这两个值，在 workflow 的编译 `build` 阶段将其以 `${{ secret.Name }}` 的方式访问其值。
+将 `Client ID` 和 `Client Secret` 直接填写在 `config.js` 的 Vssue 插件配置中是不理智的，我们依旧可以使用 Github 仓库的 Secret 来存储这两个值，在 workflow 的编译 `build` 阶段将其以
+::: v-pre
+`${{ secret.Name }}`
+:::
+的方式访问其值。
 
 <img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806192128.png" style="width:700px;border:solid 3px #eaecef" alt="blog-vssue"/>
 
@@ -1609,7 +1642,7 @@ module.exports = {
 
 
 
-这样在虚拟机运行时在环境中就拥有了 `VSSUEID` 和 `VSSUESECRET` 两个变量，而 node 为我们提供在一个 process.env 方法，让我们能够**在编译的时候访问当前进程的环境变量**，我们只需要在 `config.js` 的 Vssue 配置中使用该方法即可
+这样在虚拟机运行时在环境中就拥有了 `VSSUEID` 和 `VSSUESECRET` 两个变量，而 node 为我们提供在一个 `process.env` 方法，让我们能够**在编译的时候访问当前进程的环境变量**，我们只需要在 `config.js` 的 Vssue 配置中使用该方法即可
 
 ```javascript
 // .vuepress/config.js
@@ -1661,7 +1694,7 @@ git push
 
 
 
-之后你便可以看见你的 workflow 文件正在被逐一执行，你只需要静静感受。
+之后你便可以看见你的 workflow 文件正在被逐一执行。
 
 
 
