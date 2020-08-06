@@ -83,11 +83,12 @@ module.exports = {
     startYear: "2020",
 
     modePicker: false, // 默认 true，false 不显示模式调节按钮，true 则显示
-    mode : 'light' // 默认 auto，auto 跟随系统，dark 暗色模式，light 亮色模式
-    
+    mode : 'light', // 默认 auto，auto 跟随系统，dark 暗色模式，light 亮色模式
+    noFoundPageByTencent: false
   },
   plugins: [
     [
+      // https://github.com/moefyit/vuepress-plugin-meting
       "meting", {
         meting: {
           auto: "https://music.163.com/#/playlist?id=5156784198"
@@ -102,6 +103,7 @@ module.exports = {
       }
     ],
     [
+      // https://www.vuepress.cn/plugin/official/plugin-pwa.html
       '@vuepress/pwa', {
         serviceWorker: true,
         updatePopup: {
@@ -110,7 +112,7 @@ module.exports = {
         }
       }
     ],
-    [
+    [ // https://www.npmjs.com/package/vuepress-plugin-nuggets-style-copy
       "vuepress-plugin-nuggets-style-copy", {
         copyText: "copy",
         tip: {
@@ -119,12 +121,16 @@ module.exports = {
       }
     ],
     [
+      // https://github.com/ulivz/vuepress-plugin-flowchart
       'flowchart'
     ],
     [
+      // 禁用加载页面
       '@vuepress-reco/vuepress-plugin-loading-page',false
     ],
     [
+      // reco 自带评论插件
+      // https://vssue.js.org/zh/guide/
       '@vuepress-reco/comments', {
         solution: 'vssue',
         options: {
@@ -137,8 +143,25 @@ module.exports = {
       }
     ],
     [
+      // https://github.com/tolking/vuepress-plugin-img-lazy
       'img-lazy'
     ],
+    [ 
+      // https://vuepress.github.io/zh/plugins/copyright/
+      'copyright',
+      {
+        disabled: true,
+        // can frontmatter setting
+        // noCopy: false,
+        // noSelect: false,
+        // minLength: 0
+      },
+    ],
+    [
+      // https://vuepress.github.io/zh/plugins/smooth-scroll
+      'vuepress-plugin-smooth-scroll'
+    ],
+    
 
   ],
   markdown: {
