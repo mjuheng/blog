@@ -29,6 +29,7 @@ Github & Gitee 双端自动部署。
 
 <!-- more -->
 
+[[toc]]
 
 
 ## 开始之前
@@ -145,8 +146,7 @@ npm install
 npm run dev
 ```
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200804232214.png" style="width:800px;border:solid 3px #eaecef" alt="默认Demo样式"/>
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200804232214.png)
 
 
 
@@ -254,8 +254,7 @@ npm run dev
 npm run dev
 ```
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805152255.png" style="width:800px;border:solid 3px #eaecef" alt="个人信息注入"/>
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805152255.png =700)
 
 
 
@@ -309,8 +308,7 @@ npm run dev
 npm run dev
 ```
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805155833.png" style="width:800px;border:solid 3px #eaecef" alt="首页图片和Slogan"/>
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805155833.png =700x)
 
 
 
@@ -399,10 +397,9 @@ body {
 
 运行 `npm run dev` 查看我们修改的样式
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805160856.png" style="width:800px;border:solid 3px #eaecef" alt="默认Demo样式"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805160856.png =700x)
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805161235.png" style="width:800px;border:solid 3px #eaecef" alt="默认Demo样式"/>
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805161235.png =700x)
 
 
 
@@ -611,10 +608,9 @@ tags:
 npm run dev
 ```
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805174613.png" style="width:800px;border:solid 3px #eaecef" alt="博文列表" />
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805174613.png =700x)
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805174844.png" style="width:800px;border:solid 3px #eaecef" alt="博文页面"/>
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805174844.png =700x)
 
 
 
@@ -704,8 +700,7 @@ module.exports = {
 
 3. `npm run dev` 查看效果
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805180316.png" style="width:800px;border:solid 3px #eaecef" alt="meting播放器"/>
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805180316.png =700x)
 
 
 > 对于新增的播放器，你也可以通过 `.vuepress/styles/index.styl` 来为其修改样式
@@ -779,8 +774,7 @@ module.exports = {
 
 命令行运行 `npm run build` ，检查在 `.vuepress/dist` 下是否能构建出资源文件。
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805193936.png" style="border:solid 3px #eaecef" alt="网页源码目录"/>
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805193936.png)
 
 
 > Error: cannot find module '../dist/manifest/client.json'
@@ -927,7 +921,7 @@ git push
 
 点击 仓库Setting 下拉找到 GithuPages 在 Source 中设置如下
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805210322.png" style="border:solid 3px #eaecef" alt="GithubPages设置"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805210322.png)
 
 注意设置为 `/docs` 目录，而不是默认的 `/root` ，这样 GithubPages 就会解析我们 `/docs`  目录下的博客网页了。
 
@@ -967,20 +961,17 @@ git push
 
 1. 打开创建的 Gitee 仓库  **管理 > 基本设置 > 仓库远程地址** 输入 Github 的仓库地址
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805211042.png" style=" width:750px;border:solid 3px #eaecef" alt="Gitee同步设置"/>
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805211042.png =750x)
 
 
 2. 返回仓库代码页，**点击仓库名旁边的同步按钮完成推送**
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805211244.png" style=" width:750px;border:solid 3px #eaecef" alt="Gitee点击同步"/>
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805211244.png =750x)
 
 
 3. 这样 Github 仓库的代码便会同步至该仓库下，接下来只需要开启该仓库的 Gitee Pages 服务 ：**服务 > Gitee Pages**
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805211627.png" style=" width:750px;border:solid 3px #eaecef" alt="GiteePages服务设置"/>
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805211627.png =750x)
 
 
 4. 点击链接访问你的网站吧。
@@ -1329,19 +1320,17 @@ jobs:
 
 **个人头像 > Setting > Developer settings > [Personal access tokens](https://github.com/settings/tokens) > Generate new token**
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806154720.png" style="width:780px;border:solid 3px #eaecef" alt="Personal access token" />
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806154720.png =780x)
 
 
 `Note` 仅用于提示令牌信息，**需要注意勾选 `Scopes` 中的 `repo` 和 `workflow`**，点击 `Generate token` 按钮生成 `token`
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806155101.png" style="width:780px;border:solid 3px #eaecef" alt="Generate token"/>
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806155101.png =780x)
 
 
 之后页面会跳转会 `Personal access token` ，并出现蓝色提示框，里面的字符串便是生成的个人令牌，这串数值只会显示这一次，当你离开当前页面后就会被永久隐藏，请务必保管好。
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806155442.png" style="width:780px;border:solid 3px #eaecef" alt="Generate token sucess"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806155442.png =780x)
 
 虽然你可以将其直接复制到 `.giyhub/workflowes/main.yml` 文件的 `Deploy.with.ACCESS_TOKEN` ，但是这样是十分不安全的。**接下来我们将其保存至仓库的 Secrets 下。**
 
@@ -1355,7 +1344,7 @@ Secrets 相当于当前虚拟机的系统环境变量，在该仓库运行的 wo
 
 **仓库 > Setting > Secrets > New Secrets** 按照以下方式填写
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806160224.png" style="border:solid 3px #eaecef" alt="Secrets"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806160224.png)
 
 
 
@@ -1459,7 +1448,7 @@ Name 是存储系统环境变量的名称，你可以随意填写只需修改 wo
 
 主页右上角 **「个人设置」->「安全设置」->「SSH公钥」->「[添加公钥](https://gitee.com/profile/sshkeys)」** ，添加生成的 public key 添加到当前账户中。
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806164348.png" style="border:solid 3px #eaecef" alt="SSH 公钥"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806164348.png)
 
 
 
@@ -1475,8 +1464,7 @@ Name 是存储系统环境变量的名称，你可以随意填写只需修改 wo
 
 **Github 仓库 > Setting > Secrets > New Secrets**
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806174117.png" style="border:solid 3px #eaecef" alt="存储私钥至 Github仓库Secrets"/>
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806174117.png)
 
 
 通过
@@ -1531,7 +1519,7 @@ Name 是存储系统环境变量的名称，你可以随意填写只需修改 wo
 
 **Github 仓库 > Setting > Secrets > New Secrets**
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806175611.png" style="border:solid 3px #eaecef" alt="Secret Gitee Password"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806175611.png)
 
 
 
@@ -1559,7 +1547,7 @@ Name 是存储系统环境变量的名称，你可以随意填写只需修改 wo
 
 #### Vssue评论插件
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806184726.png" style="width:700px; border:solid 3px #eaecef" alt="Secret Gitee Password" />
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806184726.png =700x)
 
 [Vssue](https://vssue.js.org/zh/guide/) 是一款无需后台的评论系统，其由 Vue 驱动并基于 Github 仓库的 Issue 实现。被广泛运用于博客，文档等无后端评论场景。
 
@@ -1604,7 +1592,7 @@ module.exports = {
 
 依次点击 Github 的 **个人头像 > Setting > Developer setting > [OAuth Apps](https://github.com/settings/developers) > New OAuth App** 
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806185536.png" style="border:solid 3px #eaecef" alt="creat OAuth app"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806185536.png)
 
 
 
@@ -1616,7 +1604,7 @@ module.exports = {
 
 只后我们在 OAuth Apps 列表便可以看见列表了，点击其进入
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806190302.png" style="width:700px;border:solid 3px #eaecef" alt="blog-vssue"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806190302.png =700x)
 
 
 
@@ -1628,7 +1616,7 @@ module.exports = {
 :::
 的方式访问其值。
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806192128.png" style="width:700px;border:solid 3px #eaecef" alt="blog-vssue"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806192128.png =700x)
 
 这里不再详细说明设置方法，请自行参考之前几个 Secret 的配置教程。
 
@@ -1694,9 +1682,9 @@ git push
 
 推送完成后，打开 Github仓库的 Actions 按照图片依次点击进入 Action 运行日志
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806194019.png" style="width:700px;border:solid 3px #eaecef" alt="begin action"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806194019.png =700x)
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806194126.png" style="width:700px;border:solid 3px #eaecef" alt="action log"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806194126.png =700x)
 
 
 
@@ -1716,11 +1704,11 @@ git push
 >
 > - main.yml 语法错误，请检查Tab缩进
 >
->   <img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806195900.png" style="width:600px;border:solid 3px #eaecef" alt="erro"/>
+>   ![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806195900.png =600x)
 >
 > - 仓库操作错误，令牌或密码配置不正确，请根据该步骤需要的数据检查
 >
->   <img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806200032.png" style="width:600px;border:solid 3px #eaecef" alt="erro"/>
+>   ![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806200032.png =600x)
 >
 > - 部分 action 配置错误，以下错误是以为在 Deploy 中设置生成目录 `.vuepress/dist` ，却在 `config.js` 中设置 `dest` 为 `docs` ，导致虚拟机编译 `npm run build` 后没有生成文件在 `.vuepress/dist` 下，进而致使 Deploy 环节无法从 `.vuepress/dist` 目录拉取代码到 `gh-pages` 分支。
 >
@@ -1743,31 +1731,30 @@ git push
 >   }
 >   ```
 >
->   <img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806200421.png" style="width:680px;border:solid 3px #eaecef" alt="erro"/>
+>   ![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806200421.png =680x)
 
 
 
 当所有的 Action 正常执行完成后，你可以查看 Github 仓库是否更新了 `gh-pages` 分支，其是否存储了网页源码。
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806194559.png" style="width:700px;border:solid 3px #eaecef" alt="gh-pages"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806194559.png =700x)
 
 再访问你的 Gitee 仓库查看其是否同步了代码和分支。
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806194734.png" style="width:700px;border:solid 3px #eaecef" alt="gitee sync"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806194734.png =700x)
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806194823.png" style="width:700px;border:solid 3px #eaecef" alt="gitee gh-pages"/>
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806194823.png =700x)
 
 
 接下来你只需要手动配置一次两个仓库的 Pages 服务。
 
 
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806195000.png" style="width:700px;border:solid 3px #eaecef" alt="gitee pages"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806195000.png =700x)
 
 
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806195059.png" style="width:700px;border:solid 3px #eaecef" alt="github pages"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806195059.png =700x)
 
 
 
@@ -1817,11 +1804,11 @@ Github Action 在你看不见的地方为了完成了一系列操作：
 
 在插件设置中搜索 gitee 并安装插件。
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806202625.png" style="width:700px;border:solid 3px #eaecef" alt="picgo plugs"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806202625.png =700x)
 
 安装成功后，打开 **图床设置 > Gitee图床**
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806204132.png" style="width:700px;border:solid 3px #eaecef" alt="gitee set"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806204132.png =700x)
 
 `owner` ：仓库所有者
 
@@ -1833,7 +1820,7 @@ Github Action 在你看不见的地方为了完成了一系列操作：
 
 访问 Gitee 创建图床仓库
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806203152.png" style="width:700px;border:solid 3px #eaecef" alt="new repo"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806203152.png =700x)
 
 
 
@@ -1843,7 +1830,7 @@ Github Action 在你看不见的地方为了完成了一系列操作：
 
 点击 个人头像 > 设置 > 私人令牌 > 生成新令牌
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806203354.png" style="width:700px;border:solid 3px #eaecef" alt="token"/>
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806203354.png =700x)
 
 
 
@@ -1853,22 +1840,20 @@ Github Action 在你看不见的地方为了完成了一系列操作：
 
 以我的仓库为例：
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806204018.png" style="width:700px;border:solid 3px #eaecef" alt="repo" />
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806204018.png =700x)
 
 
 
 应该填写：
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806202758.png" style="width:700px;border:solid 3px #eaecef" alt="picgo plugs"/>
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806202758.png =700x)
 
 
 
 
 之后保持 PicGo 后台运行，当你的剪切板有图片或图片URL时，使用快捷键 Crtl + Shift + P 快速上传图片至仓库，随后你的剪切板将会返回图片的引用代码。
 
-<img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806204417.png" style="width:700px;border:solid 3px #eaecef" alt="picgo plugs"/>
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806204417.png =700x)
 
 
 在此处可以选择引用何种代码片段。

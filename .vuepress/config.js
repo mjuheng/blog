@@ -164,6 +164,9 @@ module.exports = {
 
   ],
   markdown: {
-    lineNumbers: false
+    lineNumbers: false,
+    extendMarkdown: md => {
+      md.use(require('markdown-it-imsize'))
+    }
   }
 }
