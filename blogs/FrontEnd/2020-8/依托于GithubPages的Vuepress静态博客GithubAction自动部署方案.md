@@ -1074,6 +1074,7 @@ on:
     branches:
       - master
 jobs:
+  # 构建并部署
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
@@ -1101,7 +1102,12 @@ jobs:
           BRANCH: gh-pages
           # vue项目 build 目录
           FOLDER: .vuepress/dist
-
+          
+  # 同步 gitee 并 更新 giteepages
+  sync-to-gitee:
+    needs: build-and-deploy
+    runs-on: ubuntu-latest
+    steps:
       # 克隆项目至 gitee
       - name: Sync to Gitee
         uses: wearerequired/git-mirror-action@v1.0.1
