@@ -29,9 +29,6 @@ Github & Gitee 双端自动部署。
 
 <!-- more -->
 
-[[toc]]
-
-
 ## 开始之前
 
 >这是我的第一个博客网站，前后花费了差不多一个星期，期间参考了大量博文，文档。
@@ -254,7 +251,7 @@ npm run dev
 npm run dev
 ```
 
-![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805152255.png =700)
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200805152255.png =700x)
 
 
 
@@ -686,8 +683,7 @@ module.exports = {
           lrcType: 0 	//禁用歌词显示
         },
         mobile: {		// 移动端设置
-          cover: false, // 取消封面覆盖
-          lrc: false	// 禁用歌词显示
+          cover: false // 取消封面覆盖
         }
       }
     ]

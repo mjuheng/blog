@@ -97,8 +97,7 @@ module.exports = {
           lrcType: 0
         },
         mobile: {
-          cover: false,
-          lrc: false
+          cover: false
         }
       }
     ],
