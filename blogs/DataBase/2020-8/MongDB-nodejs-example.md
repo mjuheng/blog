@@ -288,8 +288,6 @@ newUser.create({
 
 ### 集合关联
 
----
-
 | 文章集合 | 用户集合 |
 | :------: | :------: |
 |   _id    |   _id    |
@@ -340,8 +338,6 @@ Post.find().populate("author").then(result => {console.log(result)});
 
 
 ### 案例实战
-
----
 
 #### 用户信息管理系统
 
@@ -631,8 +627,6 @@ Project
 
 ### 模板引擎
 
----
-
 
 
 art-template
@@ -693,9 +687,9 @@ console.log(html);
 标准语法 原始语法
 
 ##### 1. 输出
-
+::: v-pre
    `{{data}}`
-
+:::
    `<%=data %>`
 
    可在花括号内使用简单的逻辑运算 + - x / = ?: 等
@@ -724,9 +718,9 @@ console.log(html);
 
 
 ##### 2. HTML输出
-
+::: v-pre
    `{{@data}}`
-
+:::
    `<%- data %>`
 
 ##### 3. 条件判断
@@ -747,9 +741,9 @@ console.log(html);
    ```
 
 ##### 4. 循环
-
+::: v-pre
    `{{each data}} {{/each}}`
-
+:::
    `<% for() {%> <%} %>`
 
    ```html
@@ -779,9 +773,9 @@ console.log(html);
 ##### 5. 子模板
 
    使用子模板可以将网站的公共区域（头部，尾部）抽离到文件中
-
+::: v-pre
    `{{include "模板"}}`
-
+:::
    `<%include("模板")>`
 
 ```html
