@@ -1,6 +1,6 @@
 ---
 title: 依托于GithubPages的Vuepress静态博客GithubAction自动部署方案
-date: 2020-8-4
+date: 2020-08-04
 sidebar: false
 categories:
  - FrontEnd
@@ -11,11 +11,9 @@ tags:
  - Github
  - Gitee
  - Git
+sticky: 1 
 publish: true
 ---
-
-
-
 
 
 博客发表流程：
@@ -24,8 +22,7 @@ publish: true
 2. `git push`
 
 
-
-Github & Gitee 双端自动部署。
+> Github & Gitee 双端自动部署。
 
 <!-- more -->
 
@@ -212,7 +209,7 @@ npm run dev
 
 
 
-
+---  
 这里需要额外注意 base 和 dest 属性：
 
 
@@ -239,7 +236,7 @@ npm run dev
 
 此处先做提醒可不做添加或修改，在 部署上线 步骤中再做详细讲解。
 
-
+---
 
 
 
@@ -590,6 +587,8 @@ tags:
 > 更多 Vuepress Markdown 支持语法请查看：
 >
 > [Vuepress Markdown扩展](https://www.vuepress.cn/guide/markdown.html)
+> 
+> 存储博文时务必以英文命名，否则可能导致 URL 混乱
 
 
 
@@ -1295,7 +1294,8 @@ jobs:
 
 
 
-##### **`Deploy`**
+##### **`Deploy`**  
+---
 
 在这一步中虚拟机会将  `FOLDER` 下的生成内容推送至 Github 仓库的 `gh-pages` 分支，所以需要一个仓库的访问令牌，你可以参考 [官方文档 创建个人访问令牌](https://docs.github.com/cn/github/authenticating-to-github/creating-a-personal-access-token) ，生成一个用于命令行访问仓库的个人令牌。
 
@@ -1370,7 +1370,8 @@ Name 是存储系统环境变量的名称，你可以随意填写只需修改 wo
 
 
 
-##### **`Sync to Gitee`**
+##### **`Sync to Gitee`**  
+---
 
 在这一步中 action 会完成 Gitee 仓库代码的同步，这里将会使用 [SSH公私钥配对](https://docs.github.com/cn/github/authenticating-to-github/connecting-to-github-with-ssh) 的方式进行 Gitee 身份验证。如果你熟悉 Github SSH 的配布方式可以自行设置。
 
@@ -1488,7 +1489,8 @@ Name 是存储系统环境变量的名称，你可以随意填写只需修改 wo
 
 
 
-##### **`Build Gitee Pages`**
+##### **`Build Gitee Pages`**  
+---
 
 完成代码的同步后，我们需要更新 Gitee Pages 服务，刷新网页内容。
 
@@ -1548,7 +1550,8 @@ Name 是存储系统环境变量的名称，你可以随意填写只需修改 wo
 
 
 
-#### Vssue评论插件
+#### Vssue评论插件  
+---
 
 ![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200806184726.png =700x)
 
