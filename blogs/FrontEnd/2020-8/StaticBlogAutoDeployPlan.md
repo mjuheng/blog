@@ -19,10 +19,14 @@ publish: true
 博客发表流程：
 
 1. 项目文件下新建 Markdown 文章
+
 2. `git push`
 
+::: tip
 
-> Github & Gitee 双端自动部署。
+Github & Gitee 双端自动部署。
+
+:::
 
 <!-- more -->
 
@@ -209,7 +213,7 @@ npm run dev
 
 
 
----  
+---
 这里需要额外注意 base 和 dest 属性：
 
 
@@ -807,7 +811,7 @@ module.exports = {
 
 
 综上所述，为了保持项目的一致性我们不得不放弃使用 Github 提供的个人域名，去与 Gitee 保持一致使用二级域名，这也是为什么上方两个博客链接都不是非根路径的原因所在。
- 
+
 
 
 ::: tip
