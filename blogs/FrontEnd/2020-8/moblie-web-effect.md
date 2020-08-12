@@ -61,7 +61,7 @@ publish: true
 
 **移动端拖动元素**
 
-- touchstarts`,`touchmove`,`touchend` 可以实现拖动元素
+- `touchstarts`,`touchmove`,`touchend` 可以实现拖动元素
 - 但是拖动元素需要当前手指的坐标值，我们可以使用 `tarfetTouches[0]` 里的 `pageX` 和 `pageY`
 - 在手指移动时计算出手指移动距离，然后用盒子原来的位置加上手指移动的距离
 

@@ -5,8 +5,10 @@ sidebar: false
 categories:
  - FrontEnd
 tags:
+ - html
  - css
-publish: false
+ - webReprint
+publish: true
 ---
 
 
@@ -263,4 +265,6 @@ body {
 ![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200809202945.jpg)
 
 
+
+> source：[携程网移动端静态页面复刻](https://github.com/QiJieH/WebReprint/tree/master/ctrip) 
 
