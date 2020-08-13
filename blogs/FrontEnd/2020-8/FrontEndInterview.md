@@ -38,15 +38,7 @@ publish: true
 
 浏览器解析网页流程图：
 
-
-
-```mermaid
-graph LR
-html>HTML] --> HTML解析 --> DOM树 --> Attachment{附件}
-css>CSS] --> CSS解析 --> 样式规则 --> Attachment{附件}
-Attachment --> 渲染DOM --> JavaScript --> display>显示页面]
-
-```
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200812212524.png)
 
 
 

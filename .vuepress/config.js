@@ -1,23 +1,14 @@
 module.exports = {
   title: "QiJieH\'s Blog",
-  description: "于朝阳升起处,我将踏上旅程",
+  description: "Blog HTML CSS C++ C Java Python DataBase MySQL Vuepress FrontEnd technology",
   base: "/blog/",
   dest: ".vuepress/dist",
   head: [
-    [
-      "link",
-      {
-        "rel": "icon",
-        "href": "/web-img/author.jpg"
-      }
-    ],
-    [
-      "meta",
-      {
-        "name": "viewport",
-        "content": "width=device-width,initial-scale=1,user-scalable=no"
-      }
-    ]
+    ["link", { rel: "icon", href: "/web-img/author.jpg"}],
+    ["meta", { name: "viewport", content: "width=device-width,initial-scale=1,user-scalable=no"}],
+    ["script", { src: "https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"}],
+    ["script", { src: "/js/MouseClickEffect.js" }],
+    ["script", { src: "/js/HeroVideo.js" }]
   ],
 
   theme: "reco",

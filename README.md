@@ -1,7 +1,7 @@
 ---
 home: true
 heroText: QiJieH's Blog
-tagline: 于朝阳升起处,我将踏上旅程
+tagline: 这个世界啊，很美丽的，很广大的，很辽阔的！
 # heroImage: /hero.png
 # heroImageStyle: {
 #   maxWidth: '600px',
@@ -11,7 +11,7 @@ tagline: 于朝阳升起处,我将踏上旅程
 #   background: '#fff',
 #   borderRadius: '1rem',
 # }
-bgImage: '/web-img/夏影.jpg'
+bgImage: '/web-img/poster.jpg'
 bgImageStyle: {
   height: '450px'
 }
