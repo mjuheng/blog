@@ -127,6 +127,7 @@ module.exports = {
         options: {
           appId: process.env.VALINEID,
           appKey: process.env.VALINEKEY,
+          visitor: true
         }
         // solution: 'vssue',
         // options: {
