@@ -121,15 +121,21 @@ module.exports = {
     [
       // reco 自带评论插件
       // https://vssue.js.org/zh/guide/
+      // https://valine.js.org/
       '@vuepress-reco/comments', {
-        solution: 'vssue',
+        solution: 'valine',
         options: {
-          platform: 'github',
-          owner: 'QiJieH',
-          repo: 'blog',
-          clientId: process.env.VSSUEID,
-          clientSecret: process.env.VSSUESECRET,
+          appId: process.env.VALINEID,
+          appKey: process.env.VALINEKEY,
         }
+        // solution: 'vssue',
+        // options: {
+        //   platform: 'github',
+        //   owner: 'QiJieH',
+        //   repo: 'blog',
+        //   clientId: process.env.VSSUEID,
+        //   clientSecret: process.env.VSSUESECRET,
+        // }
       }
     ],
     [

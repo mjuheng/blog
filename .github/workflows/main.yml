@@ -18,8 +18,10 @@ jobs:
       - name: Build
         env:
           # 注意在 Settings->Secrets 配置 VSSUE_CLIENT_ID : OAuth Apps
-          VSSUEID: ${{ secrets.VSSUE_CLIENT_ID }}
-          VSSUESECRET: ${{ secrets.VSSUE_CLIENT_SECRET }}
+          # VSSUEID: ${{ secrets.VSSUE_CLIENT_ID }}
+          # VSSUESECRET: ${{ secrets.VSSUE_CLIENT_SECRET }}
+          VALINEID: ${{ secrets.VALINE_APP_ID }}
+          VALINEKEY: ${{ secrets.VALINE_APP_KEY }}
         run: npm install && npm run build
 
       # 部署到分支
