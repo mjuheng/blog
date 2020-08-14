@@ -9,7 +9,7 @@ tags:
  - html
  - less
  - webReprint
-publish: false
+publish: true
 ---
 
 
@@ -502,7 +502,7 @@ less + rem + 媒体查询
 
 - 最后的公式：页面元素的 `rem` 值 =  页面元素值（px） /  （屏幕宽度  /  划分的份数）
 
-- 屏幕宽度/划分 的份数就是 `htmlfont-size` 的大小
+- 屏幕宽度/划分 的份数就是 `html font-size` 的大小
 
 - 或者：页面元素的 `rem 值 =  页面元素值（px） /  html font-size` 字体大小
 
@@ -511,7 +511,7 @@ less + rem + 媒体查询
 ---
 
 ```
-lflexible.js + rem
+flexible.js + rem
 ```
 
 手机淘宝团队推出的简洁高效移动端适配库
@@ -544,15 +544,19 @@ github地址：[https://github.com/amfe/lib-flexible](https://github.com/amfe/li
 
 ## 苏宁首页案例制作
 
-苏宁首页地址 ：[苏宁首页](m.suning.com)
+苏宁首页地址 ：[苏宁首页](https://m.suning.com) 
+
+
+
+### 方案1
 
 1. 技术选型
 
-方案：我们采取单独制作移动页面方案
+   方案：我们采取单独制作移动页面方案
 
-技术：布局采取rem适配布局（less + rem  + 媒体查询）
+   技术：布局采取rem适配布局（less + rem  + 媒体查询）
 
-设计图： 本设计图采用 750px 设计尺寸
+   设计图： 本设计图采用 750px 设计尺寸
 
 2. 搭建文件结构
 3. 设置视口标签以及引入初始化样式
@@ -565,28 +569,56 @@ github地址：[https://github.com/amfe/lib-flexible](https://github.com/amfe/li
 
 4. 设置公共 `common.less` 文件
 
-+ 新建 `common.less`  设置好最常见的屏幕尺寸，利用媒体查询设置不同的`html` 字体大小，因为除了首页其他页面也需要
-+ 我们关心的尺寸有 320px、360px、375px、384px、400px、414px、424px、480px、540px、720px、750px
-+ 划分的份数我们定为 15 等份
-+ 因为我们 pc 端也可以打开我们苏宁移动端首页，我们默认 `html` 字体大小为 `50px` ，注意这句话写到最上面
+	+ 新建 `common.less`  设置好最常见的屏幕尺寸，利用媒体查询设置不同的`html` 字体大小，因为除了首页其他页面也需要
+	+ 我们关心的尺寸有 320px、360px、375px、384px、400px、414px、424px、480px、540px、720px、750px
+	+ 划分的份数我们定为 15 等份
+	+ 因为我们 pc 端也可以打开我们苏宁移动端首页，我们默认 `html` 字体大小为 `50px` ，注意这句话写到最上面
+
+```less
+html {
+    font-size: 50px;
+}
+
+@no: 15;
+
+@media screen and (min-width: 320px) {html {font-size: 320px/@no;}}
+@media screen and (min-width: 360px) {html {font-size: 360px/@no;}}
+...
+```
+
+
+
+5. 新建 `index.less` 文件
+
+   - 新建 `index.less` ，在这里书写首页样式
+   - 将刚才设置好的 `common.less` 引入到 `index.less` 里面，语法如下
+
+   ```less
+   @import "common"
+   ```
+
+   - 生成 `index.css` 引入到 `index.html` 中。
+
+
+
+>  **源码：[suning-firstPlan](https://github.com/QiJieH/WebReprint/tree/master/msunning/firstPlan) **
+>
+> 有感：尽管在这种方案中 `less` 帮我们完成了 `rem` 的计算，但是大量的的算术表达式导致语法键入极其困难。可是，这种方案布局出来的网页适配屏幕是相当优秀的，可以轻易适配出各种屏幕尺寸的最佳效果。
 
 
 
 
 
+### 方案2
+
+简洁高效的 `rem` 适配方案 `flexible.js` 
 
 
 
+> Vscode `px` 转 `rem` 插件 ：**`cssrem`** 
+>
+> 注意修改插件配置的 `Cssrem:Root Font Size` 
 
 
 
-
-
-
-
-
-
-
-
-
-
+源码：[suning-secondPlan](https://github.com/QiJieH/WebReprint/tree/master/msunning/secondPlan) 
