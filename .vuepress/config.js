@@ -71,7 +71,7 @@ module.exports = {
     authorAvatar: "/web-img/author.jpg",
     // 网站更新记录
     record: "1.0.2",
-    recordLink: "/record/",
+    recordLink: "/blog/record/",
 
     startYear: "2020",
     modePicker: true, // 默认 true，false 不显示模式调节按钮，true 则显示
