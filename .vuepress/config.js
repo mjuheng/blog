@@ -66,7 +66,7 @@ module.exports = {
       {
         "title": "MXBlog",
         "desc": "暗黑风现代化设计Blog",
-        "link": "https://www.ymxblog.com/"
+        "link": "http://www.ymxblog.com/"
       }
     ],
     logo: "/web-img/author.jpg",
