@@ -24,17 +24,11 @@ module.exports = {
       //   "link": "/timeline/",
       //   "icon": "reco-date"
       // },
-      // {
-      //   "text": "Contact",
-      //   "icon": "reco-message",
-      //   "items": [
-      //     {
-      //       "text": "GitHub",
-      //       "link": "https://github.com/recoluan",
-      //       "icon": "reco-github"
-      //     }
-      //   ]
-      // }
+      {
+        "text": "Github",
+        "link": "https://github.com/QiJieH",
+        "icon": "reco-github",
+      }
     ],
 
 
@@ -75,12 +69,18 @@ module.exports = {
     lastUpdated: "Last Updated",
     author: "QiJieH",
     authorAvatar: "/web-img/author.jpg",
-    record: "1.0.0",
-    startYear: "2020",
+    // 网站更新记录
+    record: "1.0.2",
+    recordLink: "/record/",
 
-    modePicker: false, // 默认 true，false 不显示模式调节按钮，true 则显示
+    startYear: "2020",
+    modePicker: true, // 默认 true，false 不显示模式调节按钮，true 则显示
     mode : 'light', // 默认 auto，auto 跟随系统，dark 暗色模式，light 亮色模式
-    noFoundPageByTencent: false
+    noFoundPageByTencent: false,
+    valineConfig: {
+      appId: process.env.VALINEID,
+      appKey: process.env.VALINEKEY
+    }
   },
   plugins: [
     [
@@ -123,27 +123,28 @@ module.exports = {
       // 禁用加载页面
       '@vuepress-reco/vuepress-plugin-loading-page',false
     ],
-    [
-      // reco 自带评论插件
-      // https://vssue.js.org/zh/guide/
-      // https://valine.js.org/
-      '@vuepress-reco/comments', {
-        solution: 'valine',
-        options: {
-          appId: process.env.VALINEID,
-          appKey: process.env.VALINEKEY,
-          visitor: true
-        }
-        // solution: 'vssue',
-        // options: {
-        //   platform: 'github',
-        //   owner: 'QiJieH',
-        //   repo: 'blog',
-        //   clientId: process.env.VSSUEID,
-        //   clientSecret: process.env.VSSUESECRET,
-        // }
-      }
-    ],
+    // 使用 themeConfig 配置，否则无法正常加载浏览量
+    // [
+    //   // reco 自带评论插件
+    //   // https://vssue.js.org/zh/guide/
+    //   // https://valine.js.org/
+    //   '@vuepress-reco/comments', {
+    //     solution: 'valine',
+    //     options: {
+    //       appId: process.env.VALINEID,
+    //       appKey: process.env.VALINEKEY
+    //     }
+    //
+    //     // solution: 'vssue',
+    //     // options: {
+    //     //   platform: 'github',
+    //     //   owner: 'QiJieH',
+    //     //   repo: 'blog',
+    //     //   clientId: process.env.VSSUEID,
+    //     //   clientSecret: process.env.VSSUESECRET,
+    //     // }
+    //   }
+    // ],
     [
       // https://github.com/tolking/vuepress-plugin-img-lazy
       'img-lazy'

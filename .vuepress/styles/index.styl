@@ -1,7 +1,7 @@
 // 修改网页背景色
-body {
-    background-color: #f2f2f2 !important;
-}
+// body {
+//     background-color: var(--background-color) !important;
+// }
 // 修改导航栏搜索框圆弧化
 .search-box input {
     border-radius: 1.25rem !important;
@@ -40,7 +40,7 @@ body {
 }
 // 评论输入框背景色
 .vssue-new-comment-input {
-    background-color: #f4f5f7 !important;
+    background-color: var(--code-color) !important;
 }
 // 评论内容背景
 .vssue-comment-main {
@@ -54,6 +54,14 @@ body {
 .pagation-list {
     box-shadow: var(--box-shadow) !important;
     border: solid 1px var(--border-color) !important;
+    transition: all 0.3s;
+}
+.pagation-list:hover {
+    box-shadow: var(--box-shadow-hover);
+}
+// 页脚字体颜色
+.footer a {
+    color: #7f7f7f
 }
 
 
@@ -67,7 +75,44 @@ body {
 // 去除 mask 灰色遮罩
 .mask::after {
     background: transparent !important;
+    opacity : 0 !important;
 }
+
+
+
+// 暗夜 Metting
+.aplayer .aplayer-miniswitcher {
+    background-color: var(--background-color) !important;
+    border: 1px solid var(--code-color) !important;
+}
+.aplayer .aplayer-icon {
+    background-color: var(--background-color)  !important;
+}
+.aplayer.aplayer-fixed .aplayer-info {
+    border-top: 1px solid var(--border-color) !important;
+}
+.aplayer.aplayer-fixed .aplayer-body {
+    background-color: var(--background-color) !important;
+}
+.aplayer.aplayer-fixed .aplayer-list {
+    border: 1px solid var(--border-color) !important;
+    background-color: var(--background-color) !important;
+    overflow-y: hidden !important;
+}
+.aplayer .aplayer-list li {
+    border-top: 1px solid var(--border-color) !important;
+}
+.aplayer .aplayer-list-light {
+    border-top: 1px solid var(--border-color) !important;
+    background-color: var(--code-color) !important;
+}
+.aplayer .aplayer-list li:hover {
+    background: var(--code-color) !important;
+}
+.aplayer .aplayer-pic {
+        opacity: var(--default-color-7) !important;
+}
+
 
 
 // 优化阅读
