@@ -1,5 +1,5 @@
 ---
-title: JQuery 入门
+title: JQuery 入门（一）
 date: 2020-08-16
 sidebar: false
 categories:
@@ -7,7 +7,7 @@ categories:
 tags:
  - javascript
  - jquery
-publish: false
+publish: true
 ---
 
 **write less, do more.**
@@ -267,4 +267,329 @@ $("div").toggleClass("current");
 设置类样式方法比较适合样式多时操作，可以弥补css()的不足。
 
 原生 JS 中 className 会覆盖元素原先里面的类名，jQuery 里面类操作只是对指定类进行操作，不影响原先的类名。
+
+
+
+## JQuery 动画
+
+​	jQuery 给我们封装了很多动画效果，最为常见的如下：
+
+- 显示隐藏：`show() , hide() , toggle() `
+- 划入画出：`slideDown() , slideUp() , slideToggle() `
+- 淡入淡出：`fadeIn() , fadeOut() , fadeToggle() , fadeTo() `
+- 自定义动画：`animate() `
+
+> 注意：
+>
+> 动画或者效果一旦触发就会执行，如果多次触发，就造成多个动画或者效果排队执行。
+>
+> jQuery为我们提供另一个方法，可以停止动画排队：stop() ;
+
+
+
+
+
+### 显示隐藏
+
+**`show()`**
+
+```js
+show([speed,[easing],[fn]])
+```
+
+**参数**
+
+- 参数都可以省略，无动画直接显示
+- `speed`：可选，预设参数 `slow`,`normal`,`fast`，也可填写毫秒数 ms
+- `easing`：动画函数，预设 `swing` , `linear` 
+- `fn`：回调函数
+
+
+
+**`hide()`**
+
+```js
+hide([speed,[easing],[fn]])
+```
+
+
+
+**`toggle()`**
+
+```js
+toggle([speed,[easing],[fn]])
+```
+
+
+
+**实例**
+
+::: details
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+</head>
+<body>
+    <button>显示</button>
+    <button>隐藏</button>
+    <button>切换</button>
+    <div></div>
+    <script>
+        $(function() {
+            $("button").eq(0).click(function() {
+                $("div").show(1000);
+            })
+            $("button").eq(1).click(function() {
+                $("div").hide(1000);
+            })
+            $("button").eq(2).click(function() {
+              $("div").toggle(1000);
+            })
+        });
+    </script>
+</body>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: royalblue;
+            display: none;
+        }
+    </style>
+</html>
+```
+
+:::
+
+### 滑入滑出
+
+**`slideDown()`**
+
+```js
+slideDown([speed,[easing],[fn]])
+```
+
+**`slideUp()`**
+
+```js
+slideUp([speed,[easing],[fn]])
+```
+
+**`slideToggle()`**
+
+```js
+slideToggle([speed,[easing],[fn]])
+```
+
+
+
+**实例**
+
+::: details
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+</head>
+<body>
+    <button>滑入</button>
+    <button>滑出</button>
+    <button>切换</button>
+    <div></div>
+    <script>
+        $(function() {
+            $("button").eq(0).click(function() {
+                $("div").slideDown(1000);
+            })
+            $("button").eq(1).click(function() {
+                $("div").slideUp(1000);
+            })
+            $("button").eq(2).click(function() {
+              $("div").slideToggle(1000);
+            })
+        });
+    </script>
+</body>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: royalblue;
+            display: none;
+        }
+    </style>
+</html>
+```
+
+:::
+
+### 淡入淡出
+
+**`fadeIn()`**
+
+```js
+fadeIn([speed,[easing],[fn]])
+```
+
+**`fadeOut()`**
+
+```js
+fadeOut([speed,[easing],[fn]])
+```
+
+**`fadeTo()`**
+
+渐近方式调整不透明度
+
+```js
+fadeTo([speed],opacity,[easeing],[fn])
+```
+
+- `opacity` : 必需，透明度 0~1
+
+**`fadeToggle`**
+
+```js
+fadeToggle([speed,[easing],[fn]])
+```
+
+
+
+**实例**
+
+::: details
+
+```js
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+</head>
+<body>
+    <button>淡入</button>
+    <button>淡出</button>
+    <button>切换</button>
+    <button>自定义透明度</button>
+    <div></div>
+    <script>
+        $(function() {
+            $("button").eq(0).click(function() {
+                $("div").fadeIn(1000);
+            })
+            $("button").eq(1).click(function() {
+                $("div").fadeOut(1000);
+            })
+            $("button").eq(2).click(function() {
+              $("div").fadeToggle(1000);
+            })
+            $("button").eq(3).click(function() {
+              $("div").fadeTo(1000,0.5);
+            })
+        });
+    </script>
+</body>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: royalblue;
+            display: none;
+        }
+    </style>
+</html>
+```
+
+:::
+
+### 动画排队
+
+动画或者效果一旦触发就会执行，如果多次触发，就造成多个动画或者效果排队执行。
+
+停止动画排队的方法为：`stop() ` 
+
+- `stop()` 方法用于停止动画或效果。
+- `stop()` 写到动画或者效果的前面， 相当于停止结束上一次的动画。
+
+总结: 每次使用动画之前，先调用 `stop() `,在调用动画。
+
+```js
+$(this).stop().slideDown()
+```
+
+
+
+### 自定动画
+
+自定义动画非常强大，通过参数的传递可以模拟以上所有动画，方法为：`animate() `
+
+
+
+```js
+animate(params,[speed],[easing],[fn])
+```
+
+**参数**
+
+- `params` ：必需，想要更改的样式属性，以对象形式传递，复合属性使用驼峰命名。
+
+
+
+**实例**
+
+::: details
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+</head>
+<body>
+    <button>go</button>
+    <div></div>
+    <script>
+        $(function() {
+            $("button").click(function() {
+                $("div").animate({
+                    left: 500,
+                    top: 300,
+                    opacity: .4,
+                    width: 500
+                }, 500);
+            })
+        })
+    </script>
+</body>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: royalblue;
+        }
+    </style>
+</html>
+```
+
+:::
+
+
+
+
 
