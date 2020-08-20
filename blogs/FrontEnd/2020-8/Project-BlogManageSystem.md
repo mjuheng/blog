@@ -5,7 +5,6 @@ sidebar: false
 categories:
  - FrontEnd
  - BackEnd
- - DataBase
 tags:
  - ProjectPractice
  - Node.js
@@ -25,11 +24,12 @@ publish: true
 - 文章评论
 
 > 项目仓库地址 ：[QiJieH/BlogMS](https://github.com/QiJieH/BlogMS)
-<!-- more -->
-# 项目实战   多人博客管理系统
+> <!-- more -->
+>
+> # 项目实战   多人博客管理系统
 
  **快速预览:**
- 
+
 ![](https://i.loli.net/2020/08/07/o3YrjK1gZlhs74e.png =700x)
 
 ![](https://i.loli.net/2020/08/07/IASwVrNeqoE6KCa.png =700x)
