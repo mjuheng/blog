@@ -9,16 +9,13 @@ tags:
 publish: true
 ---
 
-```js
-var star = {
-    name : 'QiJieH',
-    age : 21,
-    sex : '男',
-    sayHi : function(){
-        alert('Hi');
-    }
-};
-```
+
+
+在 JavaScript 中，对象是一组无序的相关属性和方法的集合，所有的事物都是对象，例如字符串、数值、数组、函数等。
+
+- 创建对象
+- 操作对象
+- 内置对象
 
 <!-- more -->
 

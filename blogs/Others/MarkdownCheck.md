@@ -8,10 +8,9 @@ tags:
  - Markdown
 publish: true
 ---
-::: tip
+
 书写文档从未如此优雅  
-[Markdown中文指南](https://www.markdown.xyz/cheat-sheet/)
-:::
+[Markdown中文指南](https://www.markdown.xyz/cheat-sheet/) 
 <!-- more -->
 
 ## 1. 初识

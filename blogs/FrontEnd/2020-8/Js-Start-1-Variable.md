@@ -9,14 +9,7 @@ tags:
 publish: true
 ---
 
-```js
-var num = 1;
-var str = 'string';
-var bol = true;
-var obj = {};
-```
 
-<!-- more -->
 
 ## 编程语言
 

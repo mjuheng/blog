@@ -9,11 +9,19 @@ tags:
 publish: true
 ---
 
+**面向对象** OOP (Object Oriented Programming)
 
+面向对象是把构成问题事务分解成各个对象，建立对象的目的不是为了完成一个步骤，而是为了描叙某个事物在整个解决问题的步骤中的行为。
 
+典型语言：c++  java  c#
 
+面向对象的特性：
 
+- 封装性
+- 继承性
+- 多态性
 
+<!-- more -->
 
 ## 编程思想
 
@@ -153,37 +161,41 @@ class samsung extends Android {
 
 **super 关键字**
 
-之类可以用 `super()` 方法访问父类的方法
+子类可以用 `super()` 方法访问父类的方法
 
 ```js
 class Father {
-    constructor(x,y){
+    constructor(x, y) {
         this.x = x;
         this.y = y;
     }
-    sum(){
-        console.log(this.x + this.y);
+    sum() {
+        return this.x + this.y;
     }
-    say(){
+    say() {
         console.log('Dad');
     }
 }
 
 class Son extends Father {
-    constructor(x,y){
-        super(x,y);
+    constructor(x, y) {
+        super(x, y);       // 调用父类构造函数
         this.x = x;
         this.y = y;
     }
-    sub(){
+    sub() {
         console.log(this.x - this.y);
+    }
+    sumDouble() {
+        var sd = super.sum() * 2;   // 调用父类的 sum() 方法
+        console.log(sd);
     }
 }
 
-var son = new Son(1,2);
-son.sum();  // 3
-son.say();	// Dad
-son.sub();	// -1
+var son = new Son(1, 2);
+son.sub();
+son.sumDouble();
+son.say();          // 子类没有，调用父类
 ```
 
 1. 继承中，如果实例化子类输出一个方法，先看子类有没有这个方法。如果有就先执行子类的

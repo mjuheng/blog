@@ -22,11 +22,9 @@ publish: true
 
 2. `git push`
 
-::: tip
 
-Github & Gitee 双端自动部署。
 
-:::
+借助 GithubAction 实现 Github & Gitee 双端自动部署。
 
 <!-- more -->
 
@@ -36,7 +34,7 @@ Github & Gitee 双端自动部署。
 >
 >总结建站前后的经验写下第一篇关于本博客的部署教程的博文，希望能够帮助和我一样摸索建站的人。
 >
->​																																									——于朝阳升起处，我将踏上旅程
+>​																																									于朝阳升起处，我将踏上旅程
 
 
 

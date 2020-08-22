@@ -8,11 +8,13 @@ tags:
  - DOM
 publish: true
 ---
+
+
+文档对象模型 （Document Object Model) ，是 W3C 组织推荐的 HTML 或 XML 的标准编程接口。 即我们常说的 DOM树。
+
+<!-- more -->
+
 # DOM
-
-
-
-
 
 ## 1. DOM 简介
 

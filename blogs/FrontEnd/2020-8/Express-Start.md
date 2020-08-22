@@ -8,10 +8,9 @@ tags:
  - Express
 publish: true
 ---
-::: tip
+
 基于 Node.js 平台，快速、开放、极简的 Web 开发框架  
-官方文档：[Express Doc](https://www.expressjs.com.cn/)
-:::
+官方文档：[Express Doc](https://www.expressjs.com.cn/) 
 <!-- more -->
 # Express 基础入门
 

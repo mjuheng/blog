@@ -9,14 +9,12 @@ tags:
 publish: true
 ---
 
-```js
-var globalvar = 1000;
-function fn() {
-    var localvar = 10;
-}
-console.log(globalvar);      //1000
-console.log(localvar);		//not defined erro
-```
+
+
+JavaScript（ES6前）中的作用域有两种：
+
+- 全局作用域
+- 局部作用域（函数作用域）
 
 <!-- more -->
 

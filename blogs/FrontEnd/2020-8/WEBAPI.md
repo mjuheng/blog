@@ -1,16 +1,18 @@
 ---
-title: 什么是 WEB API
+title: WEB API
 date: 2020-08-07
 sidebar: false
 categories:
  - FrontEnd
 publish: true
 ---
+Web API 是浏览器提供的一套操作浏览器功能和页面元素的 API （BOM 和 DOM)。如控制浏览器窗口，访问浏览器历史等等...
+
+[MDN](https://developer.mozilla.org/zh-CN/docs/Web/API) 
+
+<!-- more -->
+
 # WEB API
-
-
-
-
 
 
 

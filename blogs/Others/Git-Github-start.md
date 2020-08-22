@@ -9,13 +9,12 @@ tags:
  - Github
 publish: true
 ---
-::: tip
+
 Git 是一个版本管理控制系统 *VCS* ，它可以在任何时间点，将文档的状态作为更新记录保存起来，也可以在任何时间点，将更新记录恢复回来。  
 [Gitee Git Doc](https://gitee.com/help/articles/4104)  
 [Github Git sue](https://docs.github.com/cn/github/using-git)  
 [bootcss Git 简易指南](https://www.bootcss.com/p/git-guide/)  
-[ProGit 进阶](https://www.progit.cn/)
-:::
+[ProGit 进阶](https://www.progit.cn/) 
 <!-- more -->
 
 

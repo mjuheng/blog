@@ -10,6 +10,8 @@ tags:
 publish: true
 ---
 
+jQuery 是一个快速、简洁的 JavaScript 库，其对原生 JavaScript 中的一些方法进行了封装和扩展。
+
 **write less, do more.**
 
 <!-- more -->
