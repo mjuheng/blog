@@ -1,5 +1,5 @@
 ---
-title: 请求相应原理及HTTP协议
+title: Node.js 入门（二）
 date: 2020-08-24
 sidebar: false
 categories:
@@ -10,8 +10,15 @@ publish: true
 ---
 
 
+Node 创建监听
 
+浏览器请求处理
 
+Promise 对象
+
+异步函数
+
+<!-- more -->
 
 ## 服务器端基础概念
 

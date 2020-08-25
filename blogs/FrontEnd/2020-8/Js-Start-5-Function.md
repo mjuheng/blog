@@ -9,13 +9,7 @@ tags:
 publish: true
 ---
 
-```js
-function fn(){
-    // code
-}
-```
 
-<!-- more -->
 
 ## 函数的概念
 

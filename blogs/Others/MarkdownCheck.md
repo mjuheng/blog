@@ -9,8 +9,9 @@ tags:
 publish: true
 ---
 
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200825181934.png)
+
 书写文档从未如此优雅  
-[Markdown中文指南](https://www.markdown.xyz/cheat-sheet/) 
 <!-- more -->
 
 ## 1. 初识

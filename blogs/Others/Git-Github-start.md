@@ -10,6 +10,8 @@ tags:
 publish: true
 ---
 
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200825181855.png)
+
 Git 是一个版本管理控制系统 *VCS* ，它可以在任何时间点，将文档的状态作为更新记录保存起来，也可以在任何时间点，将更新记录恢复回来。  
 
 <!-- more -->

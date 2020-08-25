@@ -9,11 +9,7 @@ tags:
 publish: true
 ---
 
-```js
-var arr = ['string', true, 1]
-```
 
-<!-- more -->
 
 ## 数组的概念
 
