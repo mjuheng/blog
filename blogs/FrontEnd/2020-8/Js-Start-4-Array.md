@@ -5,7 +5,7 @@ sidebar: false
 categories:
  - FrontEnd
 tags:
- - javascript
+ - JavaScript
 publish: true
 ---
 

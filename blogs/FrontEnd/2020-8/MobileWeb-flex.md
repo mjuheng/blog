@@ -5,9 +5,9 @@ sidebar: false
 categories:
  - FrontEnd
 tags:
- - html
- - css
- - webReprint
+ - HTML
+ - CSS
+ - WebReprint
 publish: true
 ---
 

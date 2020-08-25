@@ -5,13 +5,13 @@ sidebar: false
 categories:
  - FrontEnd
 tags:
- - javascript
+ - JavaScript
 publish: true
 ---
 
 
 
-**正则表达式（ Regular Expression ）**是用于匹配字符串中字符组合的模式。在JavaScript中，正则表达式也是对象。
+**正则表达式**（ Regular Expression ）是用于匹配字符串中字符组合的模式。在JavaScript中，正则表达式也是对象。
 
 <!-- more -->
 

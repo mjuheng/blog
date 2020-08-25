@@ -5,10 +5,10 @@ sidebar: false
 categories:
  - FrontEnd
 tags:
- - css
- - html
- - javascript
- - other
+ - CSS
+ - HTML
+ - JavaScript
+ - Other
 publish: true
 ---
 

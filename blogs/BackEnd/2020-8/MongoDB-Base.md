@@ -1,5 +1,5 @@
 ---
-title: "初识 MongoDB"
+title: 初识 MongoDB
 date: 2020-08-07
 sidebar: false
 categories:
@@ -9,11 +9,14 @@ tags:
  - MongoDB
 publish: true
 ---
-::: tip
+
+
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200823161501.png)
+
 MongoDB 是一个基于分布式文件存储非关系数据库。由 C++ 语言编写。旨在为 WEB 应用提供可扩展的高性能数据存储解决方案。  
-官方文档：[MongoDB Doc](https://docs.mongodb.com/guides/)
-:::
+
 <!-- more -->
+
 # MongoDB 基础语法
 
 官方文档：[Getting Started](https://docs.mongodb.com/guides/)

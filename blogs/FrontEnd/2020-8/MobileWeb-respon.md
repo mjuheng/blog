@@ -5,8 +5,8 @@ sidebar: false
 categories:
  - FrontEnd
 tags:
- - css
- - html
+ - CSS
+ - HTML
  - Bootstrap
 publish: true
 ---

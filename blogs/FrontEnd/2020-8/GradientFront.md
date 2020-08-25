@@ -5,7 +5,7 @@ sidebar: false
 categories:
  - FrontEnd
 tags:
- - css
+ - CSS
 publish: true
 ---
 
