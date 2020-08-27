@@ -9,14 +9,13 @@ tags:
 publish: true
 ---
 
+- Node 服务器创建
 
-Node 创建监听
+- 浏览器请求处理
 
-浏览器请求处理
+- Promise 对象
 
-Promise 对象
-
-异步函数
+- 异步函数
 
 <!-- more -->
 

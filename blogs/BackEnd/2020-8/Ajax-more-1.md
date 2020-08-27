@@ -1,6 +1,6 @@
 ---
 title: Ajax 编程扩展（一）
-date: 2020-08-26
+date: 2020-08-27
 sidebar: false
 categories:
  - FrontEnd
@@ -8,12 +8,8 @@ categories:
 tags:
  - Ajax
  - Node.js
-publish: false
+publish: true
 ---
-
-
-
-
 
 
 
