@@ -4,8 +4,10 @@ date: 2020-08-07
 sidebar: false
 categories:
  - FrontEnd
+ - BackEnd
 tags:
  - Express
+ - Node.js
 publish: true
 ---
 
@@ -82,7 +84,7 @@ app.post('/add', (req, res) => {
 ```js
 // Node.js
 app.on('request', (req, res) => {
-    // 获取GET参数
+    // 获取GET参数 第二个参数是否转化为对象
     let {query} = url.parse(req.url, true);
     // 获取POST参数
     let postData = '';
@@ -90,7 +92,7 @@ app.on('request', (req, res) => {
     	postData += chunk;
     });
     req.on('end', () => {
-    	console.log(querystring.parse(postData)
+    	console.log(querystring.parse(postData));
     })); 
 });
 
@@ -103,6 +105,7 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
     // 获取POST参数
+    // require('body-parser')
     console.log(req.body);
 }) 
 ```
