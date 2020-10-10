@@ -11,7 +11,6 @@ tags:
  - Github
  - Gitee
  - Git
-sticky: 1 
 publish: true
 ---
 

@@ -7,8 +7,7 @@ module.exports = {
     ["link", { rel: "icon", href: "/web-img/author.jpg"}],
     ["meta", { name: "viewport", content: "width=device-width,initial-scale=1,user-scalable=no"}],
     ["script", { src: "https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"}],
-    ["script", { src: "/js/MouseClickEffect.js" }],
-    ["script", { src: "/js/HeroVideo.js" }]
+    ["script", { src: "/js/MouseClickEffect.js" }]
   ],
 
   theme: "reco",
@@ -57,11 +56,6 @@ module.exports = {
       //   "avatar": "https://vuepress-theme-reco.recoluan.com/icon_vuepress_reco.png",
       //   "link": "https://vuepress-theme-reco.recoluan.com"
       // }
-      {
-        "title": "MXBlog",
-        "desc": "暗黑风现代化设计Blog",
-        "link": "http://www.ymxblog.com/"
-      }
     ],
     logo: "/web-img/author.jpg",
     search: true,

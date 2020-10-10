@@ -1,7 +1,7 @@
 ---
 home: true
 heroText: QiJieH's Blog
-tagline: 这个世界啊，很美丽的，很广大的，很辽阔的！
+tagline: 连宵不寝听微雨，错喜檐花滴数行
 # heroImage: /hero.png
 # heroImageStyle: {
 #   maxWidth: '600px',
@@ -11,7 +11,7 @@ tagline: 这个世界啊，很美丽的，很广大的，很辽阔的！
 #   background: '#fff',
 #   borderRadius: '1rem',
 # }
-bgImage: '/web-img/poster.jpg'
+bgImage: '/web-img/summer.jpg'
 bgImageStyle: {
   height: '450px'
 }
