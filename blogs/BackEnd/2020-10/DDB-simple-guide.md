@@ -71,11 +71,6 @@ FROM dept,emp@remoteDB
 WHERE emp.depton = dept.depton;
 ```
 
->在SQL命令符下使用 `host c` 可以清屏
-> ```sql
->SQL> host c
->```
-
 **使用同义词替换远端数据库**
 ```sql
 CREATE SYNONYM remoteemp FOR emp@remoteDB;
