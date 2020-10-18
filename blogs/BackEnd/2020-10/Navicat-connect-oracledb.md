@@ -8,7 +8,8 @@ tags:
  - OracleDB
 publish: true
 ---
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master/20201019005750.png)
+<!-- more -->
 ## Navicat Premium 15 连接本机 OracleDB
 
 > 本教程基于作者学校机房环境的特殊配布，请酌情参考

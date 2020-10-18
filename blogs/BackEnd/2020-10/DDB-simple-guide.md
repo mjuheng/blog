@@ -8,7 +8,8 @@ tags:
  - Oracle
 publish: true
 ---
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master/20201019005612.png)
+<!-- more -->
 ## Oracle 分布式数据库
 
 ### 什么是分布式数据库

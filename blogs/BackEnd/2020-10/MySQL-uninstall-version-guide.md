@@ -8,7 +8,8 @@ tags:
  - MySQL
 publish: true
 ---
-
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master/20201019005641.png)
+<!-- more -->
 ## MySQL 免安装版配置
 
 
