@@ -6,11 +6,9 @@ categories:
  - BackEnd
 tags:
  - Tomcat
- - Java web
+ - Java Web
 publish: true
 ---
-![](https://gitee.com/QiJieH/blog-image-bed/raw/master/20201018230936.png)
-<!-- more -->
 ## Tomcat 服务器安装与使用
 
 ### Web程序开发中常用的服务器有：

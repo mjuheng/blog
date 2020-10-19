@@ -27,18 +27,25 @@ bin\jlink.exe --module-path jmods --add-modules java.desktop --output jre
 在资源管理栏中右键项目文件夹，选择 `Build Path` 在顶栏选择 `Libraries` 选择 `modul path` 点击右侧 `Add External JARs` 选择已下载解压的 jar 包
 
 ### Eclipse 代码中文字符过小解决
-
+两种方案：
 1. 把字体设置为 Courier New ：
-`Windows` -> `Preferences` -> `Genneral` -> `Appearance` -> `Colors and Font` -> 在右侧框展开`Basic`-> `Text Font` 点击`Edit` 按钮，在弹出窗选择 `Courier New`
+`Windows -> Preferences -> Genneral -> Appearance -> Colors and Font -> 在右侧框展开Basic -> Text Font` 点击`Edit` 按钮，在弹出窗选择 `Courier New`
 
 2. 将脚本修改为 中欧字符 ：
-`windows` -> `Preferences` -> `Genneral` -> `Appearance` -> `Colors and Font` 在右侧选中 `Text Font` 点击 `Edit` 按钮， 将 `西欧语言` 改成 `中欧字符`
+`windows -> Preferences -> Genneral -> Appearance -> Colors and Font` 在右侧选中 `Text Font` 点击 `Edit` 按钮， 将 `西欧语言` 改成 `中欧字符`
 
 > 推荐使用第二种解决方案，Consolas 字体个人感觉比 Courier New 好看
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master/20201019225954.png)
 
 ### Eclipse 代码补全
 默认情况下 Eclipse 的代码补全是在键入 `.` 之后出现的，不像其他 IDE 键入任意字母提示补全。如果需要同其他 IDE 一样，需要自行修改补全规则
 
-`Window` --> `Perferences` --> `Java` --> `Editor` --> `Content Assist`
+`Window --> Perferences --> Java --> Editor --> Content Assist`
 
-在 `Auto Activation` 栏中勾选 `Enable auto activation` ，并设置 `Auto activation triggers for java` 选项为 `.qwertyuiopasdfghjklzxcvbnm` 即二十六个字母
+在 `Auto Activation` 栏中勾选 `Enable auto activation` ，并设置 `Auto activation triggers for java` 选项为 `.qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM` 即二十六个字母
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master/20201019230118.png)
+
+### Eclipse 修改类注释文档的@author字段
+Eclipse默认情况下使用`/**`自动创建类注释文档时`@author`字段默认是计算机的用户名，如果你需要修改成你的开发名，可以以下操作设置
+`Window --> Perferences`
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master/20201019225807.png)
