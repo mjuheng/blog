@@ -8,6 +8,7 @@ categories:
 tags:
  - Tomcat
  - Java Web
+ - Java
 publish: true
 ---
 Java Web，是用Java技术来解决相关web互联网领域的技术总和。web包括：web服务器和web客户端两部分。
@@ -30,7 +31,7 @@ Java Web，是用Java技术来解决相关web互联网领域的技术总和。we
 
 ### 使用Eclipse构建第一个Web应用
 启动Eclipse打开工作空间，新建一个`Web -> Dynamic Web Project`项目，之后Eclipse就会为您构建一个Web项目的基础构架。
-注意在最后一步时勾选 `Generate web.xml deployment descriptor` ，否则生成的项目将没有`web.xml`文件
+注意在最后一步时勾选 `Generate web.xml deployment descriptor` ，否则生成的项目将没有`web.xml`文件 *(Dynamic web module version >= 3.0 之后不再使用`web.xml`而是通过servlet的注释方式进行路径配置，但是并不建议入门跳过`web.xml`的认知)*
 
 > 基于Eclipse版本
 > ```
@@ -50,7 +51,7 @@ web应用就是一个web项目，web项目下有可供用户访问的网页资�
 `/WebContent/classes`：存放java被编译成的class文件
 
 ### 配置web项目访问的默认页面
-通过修改项目配置文件`WebContent/WEB-INF/web.xml`设置web项目访问的默认页面，如果页面在文件中不存在，就顺序往下访问。
+通过修改项目配置文件`WebContent/WEB-INF/web.xml`设置web项目访问的默认页面，如果该页面在文件中不存在，就顺序往下访问。
 示例：设置`WebContent/hi.html`文件为访问默认页面：
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -62,27 +63,32 @@ web应用就是一个web项目，web项目下有可供用户访问的网页资�
 </web-app>
 ```
 > 如果你在使用 Eclipse 构建项目时没有勾选生成配置导致没有`web.xml`文件，也可以手动生成
-> 右键项目打开菜单 > Java EE Tools > Generate Deployment Descriptor Stub
+> `右键项目打开菜单 > Java EE Tools > Generate Deployment Descriptor Stub`
 
 ### 为Eclipse配置Tomcat服务器
-`Window -> Preferences -> Web Services -> Serve and Runtime`
-设置 `Serve runtime` 为你的 `Tomcat` 版本
+假设你已经了解Tomcat服务器并成功启动。
+在Eclipse顶部工具条点击 `Window -> Preferences -> Web Services -> Serve and Runtime`
+设置 `Serve runtime` 为你的 `Tomcat` 版本，并指定你的`tomcat`存放根目录
 > Tomcat 服务器安装与使用参考同名博文
 
 **设置web项目托管方式**
 双击控制台`Servers`中的`Tomcat`服务器即可修改相关属性
 
-现在我们将项目编译后的文件托管在Tomcat安装目录下的`/webapps`下，而不是默认的eclipse的工作空间中（可选）
 ![](https://gitee.com/QiJieH/blog-image-bed/raw/master/20201019004417.png)
-### 为web项目配置Tomcat服务器
-在项目控制台窗口选项卡，点击`Servers`点击输出台的链接，在弹出窗口选择相应版本Tomcat服务器，点击下一步，设置Tomcat在本机中的存储目录,确定即可
+配置项说明：
+- 三个单选选择：
+这是选择web项目编译后的文件托管方式，
+第一项是存放在Eclipse的工作空间下
+第二项是存放在Tomcat的安装路径下
+第三项是使用用户自定义路径
+- `Server path` 是引用的`tomcat`存储根目录
+- `Deploy path` 存储在Tomcat安装路径下的哪个文件下（注意如果使用eclipse默认的选项，你将无法在Tomcat安装路径下查看，推荐更改为Tomcat的规范托管文件夹 `webapps`）
 
 ### 运行web项目
-- 鼠标右键项目菜单 `-> Run As -> Run on Sever -> Tomcat` 即可
-- 右键点击项目Severs控制台窗口下的 `Tomcat服务器 -> Add and Remove` 将项目托管至服务器区即可（推荐）
+第一种方式：鼠标右键项目菜单 `-> Run As -> Run on Sever -> Tomcat` 即可
+第二种方式：右键点击项目Severs控制台窗口下的 `Tomcat服务器 -> Add and Remove` 将项目托管至服务器区即可（推荐）
 
 ![](https://gitee.com/QiJieH/blog-image-bed/raw/master/20201019004728.png)
 
-> 如果你的工作空间或Tomcat的`webapps`下没有项目文件，你可能需要右键服务器点击Publish
 
-现在你就可以通过浏览器访问 http://localhost:8080/demo/ 来查看你的web应用了。
+现在你就可以通过浏览器访问 http://localhost:8080/projectName/ 来查看你的web应用了。

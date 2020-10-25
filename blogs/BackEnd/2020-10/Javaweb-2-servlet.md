@@ -7,11 +7,12 @@ categories:
  - FrontEnd
 tags:
  - Java Web
+ - Java
 publish: true
 ---
 
 
-##  Java Web 之 Servlet 基础
+##  Java Web(二) Servlet 基础
 ### Servlet概述
 
 **什么是servlet**
@@ -30,7 +31,7 @@ servlet 通常通过 HTTP（超文本传输协议）接收和响应来自 Web �
 
 ![](https://gitee.com/QiJieH/blog-image-bed/raw/master/image-20201019174543796.png)
 
-### Servlet 入门
+### Servlet 基础
 
 查询 JavaEE-API文档中的Servlet类，该类主要有五个方法 (文档描述)
 
@@ -56,51 +57,7 @@ class MyServlet extends HttpServlet { code... }
 
 ![](https://gitee.com/QiJieH/blog-image-bed/raw/master/20201019223231.png)
 
-### Servlet 实现
-**Eclipse导入servlet-api.jar**
-Eclipse并不提供和支持自动导入`servlet`包，需要我们手动为项目导入jar包。
-`Tomcat/lib`目录下的`servlet-api.jar`提供了jar包我们直接将其复制到项目的`WebContent/WEB-INFO/lib`下即可，成功复制导入之后在项目的`JavaResources/Libraries`下会新增`Web App Libraries/servlet-api.jar`。
-![](https://gitee.com/QiJieH/blog-image-bed/raw/master/20201019225258.png)
 
-
-**通过Eclipse创建Servlet，部署到tomcat服务器**
-1. 创建`HelloServlet`类，继承`GenericServlet`
-2. 重写父类`GenericServlet`的`service`方法
-3. 在`service`方法里面，处理客户端请求，把数据返回客户端
-```java
-/**
- * 自己创建的Servlet，继承GenericServlet
- * 重写service方法
- * @author qijieh
- *
- */
-public class HelloServlet extends GenericServlet{
-
-	@Override
-	public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
-		// 处理客户端请求，响应数据
-		System.out.println("client request recevied .............");
-		// 与浏览器绑定输出流，向浏览器输出数据
-		PrintWriter pw = res.getWriter();
-		pw.print("Hello world");
-	}
-	
-}
-```
-4. 客户端想要访问Servlet，需要提供servlet的访问路径，在web.xml中键入地图指向。你可以右键实现的servlet类，点击复制限定名即可快速复制该类在项目中的路径引用。
-```xml
-<!-- 配置/hello路径访问的servlet -->
-<servlet>
-    <servlet-name>helloWorld</servlet-name>
-    <servlet-class>per.qijieh.firstmyapp.servlet.HelloServlet</servlet-class>
-</servlet>
-<!-- 配置浏览器访问servlet的路径 -->
-<servlet-mapping>
-    <servlet-name>helloWorld</servlet-name>
-    <url-pattern>/hello</url-pattern>
-</servlet-mapping>
-```
-4. 托管项目到Tomcat服务器，访问设置的路径查看是否成功 `http://localhost/demo/hello`
 
 ### Servlet 的生命周期
 
@@ -168,11 +125,11 @@ console >>>>
 ```
 
 ### Servlet 源码解析 HttpServlet
-浏览器访问服务器端资源时需要遵守网络传输协议，比如`http,https,file`等，所以在创建servlet时,我们一般通过继承HttpServlet类来实现。
+浏览器访问服务器端资源时需要遵守网络传输协议，比如`http,https,file`等，所以在创建servlet时,我们一般通过继承`HttpServlet`类来实现。
 
->如果你需要查看HttpServlet的源码，你需要前往[Tomcat](https://tomcat.apache.org/)官网下载Source Code Distributions压缩包，并在项目引入的`servlet-api.jar`中绑定源码文件
+>如果你需要查看`HttpServlet`的源码，你需要前往[Tomcat](https://tomcat.apache.org/)官网下载`Source Code Distributions`源码压缩包，并在项目引入的`servlet-api.jar`中绑定源码文件
 
-以下是部分HttpServlet类的源码：
+以下是部分`HttpServlet`类的源码：
 ```java
 public abstract class HttpServlet extends GenericServlet {
 	//...
@@ -209,7 +166,7 @@ public abstract class HttpServlet extends GenericServlet {
 }
 ```
 
-在HttpServlet里重写service时，一般不会重写其内部的其他方法，因为在service方法内部，最终调用了doGet,doPost等方法，所以在重写service方法时，我们只需要重写其doGet和doPost等方法
+在`HttpServlet`里重写方法时，一般不会重写其内部`service`方法，因为在其方法内部，最终调用了`doGet,doPost`等方法，所以我们只需要重写其`doGet`和`doPost`等方法
 
 
 **继承HttpServlet实例代码：**
@@ -239,78 +196,89 @@ public class MyHttpServlet extends HttpServlet {
 	}
 }
 ```
-web.xml:配置表单提交的servlet路径
-::: details
+
+
+### Servlet ON Eclipse
+
+#### 项目导入servlet-api.jar
+Eclipse并不提供和支持自动导入`servlet`包，需要我们手动为项目导入jar包。
+`Tomcat/lib`目录下的`servlet-api.jar`提供了jar包我们直接将其复制到项目的`WebContent/WEB-INFO/lib`下即可，成功复制导入之后在项目的`JavaResources/Libraries`下会新增`Web App Libraries/servlet-api.jar`。
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master/20201019225258.png)
+
+
+
+
+#### 在`Eclipse`开发工具中创建`Servlet`的两种方式
+
+
+**1. 手动创建`Servlet`继承`GenericServlet`，部署到tomcat服务器**
+第一种是创建普通java类，通过实现`Servlet`接口或继承`HttpServlet(GenericServlet)`类。之后，你还需要手动在`web.xml`中配置访问该`servlet`的访问信息。
+1. 创建`HelloServlet`类，继承`GenericServlet`
+2. 重写父类`GenericServlet`的`service`方法
+3. 在`service`方法里面，处理客户端请求，把数据返回客户端
+```java
+/**
+ * 自己创建的Servlet，继承GenericServlet
+ * 重写service方法
+ * @author qijieh
+ *
+ */
+public class HelloServlet extends GenericServlet{
+
+	@Override
+	public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+		// 处理客户端请求，响应数据
+		System.out.println("client request recevied .............");
+		// 与浏览器绑定输出流，向浏览器输出数据
+		PrintWriter pw = res.getWriter();
+		pw.print("Hello world");
+	}
+	
+}
+```
+4. 客户端想要访问Servlet，需要提供servlet的访问路径，在web.xml中键入地图指向。你可以右键实现的servlet类，点击复制限定名即可快速复制该类在项目中的路径引用。
 ```xml
-<!-- 配置/from表单提交路径 -->
+<!-- 配置/hello路径访问的servlet -->
 <servlet>
-	<servlet-name>myhttpservlet</servlet-name>
-	<servlet-class>per.qijieh.firstmyapp.servlet.MyHttpServlet</servlet-class>
+    <servlet-name>helloWorld</servlet-name>
+    <servlet-class>per.qijieh.firstmyapp.servlet.HelloServlet</servlet-class>
 </servlet>
 <!-- 配置浏览器访问servlet的路径 -->
 <servlet-mapping>
-	<servlet-name>myhttpservlet</servlet-name>
-	<url-pattern>/from</url-pattern>
+    <servlet-name>helloWorld</servlet-name>
+    <url-pattern>/hello</url-pattern>
 </servlet-mapping>
 ```
-:::
+4. 托管项目到Tomcat服务器，访问设置的路径查看是否成功 `http://localhost/demo/hello`
 
-from.html：静态页面，两个表单，一种以get请求提交，一种以post请求提交
-::: details
-```html
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" 
-integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-</head>
-<body>
-<div class="container">
-	<div class="row" style="margin-top:100px">
-		  <div class="col-md-4"></div>
-		  <div class="col-md-4">
-		  	<form action="http://localhost:8080/demo/from" method="get">
-				  <div class="form-group">
-				    <label for="exampleInputEmail">Email</label>
-				    <input type="email" class="form-control" id="exampleInputEmail" placeholder="Email" name="Email">
-				  </div>
-				  <div class="form-group">
-				    <label for="exampleInputPassword">Password</label>
-				    <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" name="Password">
-				  </div>
-				  <button type="submit" class="btn btn-default">Submit Get</button>
-			</form>
-		  </div>
-		  <div class="col-md-4"></div>
-	</div>
-	<div class="row" style="margin-top:200px">
-		  <div class="col-md-4"></div>
-		  <div class="col-md-4">
-		  	<form action="http://localhost:8080/demo/from" method="post">
-				  <div class="form-group">
-				    <label for="exampleInputEmail">Email</label>
-				    <input type="email" class="form-control" id="exampleInputEmail" placeholder="Email" name="Email">
-				  </div>
-				  <div class="form-group">
-				    <label for="exampleInputPassword">Password</label>
-				    <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" name="Password">
-				  </div>
-				  <button type="submit" class="btn btn-default">Submit Post</button>
-			</form>
-		  </div>
-		  <div class="col-md-4"></div>
-	</div>
-</div>
-</body>
-</html>
-```
-::: 
 
-测试输出：
+**2. 使用新建Servlet类的方式，自动创建**
+第二种是通过开发工具新建`Servlet`，这种方式会自动向`web.xml`中添加访问该`servlet`的访问信息。
+
+通过Eclipse创建`servlet`时，弹出窗口会引导你填写servlet名，描述，该Servlet的访问路径，重写的请求方法等。
+
+以下是通过Eclipse新建的`servlet`类的部分代码：
+```java {20}
+@WebServlet("/autoBuildServlet")
+public class AutoBuildServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 自动生成的重写doGet方法
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * 自动生成的重写doPost方法
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
 ```
-接受到get请求：GET
-接受到post请求：POST
-```
+可以看见，其通过继承`HttpServlet`类的方式实现`servlet`，此外注意高亮标识行，其在`doPost`方法中调用了`doGet`方法，这是为了简化开发，即允许同一种需求使用Get和Post请求完成服务。
