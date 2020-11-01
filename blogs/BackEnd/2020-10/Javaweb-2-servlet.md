@@ -203,12 +203,14 @@ public class MyHttpServlet extends HttpServlet {
 #### 项目导入servlet-api.jar
 Eclipse并不提供和支持自动导入`servlet`包，需要我们手动为项目导入jar包。
 `Tomcat/lib`目录下的`servlet-api.jar`提供了jar包我们直接将其复制到项目的`WebContent/WEB-INFO/lib`下即可，成功复制导入之后在项目的`JavaResources/Libraries`下会新增`Web App Libraries/servlet-api.jar`。
+
 ![](https://gitee.com/QiJieH/blog-image-bed/raw/master/20201019225258.png)
 
 
+> 整个WEB项目的jar包都应该通过这种方式导入到项目中，即复制jar到`WebContent/WEB-INFO/lib`目录下，这对项目可移植性友好。
 
 
-#### 在`Eclipse`开发工具中创建`Servlet`的两种方式
+#### 在Eclipse开发工具中创建Servlet的两种方式
 
 
 **1. 手动创建`Servlet`继承`GenericServlet`，部署到tomcat服务器**
@@ -258,7 +260,7 @@ public class HelloServlet extends GenericServlet{
 通过Eclipse创建`servlet`时，弹出窗口会引导你填写servlet名，描述，该Servlet的访问路径，重写的请求方法等。
 
 以下是通过Eclipse新建的`servlet`类的部分代码：
-```java {20}
+```java {18}
 @WebServlet("/autoBuildServlet")
 public class AutoBuildServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

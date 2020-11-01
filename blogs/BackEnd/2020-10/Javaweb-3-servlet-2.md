@@ -8,7 +8,7 @@ categories:
 tags:
  - Java Web
  - Java
-publish: false
+publish: true
 ---
 
 ##  Java Web(三) Servlet进阶
@@ -241,8 +241,10 @@ public class FilePathServlet extends HttpServlet {
 
 请求消息分为三部分：请求行，请求头，请求参数。
 
-#### `HttpServletRequest` 对象常用方法 ####
+#### HttpServletRequest 对象常用方法
+
 获取请求行的相关方法：
+
 | 方法|说明|实例|
 | ---|---|---|
 |`getMethod()`|获取请求提交方式|`GET`|
@@ -253,19 +255,30 @@ public class FilePathServlet extends HttpServlet {
 |`getRequestURL()`|获取请求完整路径|`http://localhost:8080/demo/RequestServlet`|
 
 获取请求头的相关方法：
+
 | 方法|说明|
 | ---|---|
 |`getHeader(String name)`|获取请求头的信息|
 |`getHeaderNames()`|获取请求头的名称集合|
 
 获取请求参数的相关方法：
+
 | 方法|说明|
 | ---|---|
 |`getParameter(String name)`|获取请求参数值|
 |`getParameterValues(String name)`|获取请求参数的名称集合|
 |`getParameterMap()`|获取所有值|
 
-实例代码：
+
+获取其他常用对象的相关方法：
+
+| 方法|说明|
+| ---|---|
+|`getRequestDispatcher()`|获取该请求的调度器对象|
+
+
+
+获取请求参数实例代码：
 ```java
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	String username = request.getParameter("username");
@@ -296,28 +309,12 @@ request.setCharacterEncoding("utf-8");
 ```
 
 #### HttpServletRequest 传递数据
-利用`Request`对象传递数据是利用了其域对象的特性，在一次请求中可以通过其存值与取值。
+利用`Request`对象传递数据是利用了其域对象的特性，在**一次请求中**可以通过其存值与取值。
 |方法|说明|
 |---|---|
 |`setAttribute(String key, Obeject obj)`|存值|
 |`getAttribute(String key)`|取值|
 |`removeAttribute(String key)`|移除值|
-
-### RequestDispatcher 对象
-在开发中，当web资源被访问到以后，需要服务器跳转到另一个web资源去处理请求，可以通过sendRedirect这个方法实现，转发对象的`forward`方法。
-
-得到一个`RequestDispatcher`对象
-```java
-forwardObj.forward(request,response)
-```
-
-**`RequestDispatcher`对象常用方法：**
-|方法|说明|
-|---|---|
-|`forward(request,response)`|请求转发|
-|`include(request,response)`|请求包含|
-
-
 
 
 ### HttpServletResponse对象
@@ -327,7 +324,7 @@ forwardObj.forward(request,response)
 
 响应信息分为三部分：响应行，响应头，响应正文（响应体）
 
-#### `HttpServletResponse` 对象常用方法 ####
+#### HttpServletResponse 对象常用方法 ####
 设置响应行和响应头的相关的方法：
 | 方法|说明|
 | ---|---|
@@ -396,13 +393,118 @@ public class HttpResponseServlet extends HttpServlet {
 }
 ```
 
+### RequestDispatcher 对象
+在开发中，当web资源被访问到以后，需要服务器跳转到另一个web资源去处理请求，可以通过sendRedirect这个方法实现，转发对象的`forward`方法。
+
+得到一个`RequestDispatcher`对象
+```java
+forwardObj.forward(request,response)
+```
+
+**`RequestDispatcher`对象常用方法：**
+|方法|说明|
+|---|---|
+|`forward(request,response)`|请求转发|
+|`include(request,response)`|请求包含|
+
+#### 请求转发和重定向  
+请求转发和重定向虽然实现的功能一致，但是其内部实现原理是不同的，必须明确两者的整个流程。
+
+![](https://gitee.com/qijieh/blog-image-bed/raw/master/20201026001455.png)
+
+1. 请求转发
+
+通过调用`RequestDispatcher.forward()`方法，将当前的`request`发送给指定`servlet`对象
+```java
+// 转发的 servlet
+@WebServlet("/RequestFowardServlet")
+public class RequestFowardServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 1. 获取转发对象
+		RequestDispatcher rd = request.getRequestDispatcher("/RequestResultServlet");
+		// 2. 调用转发方法，实现转发效果
+		request.setAttribute("Servlet01", "this is deal by servlet01");
+		rd.forward(request, response);
+	}
+}
+```
+```java
+// 最终接受请求的 servlet
+@WebServlet("/RequestResultServlet")
+public class RequestResultServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("Servlet02", "finnal deal by Servlet02");
+		Object obj = request.getAttribute("Servlet01");
+		Object obj2 = request.getAttribute("Servlet02");
+		response.getWriter().println(obj.toString());
+		response.getWriter().println(obj2.toString());
+	}
+}
+```
+
+2. 请求重定向
+
+重定向的`requset`是无法携带参数，因为浏览器无法在第二次发起请求时，无法处理第一次请求响应的数据并携带其至第二次请求中。
 
 
+#### 请求包含
 
+请求包含又不同于另外两个方式，请求包含是在服务器内部完成的，其路径和请求转发一样也不需要携带项目名称。与请求转发不同的是，这种方式最终响应浏览器的是初始请求的`servlet`。
 
+![](https://gitee.com/QiJieH/blog-image-bed/raw/master/20201028150431.png)
 
+**实例代码：**
+```java
+/**
+ * 这是一个包含的Servlet，其包含了其他web资源
+ */
+@WebServlet("/RequestIncludeServlet")
+public class RequestIncludeServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 1. 获取调度器对象
+		RequestDispatcher rd = request.getRequestDispatcher("/RequestIncludedServlet");
 
+		PrintWriter out = response.getWriter();
+		out.println("including..............");
+		// 2. 请求包含
+		rd.include(request, response);
+		
+		// 3. 包含完毕后，原对象可握有request对象
+		out.println("includ commplet");
+	}
+}
+```
 
+```java
+/**
+ * 这是一个被包含的Servlet
+ */
+@WebServlet("/RequestIncludedServlet")
+public class RequestIncludedServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		out.println("I'm included servlet, this word is by me");
+	}
+}
+```
+
+访问`/RequestIncludeServlet`，查看网页：
+```
+including..............
+I'm included servlet, this word is by me
+includ commplet
+```
+
+注意，虽然被包含的`servlet`操作了`response`但是这个`response`对象最终依旧是归原`servlet`握有的，也是由原`servlet`响应给客户端的。（通过中文编码测试可验证）
+
+> 请求转发和页面重定向可以从浏览器明显感觉到，页面重定向会刷新页面并更改页面的url地址，但是请求转发只会发起一次请求，自始至终url也没有变化。
 
 
 
