@@ -1,7 +1,6 @@
 ---
 title: BOM 浏览器对象模型
 date: 2020-08-07
-sidebar: false
 categories:
  - FrontEnd
 tags:

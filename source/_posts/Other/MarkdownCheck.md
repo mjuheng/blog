@@ -1,7 +1,6 @@
 ---
 title: Markdown 语法入门
 date: 2020-08-07
-sidebar: false
 categories:
  - Others
 tags:
