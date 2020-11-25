@@ -1,11 +1,10 @@
-name: Sync to Gitee Repo
+name: Deploy Gitee
 on:
   push:
     branches:
       - master
 jobs:
   sync-to-gitee:
-    needs: build-and-deploy
     runs-on: ubuntu-latest
     steps:
       # 克隆项目至 gitee
@@ -31,5 +30,5 @@ jobs:
             gitee-password: ${{ secrets.GITEE_PASSWORD }}
             # 注意替换为你的 Gitee 仓库
             gitee-repo: qijieh/blog
-            # 部署分支
+            # 构建分支
             branch: gh-pages
