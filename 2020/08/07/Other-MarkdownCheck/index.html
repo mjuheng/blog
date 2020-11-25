@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="//cdn1.lncld.net">
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>Markdown 语法入门 | Qijieh&#39;s Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/blog/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/blog/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/blog/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/blog/css/highlight/atelier-heath-light.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/blog/css/highlight/atelier-heath-light.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Qijieh's Blog"><meta name="msapplication-starturl" content="http://qijieh.gitee.io/blog"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Qijieh's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="Markdown 语法入门 | Qijieh&#39;s Blog"><meta property="og:site_name" content="Qijieh&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="http://qijieh.gitee.io/blog/2020/08/07/Other-MarkdownCheck/"><meta property="og:locale" content="zh-CN"><meta name="description" content="书写文档从未如此优雅 - QiJieH - Qijieh&#39;s Blog"><meta name="keywords" content="Markdown"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200825181934.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807160743.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807160818.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807160842.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807160900.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807160911.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807161058.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807161116.png"><meta property="og:image" content="c:/Users/user/AppData/Roaming/Typora/typora-user-images/image-20200807161136631.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807161148.png"><meta property="article:published_time" content="2020-08-06T16:00:00.000Z"><meta property="article:modified_time" content="2020-11-25T09:26:27.970Z"><meta property="og:updated_time" content="2020-11-25T09:26:27.970Z"><meta property="article:author" content="QiJieH"><meta property="article:tag" content="Markdown"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://qijieh.gitee.io/blog/2020/08/07/Other-MarkdownCheck/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://qijieh.gitee.io/blog/2020/08/07/Other-MarkdownCheck/",
+    "@type": "BlogPosting",
+    "logo": "http://qijieh.gitee.io/blog/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://qijieh.gitee.io/blog/2020/08/07/Other-MarkdownCheck/"
+    },
+    "headline": "Markdown 语法入门 | Qijieh&#39;s Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2020-08-06T16:00:00.000Z",
+    "dateModified": "2020-11-25T09:26:27.970Z",
+    "author": {
+        "@type": "Person",
+        "name": "QiJieH",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/author.jpg"
+        },
+        "description": "hello world."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Qijieh&#39;s Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://qijieh.gitee.io/blog/blog/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Markdown",
+    "description": "书写文档从未如此优雅 - QiJieH - Qijieh&#39;s Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/blog/">Qijieh&#39;s Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                hello world.
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/blog/" class="navbar-link">首页</a>
+    
+    
+        <a href="/blog/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/blog/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/blog/tags" class="navbar-link">标签</a>
+    
+        <a href="/blog/links" class="navbar-link">友链</a>
+    
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">Markdown 语法入门</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/blog/img/author.jpg" src="/blog/img/suka-lazyload.gif" alt="QiJieH's Avatar">
+        <span>2020-08-07</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/blog/categories/Others/">Others</a>
+        
+        
+        
+            <span class="suka-devide-dot"></span>
+<span id="/blog/2020/08/07/Other-MarkdownCheck/" class="leancloud-visitors" data-flag-title="Markdown 语法入门">
+    <span>view </span>
+    <span class="leancloud-visitors-count">0</span>
+    <span></span>
+</span>
+        
+    </p>
+    <div class="post-header-info-right">
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-%E5%88%9D%E8%AF%86"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. 初识</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-%E7%BC%96%E8%BE%91%E5%99%A8"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. 编辑器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-%E5%9C%A8%E7%BA%BF"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1.1 在线</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-%E5%BA%94%E7%94%A8"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">1.2 应用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-%E6%8F%92%E4%BB%B6"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">1.3 插件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. 基础语法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-%E6%A0%87%E9%A2%98"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 标题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-%E8%BD%AC%E8%A1%8C"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2 转行</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-3-%E5%88%86%E5%89%B2%E7%BA%BF"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3.3 分割线</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-4-%E5%AD%97%E4%BD%93%E6%A0%B7%E5%BC%8F"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">3.4 字体样式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-5-%E5%88%97%E8%A1%A8"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">3.5 列表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-6-%E5%BC%95%E7%94%A8"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">3.6 引用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-7-%E5%9B%BE%E7%89%87"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">3.7 图片</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-8-%E8%B6%85%E9%93%BE%E6%8E%A5"><span class="post-toc-number">3.8.</span> <span class="post-toc-text">3.8 超链接</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-9-%E8%A1%A8%E6%A0%BC"><span class="post-toc-number">3.9.</span> <span class="post-toc-text">3.9 表格</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-10-%E4%BB%A3%E7%A0%81"><span class="post-toc-number">3.10.</span> <span class="post-toc-text">3.10 代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. 扩展语法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-HTML%E5%85%83%E7%B4%A0"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">4.1 HTML元素</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">4.2 转义字符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-3-%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">4.3 数学公式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-4-%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">4.4 流程图</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-5-%E7%9B%AE%E5%BD%95"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">4.5 目录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-6-%E8%84%9A%E6%B3%A8"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">4.6 脚注</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-7-%E5%AE%8C%E6%88%90%E6%B8%85%E5%8D%95"><span class="post-toc-number">4.7.</span> <span class="post-toc-text">4.7 完成清单</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-8-Emoji%E8%A1%A8%E6%83%85"><span class="post-toc-number">4.8.</span> <span class="post-toc-text">4.8 Emoji表情</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-9-%E9%94%9A%E7%82%B9%E5%AE%9A%E4%BD%8D"><span class="post-toc-number">4.9.</span> <span class="post-toc-text">4.9 锚点定位</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-%E6%B5%81%E7%A8%8B%E5%9B%BE%E7%A4%BA%E4%BE%8B"><span class="post-toc-number">5.</span> <span class="post-toc-text">5. 流程图示例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-1-%E5%88%9D%E8%AF%86"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">5.1 初识</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-2-%E6%A8%AA%E5%90%91%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">5.2 横向流程图</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-3-%E6%A0%87%E5%87%86%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">5.3 标准流程图</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-4-UML%E6%97%B6%E5%BA%8F%E5%9B%BE"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">5.4 UML时序图</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-5-UML%E6%97%B6%E5%BA%8F%E5%9B%BE%E5%A4%8D%E6%9D%82"><span class="post-toc-number">5.5.</span> <span class="post-toc-text">5.5 UML时序图复杂</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-6-UML%E6%A0%87%E5%87%86%E6%97%B6%E5%BA%8F%E5%9B%BE"><span class="post-toc-number">5.6.</span> <span class="post-toc-text">5.6 UML标准时序图</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-7-%E7%94%98%E7%89%B9%E5%9B%BE"><span class="post-toc-number">5.7.</span> <span class="post-toc-text">5.7 甘特图</span></a></li></ol></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200825181934.png"></p>
+<p>书写文档从未如此优雅  </p>
+<a id="more"></a>
+
+<h2 id="1-初识"><a href="#1-初识" class="headerlink" title="1. 初识"></a>1. 初识</h2><p>Markdown 是一种轻量级的标记语言，可用于在纯文本文档中添加格式化元素。Markdown 由 John Gruber 于 2004 年创建，如今已成为世界上最受欢迎的标记语言之一。</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.markdown.xyz/cheat-sheet/">Markdown中文指南</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/191d1e21f7ed/">简书语法速查</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.runoob.com/markdown/md-tutorial.html">菜鸟入门教程</a></p>
+</li>
+</ul>
+<p>你可能想知道为什么人们使用 Markdown 而不是所用即所得（WYSIWYG）编辑器。当你可以通过按下界面中的按钮来设置文本格式时，为什么还要使用 Markdown 来书写呢？事实证明，人们使用 Markdown 而不是 WYSIWYG 编辑器的原因有两个：</p>
+<ul>
+<li>Markdown 处处可用。人们使用它来创建 网站、文档、便签、书籍、演示文稿、邮件 和 技术文档。</li>
+<li>Markdown 是可移植的。几乎可以使用任何应用程序打开包含 Markdown 格式的文本文件。如果你不喜欢当前使用的 Markdown 应用程序了，则可以将 Markdown 文件导入另一个 Markdown 应用程序中。这与 Microsoft Word 等文字处理应用程序形成了鲜明的对比，Microsoft Word 将你的内容锁定在专有文件格式中。</li>
+<li>Markdown 是独立于平台的。你可以在运行任何操作系统的任何设备上创建 Markdown 格式的文本。</li>
+<li>Markdown 能适应未来的变化。即使你正在使用的应用程序将来会在某个时候不能使用了，你仍然可以使用文本编辑器读取 Markdown 格式的文本。当涉及需要无限期保存的书籍、大学论文和其他里程碑式的文件时，这是一个重要的考虑因素。</li>
+<li>Markdown 无处不在。例如 Reddit 和 GitHub 等网站都支持 Markdown，许多桌面和基于 Web 的应用程序也都支持 Markdown。</li>
+</ul>
+<h2 id="2-编辑器"><a href="#2-编辑器" class="headerlink" title="2. 编辑器"></a>2. 编辑器</h2><h3 id="1-1-在线"><a href="#1-1-在线" class="headerlink" title="1.1 在线"></a>1.1 在线</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://dillinger.io/">Dillinger</a> </li>
+</ul>
+<h3 id="1-2-应用"><a href="#1-2-应用" class="headerlink" title="1.2 应用"></a>1.2 应用</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="http://25.io/mou/">Mou</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://markdownpad.com/">MarkdownPad</a></p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://www.typora.io/">Typora</a></strong></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://atom.io/">Atom</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://pad.haroopress.com/user.html">Haroopad</a></p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="http://www.sublimetext.com/">SublimeText</a></strong></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zybuluo.com/mdeditor">Cmd Markdown</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://bywordapp.com/">Byword</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://cloose.github.io/CuteMarkEd/">CuteMarkEd</a></p>
+</li>
+</ul>
+<h3 id="1-3-插件"><a href="#1-3-插件" class="headerlink" title="1.3 插件"></a>1.3 插件</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://atom.io/">Atom</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://www.sublimetext.com/">SublimeText</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://dillinger.io/">Dillinger</a></p>
+</li>
+</ul>
+<h2 id="3-基础语法"><a href="#3-基础语法" class="headerlink" title="3. 基础语法"></a>3. 基础语法</h2><h3 id="3-1-标题"><a href="#3-1-标题" class="headerlink" title="3.1 标题"></a>3.1 标题</h3><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-2-转行"><a href="#3-2-转行" class="headerlink" title="3.2 转行"></a>3.2 转行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在需要转行的句末连续两个空格  </span><br><span class="line"></span><br><span class="line">或者间隔一个空行，这段文字连续转行2次</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-3-分割线"><a href="#3-3-分割线" class="headerlink" title="3.3 分割线"></a>3.3 分割线</h3><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">------</span><br><span class="line">**<span class="strong">*</span></span><br><span class="line"><span class="strong">*</span>**<span class="strong">*</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-4-字体样式"><a href="#3-4-字体样式" class="headerlink" title="3.4 字体样式"></a>3.4 字体样式</h3><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">~~需要删除的内容~~</span><br><span class="line">&lt;u&gt;下划线内容&lt;/u&gt;</span><br><span class="line"><span class="strong">*倾斜字体*</span></span><br><span class="line">*<span class="strong">*加粗强调*</span><span class="strong">*</span></span><br><span class="line"><span class="strong">*</span>*<span class="strong">*加粗斜体*</span>*<span class="strong">*</span></span><br></pre></td></tr></table></figure>
+
+<p>下划线目前 markdown 暂时没有支持语法，可以依靠 html 语法实现</p>
+<h3 id="3-5-列表"><a href="#3-5-列表" class="headerlink" title="3.5 列表"></a>3.5 列表</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> 无序列表</span><br><span class="line"><span class="bullet">+</span> 无序列表</span><br><span class="line"><span class="bullet">*</span> 无序列表的三种方式</span><br><span class="line"><span class="bullet">1.</span> 有序列表</span><br><span class="line"><span class="bullet">2.</span> 有序列表</span><br></pre></td></tr></table></figure>
+
+<p>列表之间允许嵌套列表和其他语法格式</p>
+<h3 id="3-6-引用"><a href="#3-6-引用" class="headerlink" title="3.6 引用"></a>3.6 引用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 这是引用内容</span><br><span class="line">&gt; &gt; 引用的嵌套</span><br></pre></td></tr></table></figure>
+
+<p>引用允许嵌套引用和其他语法格式</p>
+<h3 id="3-7-图片"><a href="#3-7-图片" class="headerlink" title="3.7 图片"></a>3.7 图片</h3><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">!<span class="selector-attr">[图片注释]</span>(图片地址可以是url也可以是文件路径 <span class="string">&quot;鼠标悬浮提示,可加可不加&quot;</span>)</span><br><span class="line"></span><br><span class="line">!<span class="selector-attr">[图片7-1]</span>(<span class="attribute">D</span>:/image/<span class="number">01</span>.png)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-8-超链接"><a href="#3-8-超链接" class="headerlink" title="3.8 超链接"></a>3.8 超链接</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[百度]</span>(<span class="selector-tag">https</span>://<span class="selector-tag">www</span><span class="selector-class">.baidu</span><span class="selector-class">.com</span>)</span><br><span class="line"></span><br><span class="line"><span class="selector-attr">[Google]</span>(<span class="selector-tag">https</span>://<span class="selector-tag">www</span><span class="selector-class">.google</span><span class="selector-class">.com</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-9-表格"><a href="#3-9-表格" class="headerlink" title="3.9 表格"></a>3.9 表格</h3><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">表头|<span class="string">表头</span>|<span class="string">表头</span></span><br><span class="line"><span class="string">---</span>|<span class="string">:--:</span>|<span class="string">---:</span></span><br><span class="line"><span class="string">内容</span>|<span class="string">内容</span>|<span class="string">内容</span></span><br><span class="line"><span class="string">内容</span>|<span class="string">内容</span>|<span class="string">内容</span></span><br><span class="line"></span><br><span class="line"><span class="string">第二行分割表头和内容。</span></span><br><span class="line"><span class="string">文字默认居左</span></span><br><span class="line"><span class="string">两边加：表示文字居中</span></span><br><span class="line"><span class="string">右边加：表示文字居右</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-10-代码"><a href="#3-10-代码" class="headerlink" title="3.10 代码"></a>3.10 代码</h3><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">`单独代码`</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">​```language</span><br><span class="line">code here</span><br><span class="line">​```</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+<h2 id="4-扩展语法"><a href="#4-扩展语法" class="headerlink" title="4. 扩展语法"></a>4. 扩展语法</h2><h3 id="4-1-HTML元素"><a href="#4-1-HTML元素" class="headerlink" title="4.1 HTML元素"></a>4.1 HTML元素</h3><p>不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">kbd</span>&gt;</span> <span class="tag">&lt;<span class="name">b</span>&gt;</span> <span class="tag">&lt;<span class="name">i</span>&gt;</span> <span class="tag">&lt;<span class="name">em</span>&gt;</span> <span class="tag">&lt;<span class="name">sup</span>&gt;</span> <span class="tag">&lt;<span class="name">sub</span>&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span> <span class="tag">&lt;<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line">使用 <span class="tag">&lt;<span class="name">kbd</span>&gt;</span>Ctrl<span class="tag">&lt;/<span class="name">kbd</span>&gt;</span>+<span class="tag">&lt;<span class="name">kbd</span>&gt;</span>Alt<span class="tag">&lt;/<span class="name">kbd</span>&gt;</span>+<span class="tag">&lt;<span class="name">kbd</span>&gt;</span>Del<span class="tag">&lt;/<span class="name">kbd</span>&gt;</span> 重启电脑</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="4-2-转义字符"><a href="#4-2-转义字符" class="headerlink" title="4.2 转义字符"></a>4.2 转义字符</h3><p>Markdown 使用了很多特殊符号来表示特定的意义，如果需要显示特定的符号则需要使用转义字符，Markdown 使用反斜杠转义特殊字符：</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">\是</span>转义符</span><br><span class="line"></span><br><span class="line"><span class="symbol">\*</span><span class="symbol">\*</span>不再是加粗强调<span class="symbol">\*</span><span class="symbol">\*</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="4-3-数学公式"><a href="#4-3-数学公式" class="headerlink" title="4.3 数学公式"></a>4.3 数学公式</h3><p>当你需要输入数学公式时，即可使用公式块：</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line"><span class="symbol">\m</span>athbf&#123;V&#125;_1 <span class="symbol">\t</span>imes <span class="symbol">\m</span>athbf&#123;V&#125;_2 =  <span class="symbol">\b</span>egin&#123;vmatrix&#125; </span><br><span class="line"><span class="symbol">\m</span>athbf&#123;i&#125; &amp; <span class="symbol">\m</span>athbf&#123;j&#125; &amp; <span class="symbol">\m</span>athbf&#123;k&#125; <span class="symbol">\\</span></span><br><span class="line"><span class="symbol">\f</span>rac&#123;<span class="symbol">\p</span>artial X&#125;&#123;<span class="symbol">\p</span>artial u&#125; &amp;  <span class="symbol">\f</span>rac&#123;<span class="symbol">\p</span>artial Y&#125;&#123;<span class="symbol">\p</span>artial u&#125; &amp; 0 <span class="symbol">\\</span></span><br><span class="line"><span class="symbol">\f</span>rac&#123;<span class="symbol">\p</span>artial X&#125;&#123;<span class="symbol">\p</span>artial v&#125; &amp;  <span class="symbol">\f</span>rac&#123;<span class="symbol">\p</span>artial Y&#125;&#123;<span class="symbol">\p</span>artial v&#125; &amp; 0 <span class="symbol">\\</span></span><br><span class="line"><span class="symbol">\e</span>nd&#123;vmatrix&#125;</span><br><span class="line">$&#123;<span class="keyword">$tep1&#125;&#123;\style&#123;visibility:hidden&#125;&#123;</span>(x+1)(x+1)&#125;&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="4-4-流程图"><a href="#4-4-流程图" class="headerlink" title="4.4 流程图"></a>4.4 流程图</h3><p>由于流程图语法较为复杂，这里仅显示简单的流程图代码，如需深入了解，参考</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">​```mermaid</span><br><span class="line">graph LR</span><br><span class="line">A[方形] --&gt;B(圆角)</span><br><span class="line">    B --&gt; C&#123;条件a&#125;</span><br><span class="line">    C --&gt;|<span class="type">a</span>=<span class="number">1</span>| <span class="type">D</span>[结果<span class="number">1</span>]</span><br><span class="line">    C --&gt;|<span class="type">a</span>=<span class="number">2</span>| <span class="type">E</span>[结果<span class="number">2</span>]</span><br><span class="line">    F[横向流程图]</span><br><span class="line">​```</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807160743.png"></p>
+<h3 id="4-5-目录"><a href="#4-5-目录" class="headerlink" title="4.5 目录"></a>4.5 目录</h3><p>目录会在指定位置自动生成当前文档的标题结构</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[TOC]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="4-6-脚注"><a href="#4-6-脚注" class="headerlink" title="4.6 脚注"></a>4.6 脚注</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Her<span class="string">e&#x27;s a simple footnote,[^1] and here&#x27;</span>s a longer one.[^bignote]</span><br><span class="line"></span><br><span class="line">[^<span class="number">1</span>]: This <span class="keyword">is</span> the first footnote.</span><br><span class="line"></span><br><span class="line">[^bignote]: Her<span class="string">e&#x27;s one with multiple paragraphs and code.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Indent paragraphs to include them in the footnote.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    `&#123; my code &#125;`</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Add as many paragraphs as you like.</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="4-7-完成清单"><a href="#4-7-完成清单" class="headerlink" title="4.7 完成清单"></a>4.7 完成清单</h3><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>[x] Write the press release</span><br><span class="line"><span class="bullet">- </span>[ ] Update the website</span><br><span class="line"><span class="bullet">- </span>[ ] Contact the media</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="4-8-Emoji表情"><a href="#4-8-Emoji表情" class="headerlink" title="4.8 Emoji表情"></a>4.8 Emoji表情</h3><p>完整 emoji 表情请参考 <a target="_blank" rel="noopener" href="https://gist.github.com/rxaviers/7360908">list of emoji shortcodes</a></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Gone</span> <span class="selector-tag">camping</span>! <span class="selector-pseudo">:tent</span>: <span class="selector-tag">Be</span> <span class="selector-tag">back</span> <span class="selector-tag">soon</span>.</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">That</span> <span class="selector-tag">is</span> <span class="selector-tag">so</span> <span class="selector-tag">funny</span>! <span class="selector-pseudo">:joy</span>:</span><br><span class="line"></span><br><span class="line"><span class="selector-pseudo">:sad</span>:</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-9-锚点定位"><a href="#4-9-锚点定位" class="headerlink" title="4.9 锚点定位"></a>4.9 锚点定位</h3><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">markdown语法</span></span><br><span class="line"><span class="xml">[定位至标题1](#heading-1)</span></span><br><span class="line"><span class="xml">### 标题1 </span><span class="template-tag">&#123;#<span class="name">heading-</span>1&#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="xml">html语法</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;custom-id&quot;</span>&gt;</span>定位至标题2<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">h3</span> <span class="attr">id</span>=<span class="string">&quot;custom-id&quot;</span>&gt;</span>标题2<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="5-流程图示例"><a href="#5-流程图示例" class="headerlink" title="5. 流程图示例"></a>5. 流程图示例</h2><p>Markdown 支持在文档中使相关语法创建流程图。这些流程图都是通过渲染代码生成的。</p>
+<h3 id="5-1-初识"><a href="#5-1-初识" class="headerlink" title="5.1 初识"></a>5.1 初识</h3><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Left to Right</span></span><br><span class="line"><span class="symbol">graph</span> <span class="built_in">LR</span></span><br><span class="line">A --&gt; B</span><br><span class="line"></span><br><span class="line"><span class="comment">// Top to Bottom</span></span><br><span class="line"><span class="symbol">graph</span> TB</span><br><span class="line">A --&gt; B</span><br><span class="line"></span><br><span class="line"><span class="comment">// Right to Left</span></span><br><span class="line"><span class="symbol">graph</span> RL</span><br><span class="line">A --&gt; B</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bottom to Top</span></span><br><span class="line"><span class="symbol">graph</span> BT</span><br><span class="line">A --&gt; B</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807160818.png"></p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">默认节点 <span class="variable">A</span></span><br><span class="line">方形节点 <span class="variable">B</span>[<span class="variable">Bname</span>]</span><br><span class="line">圆角节点 <span class="function"><span class="title">C</span>(<span class="variable">Cname</span>)</span></span><br><span class="line">圆形节点 <span class="function"><span class="title">D</span>((<span class="variable">dname</span>))</span></span><br><span class="line">非对称节点 <span class="variable">E</span>&gt;<span class="variable">ename</span>]</span><br><span class="line">菱形节点 <span class="variable">F</span>&#123;<span class="variable">fname</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ABCDEF 是节点的变量名,name才是显示的节点名</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807160842.png"></p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">箭头连接 <span class="built_in">A1</span>-–&gt;B1</span><br><span class="line">开放连接 <span class="built_in">A2</span>—--B2</span><br><span class="line">虚线连接 <span class="built_in">A3</span>-.-B3</span><br><span class="line">虚线箭头 <span class="built_in">A4</span>-.-&gt;B4</span><br><span class="line">文本标识 A5--&gt;<span class="title">|text|</span>B5</span><br><span class="line"><span class="comment">// 箭头&gt; 文本|text|</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807160900.png"></p>
+<h3 id="5-2-横向流程图"><a href="#5-2-横向流程图" class="headerlink" title="5.2 横向流程图"></a>5.2 横向流程图</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">​```mermaid</span><br><span class="line">graph LR</span><br><span class="line">A[方形] --&gt;B(圆角)</span><br><span class="line">    B --&gt; C&#123;条件a&#125;</span><br><span class="line">    C --&gt;|<span class="type">a</span>=<span class="number">1</span>| <span class="type">D</span>[结果<span class="number">1</span>]</span><br><span class="line">    C --&gt;|<span class="type">a</span>=<span class="number">2</span>| <span class="type">E</span>[结果<span class="number">2</span>]</span><br><span class="line">    F[横向流程图]</span><br><span class="line">​```</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807160911.png"></p>
+<h3 id="5-3-标准流程图"><a href="#5-3-标准流程图" class="headerlink" title="5.3 标准流程图"></a>5.3 标准流程图</h3><figure class="highlight sml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">​```flow</span><br><span class="line">st=&gt;start: 开始框</span><br><span class="line"><span class="keyword">op</span>=&gt;operation: 处理框</span><br><span class="line">cond=&gt;condition: 判断框(是或否?)</span><br><span class="line">sub1=&gt;subroutine: 子流程</span><br><span class="line">io=&gt;inputoutput: 输入输出框</span><br><span class="line">e=&gt;<span class="keyword">end</span>: 结束框</span><br><span class="line">st-&gt;<span class="keyword">op</span>-&gt;cond</span><br><span class="line">cond(yes)-&gt;io-&gt;e</span><br><span class="line">cond(no)-&gt;sub1(right)-&gt;<span class="keyword">op</span></span><br><span class="line">​```</span><br></pre></td></tr></table></figure>
+
+<p>@flowstart<br>st=&gt;start: 开始框<br>op=&gt;operation: 处理框<br>cond=&gt;condition: 判断框(是或否?)<br>sub1=&gt;subroutine: 子流程<br>io=&gt;inputoutput: 输入输出框<br>e=&gt;end: 结束框</p>
+<p>st-&gt;op-&gt;cond<br>cond(yes)-&gt;io-&gt;e<br>cond(no)-&gt;sub1(right)-&gt;op<br>@flowend</p>
+<h3 id="5-4-UML时序图"><a href="#5-4-UML时序图" class="headerlink" title="5.4 UML时序图"></a>5.4 UML时序图</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">​```sequence</span><br><span class="line">对象A-&gt;对象<span class="keyword">B: </span>对象<span class="keyword">B你好吗?（请求）</span></span><br><span class="line"><span class="keyword">Note </span>right of 对象<span class="keyword">B: </span>对象<span class="keyword">B的描述</span></span><br><span class="line"><span class="keyword">Note </span>left of 对象A: 对象A的描述(提示)</span><br><span class="line">对象<span class="keyword">B--&gt;对象A: </span>我很好(响应)</span><br><span class="line">对象A-&gt;对象<span class="keyword">B: </span>你真的好吗？</span><br><span class="line">​```</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807161058.png"></p>
+<h3 id="5-5-UML时序图复杂"><a href="#5-5-UML时序图复杂" class="headerlink" title="5.5 UML时序图复杂"></a>5.5 UML时序图复杂</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">​```sequence</span><br><span class="line"><span class="symbol">Title:</span> 标题：复杂使用</span><br><span class="line">对象A-&gt;对象<span class="keyword">B: </span>对象<span class="keyword">B你好吗?（请求）</span></span><br><span class="line"><span class="keyword">Note </span>right of 对象<span class="keyword">B: </span>对象<span class="keyword">B的描述</span></span><br><span class="line"><span class="keyword">Note </span>left of 对象A: 对象A的描述(提示)</span><br><span class="line">对象<span class="keyword">B--&gt;对象A: </span>我很好(响应)</span><br><span class="line">对象<span class="keyword">B-&gt;小三: </span>你好吗</span><br><span class="line">小三--&gt;&gt;对象A: 对象<span class="keyword">B找我了</span></span><br><span class="line"><span class="keyword">对象A-&gt;对象B: </span>你真的好吗？</span><br><span class="line">Note over 小三,对象<span class="keyword">B: </span>我们是朋友</span><br><span class="line">participant C</span><br><span class="line">Note right of C: 没人陪我玩</span><br><span class="line">​```</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807161116.png"></p>
+<h3 id="5-6-UML标准时序图"><a href="#5-6-UML标准时序图" class="headerlink" title="5.6 UML标准时序图"></a>5.6 UML标准时序图</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">​```mermaid</span><br><span class="line">%% 时序图例子,-&gt; 直线，--&gt;虚线，-&gt;&gt;实线箭头</span><br><span class="line">  sequenceDiagram</span><br><span class="line">    participant 张三</span><br><span class="line">    participant 李四</span><br><span class="line">    张三-&gt;王五: 王五你好吗？</span><br><span class="line">    loop 健康检查</span><br><span class="line">        王五-&gt;王五: 与疾病战斗</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    Note <span class="built_in">right</span> of 王五: 合理 食物 &lt;br/&gt;看医生...</span><br><span class="line">    李四--&gt;&gt;张三: 很好!</span><br><span class="line">    王五-&gt;李四: 你怎么样?</span><br><span class="line">    李四--&gt;王五: 很好!</span><br><span class="line">​```</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20200807161136631.png" alt="image-20200807161136631"></p>
+<h3 id="5-7-甘特图"><a href="#5-7-甘特图" class="headerlink" title="5.7 甘特图"></a>5.7 甘特图</h3><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">​<span class="string">```</span>mermaid</span><br><span class="line">%% 语法示例</span><br><span class="line">        gantt</span><br><span class="line">        dateFormat  YYYY-MM-<span class="built_in">DD</span></span><br><span class="line">        title 软件开发甘特图</span><br><span class="line">        <span class="meta">section</span> 设计</span><br><span class="line">        需求                      :done,    des1, <span class="number">2020</span>-<span class="number">01</span>-<span class="number">06</span>,<span class="number">202020</span>-<span class="number">01</span>-<span class="number">08</span></span><br><span class="line">        原型                      :active,  des2, <span class="number">2020</span>-<span class="number">01</span>-<span class="number">09</span>, <span class="number">3d</span></span><br><span class="line">        UI设计                    :         des3, after des2, <span class="number">5d</span></span><br><span class="line">    未来任务                       :         des4, after des3, <span class="number">5d</span></span><br><span class="line">        <span class="meta">section</span> 开发</span><br><span class="line">        学习准备理解需求            :crit, done, <span class="number">2020</span>-<span class="number">01</span>-<span class="number">06</span>,<span class="number">24h</span></span><br><span class="line">        设计框架                  :crit, done, after des2, <span class="number">2d</span></span><br><span class="line">        开发                     :crit, active, <span class="number">3d</span></span><br><span class="line">        未来任务                  :crit, <span class="number">5d</span></span><br><span class="line">        耍                       :<span class="number">2d</span></span><br><span class="line">        <span class="meta">section</span> 测试</span><br><span class="line">        功能测试                 :active, a1, after des3, <span class="number">3d</span></span><br><span class="line">        压力测试                 :after a1  , <span class="number">20h</span></span><br><span class="line">        测试报告                 : <span class="number">48h</span></span><br><span class="line">​<span class="string">```</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807161148.png"></p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-11-25");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-08-06T16:00:00.000Z" itemprop="datePublished">2020-08-07</time>
+
+    , 最后修改于&nbsp;<time datetime="2020-11-25T09:26:27.970Z" itemprop="dateModified">2020-11-25</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/blog/categories/Others/'>Others</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/blog/tags/Markdown/" rel="tag">#&nbsp;Markdown</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/blog/2020/08/07/Other-Git-Github-start/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">初识 Git</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/blog/2020/08/07/BackEnd-2020-8-Express-Start/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Express 初步使用</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="vcomments"></div>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = ''.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = '' === 'true';
+    var verify = '' === 'true';
+    new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        appId: "process.env.VALINEID",
+        appKey: "process.env.VALINEKEY",
+        placeholder: "Just go go",
+        meta: guest_info,
+        pageSize:'10',
+        avatar:'retro',
+        lang:'zh-cn',
+        guest_info: guest_info,
+        visitor: true
+    });
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://qijieh.gitee.io/blog">Qijieh's Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    Hosted on <a target="_blank" href="https://github.com/QiJieH" rel="nofollow noopener noreferrer noopener">Github Pages</a>
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+            <span id="http://qijieh.gitee.io/blog" class="leancloud-visitors" data-flag-title="Qijieh&#39;s Blog">
+    <span></span><!--
+ --><span class="leancloud-visitors-count">0</span><!--
+ --><span> Visitor |</span>
+</span>
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2019;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/blog/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

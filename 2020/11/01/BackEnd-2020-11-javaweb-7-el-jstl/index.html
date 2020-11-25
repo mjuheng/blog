@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="//cdn1.lncld.net">
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>Java Web(七) EL表达式和JSTL标签库 | Qijieh&#39;s Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/blog/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/blog/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/blog/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/blog/css/highlight/atelier-heath-light.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/blog/css/highlight/atelier-heath-light.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Qijieh's Blog"><meta name="msapplication-starturl" content="http://qijieh.gitee.io/blog"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Qijieh's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="Java Web(七) EL表达式和JSTL标签库 | Qijieh&#39;s Blog"><meta property="og:site_name" content="Qijieh&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="http://qijieh.gitee.io/blog/2020/11/01/BackEnd-2020-11-javaweb-7-el-jstl/"><meta property="og:locale" content="zh-CN"><meta name="description" content="Java Web(七) EL表达式和JSTL标签库JavaBeanJavaBean 是java开发中常用的组件，其实就是一个java类，用于封装数据。书写JavaBean需要满足五个规范：  该类被public修饰 该类提供公共无参构造方法 该类要有私有属性 该类的私有属性必须有get和set方法 该类要实现Serializable接口(可选)  1234567891011121314151617 - QiJieH - Qijieh&#39;s Blog"><meta name="keywords" content="Java, Java Web"><meta property="article:published_time" content="2020-10-31T16:00:00.000Z"><meta property="article:modified_time" content="2020-11-25T09:26:27.912Z"><meta property="og:updated_time" content="2020-11-25T09:26:27.912Z"><meta property="article:author" content="QiJieH"><meta property="article:tag" content="Java, Java Web"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://qijieh.gitee.io/blog/2020/11/01/BackEnd-2020-11-javaweb-7-el-jstl/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://qijieh.gitee.io/blog/2020/11/01/BackEnd-2020-11-javaweb-7-el-jstl/",
+    "@type": "BlogPosting",
+    "logo": "http://qijieh.gitee.io/blog/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://qijieh.gitee.io/blog/2020/11/01/BackEnd-2020-11-javaweb-7-el-jstl/"
+    },
+    "headline": "Java Web(七) EL表达式和JSTL标签库 | Qijieh&#39;s Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2020-10-31T16:00:00.000Z",
+    "dateModified": "2020-11-25T09:26:27.912Z",
+    "author": {
+        "@type": "Person",
+        "name": "QiJieH",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/author.jpg"
+        },
+        "description": "hello world."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Qijieh&#39;s Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://qijieh.gitee.io/blog/blog/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Java, Java Web",
+    "description": "Java Web(七) EL表达式和JSTL标签库JavaBeanJavaBean 是java开发中常用的组件，其实就是一个java类，用于封装数据。书写JavaBean需要满足五个规范：  该类被public修饰 该类提供公共无参构造方法 该类要有私有属性 该类的私有属性必须有get和set方法 该类要实现Serializable接口(可选)  1234567891011121314151617 - QiJieH - Qijieh&#39;s Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/blog/">Qijieh&#39;s Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                hello world.
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/blog/" class="navbar-link">首页</a>
+    
+    
+        <a href="/blog/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/blog/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/blog/tags" class="navbar-link">标签</a>
+    
+        <a href="/blog/links" class="navbar-link">友链</a>
+    
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">Java Web(七) EL表达式和JSTL标签库</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/blog/img/author.jpg" src="/blog/img/suka-lazyload.gif" alt="QiJieH's Avatar">
+        <span>2020-11-01</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/blog/categories/BackEnd/">BackEnd</a><span class="suka-devide-dot"></span><a class="category-link" href="/blog/categories/BackEnd/FrontEnd/">FrontEnd</a>
+        
+        
+        
+            <span class="suka-devide-dot"></span>
+<span id="/blog/2020/11/01/BackEnd-2020-11-javaweb-7-el-jstl/" class="leancloud-visitors" data-flag-title="Java Web(七) EL表达式和JSTL标签库">
+    <span>view </span>
+    <span class="leancloud-visitors-count">0</span>
+    <span></span>
+</span>
+        
+    </p>
+    <div class="post-header-info-right">
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java-Web-%E4%B8%83-EL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8CJSTL%E6%A0%87%E7%AD%BE%E5%BA%93"><span class="post-toc-number">1.</span> <span class="post-toc-text">Java Web(七) EL表达式和JSTL标签库</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JavaBean"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">JavaBean</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#BeanUtils"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">BeanUtils</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#EL-%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">EL 表达式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JSTL"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">JSTL</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#JSTL%E4%B8%8B%E8%BD%BD%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">JSTL下载和使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#JSTL-%E6%A0%87%E7%AD%BE"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">JSTL 标签</span></a></li></ol></li></ol></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <h2 id="Java-Web-七-EL表达式和JSTL标签库"><a href="#Java-Web-七-EL表达式和JSTL标签库" class="headerlink" title="Java Web(七) EL表达式和JSTL标签库"></a>Java Web(七) EL表达式和JSTL标签库</h2><h3 id="JavaBean"><a href="#JavaBean" class="headerlink" title="JavaBean"></a>JavaBean</h3><p>JavaBean 是java开发中常用的组件，其实就是一个java类，用于封装数据。<br>书写JavaBean需要满足五个规范：</p>
+<ul>
+<li>该类被<code>public</code>修饰</li>
+<li>该类提供公共无参构造方法</li>
+<li>该类要有私有属性</li>
+<li>该类的私有属性必须有<code>get</code>和<code>set</code>方法</li>
+<li>该类要实现<code>Serializable</code>接口(可选)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Book</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line">	<span class="comment">// 私有属性</span></span><br><span class="line">	<span class="keyword">private</span> String id;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="comment">// 无参构造方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Book</span><span class="params">()</span> </span>&#123;&#125;;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// get&amp;set</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>JavaBean的属性</strong><br>类的成员变量和属性的关系：在普通的java类里面，成员变量可以说成是属性，但是在javabean里，只有能被get&amp;set的成员变量才被称为属性。</p>
+<h3 id="BeanUtils"><a href="#BeanUtils" class="headerlink" title="BeanUtils"></a>BeanUtils</h3><p>BeanUtils 是apache提供的一套封装JavaBean的工具类。要想使用<code>BeanUtils</code>工具类，需要导入相关jar包到项目。</p>
+<p><a target="_blank" rel="noopener" href="http://commons.apache.org/proper/commons-beanutils/">commons-beanutils-1.9.4.jar</a><br><a target="_blank" rel="noopener" href="http://commons.apache.org/proper/commons-logging/download_logging.cgi">commons-logging-1.2.jar</a></p>
+<p><strong>BeanUtils常用API:</strong></p>
+<p><strong><code>setProperty</code></strong></p>
+<p>设置<code>javabean</code>属性值</p>
+<p>基础语法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setProperty(bean, name, val)</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>getProperty</code></strong></p>
+<p>获取<code>javabean</code>的属性值</p>
+<p>基础语法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getProperty(bean, name)</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>populate</code></strong></p>
+<p>设置<code>javabean</code>属性值通过<code>map</code>集合</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">populate(bean, properties)</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li><code>properties</code>：map key 对应<code>javabean attr</code>, map value 对应<code>javabean attr-val</code></li>
+</ul>
+<p><code>BeanUtils</code>常用来封装表单的提交数据，因为<code>request</code>提供了<code>getParameterMap()</code>方法将提交参数合并为一个<code>map</code>对象，我们可以直接使用<code>BeanUtils</code>的<code>populate()</code>方法直接封装数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">       Person person = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 传统表单提交与赋值</span></span><br><span class="line">	String name = request.getParameter(<span class="string">&quot;username&quot;</span>); </span><br><span class="line">	String passwd = request.getParameter(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">	  </span><br><span class="line">	person.setName(name); </span><br><span class="line">	person.setAge(passwd);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// BeanUtils</span></span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		BeanUtils.populate(person, request.getParameterMap());</span><br><span class="line">	&#125; <span class="keyword">catch</span> (IllegalAccessException | InvocationTargetException e) &#123;</span><br><span class="line">		<span class="comment">// TODO 自动生成的 catch 块</span></span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意<code>BeanUtils</code>是JavaWeb项目的第三方jar包，在其他项目下你可能无法这种使用它。<br>使用<code>BeanUtils</code>时，还需要注意属性名和值的对应关系。</p>
+</blockquote>
+<h3 id="EL-表达式"><a href="#EL-表达式" class="headerlink" title="EL 表达式"></a>EL 表达式</h3><p>EL Expression Language 在开发中通常用来获取域对象中保存的值。</p>
+<p>基本语法</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;object&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 提供脚本元素获取域对象值 --&gt;</span></span><br><span class="line">&lt;%= request.getAttribute(&quot;name&quot;) %&gt; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">&lt;%= request.getAttribute(&quot;major&quot;) %&gt; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 使用EL表达式 --&gt;</span></span><br><span class="line">$&#123;name&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">$&#123;major&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当el表达式中的值不存在时，不会在页面中显示任何信息，即返回””</p>
+<p><strong>EL 标识符</strong></p>
+<p>在el书写过程中，使用一些符号来标记变量，函数名等。</p>
+<p>书写规范：</p>
+<ul>
+<li>不能以数字开头</li>
+<li>不能包含el关键字：<code>and</code>,<code>or</code>等</li>
+<li>不能使用el表达式的隐式对象</li>
+<li>不能包含特殊符号：<code>\ / : , =</code></li>
+</ul>
+<p><strong>EL 变量</strong></p>
+<p>基本格式：<code>$&#123;object&#125;</code>，其中的<code>objec</code>就可以理解为el中的变量，无需定义可以直接使用。</p>
+<p><strong>EL 常量</strong></p>
+<p>布尔常量，数字常量，字符串常量，<code>null</code>常量</p>
+<p><strong>EL 运算符</strong></p>
+<p>点运算符，方括号运算符，算术运算符，比较运算符，逻辑运算符，<code>empty</code>运算符，三目运算符</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">    Person p = new Person();</span><br><span class="line">    BeanUtils.setProperty(p, &quot;username&quot;, &quot;qijieh&quot;);</span><br><span class="line">    BeanUtils.setProperty(p, &quot;password&quot;, &quot;a123&quot;);</span><br><span class="line">    request.setAttribute(&quot;person&quot;, p);</span><br><span class="line">%&gt;</span><br><span class="line">    <span class="comment">&lt;!-- empty运算符用于判断域对象中的属性是否存在，不存在返回true --&gt;</span></span><br><span class="line">    $&#123;empty person&#125;</span><br><span class="line">    <span class="comment">&lt;!-- 点运算符用于获取域对象中的属性值 --&gt;</span></span><br><span class="line">    $&#123;person.username&#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">&lt;%</span><br><span class="line">    Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();</span><br><span class="line">    map.put(&quot;my-name&quot;,&quot;qijieh&quot;);</span><br><span class="line">    request.setAttribute(&quot;user&quot;, map);</span><br><span class="line">%&gt;</span><br><span class="line">    <span class="comment">&lt;!-- 如果属性名包含特殊字符时，使用方括号运算符获取该值 --&gt;</span></span><br><span class="line">    $&#123;user[&quot;my-name&quot;]&#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">&lt;!-- 算术运算符 --&gt;</span></span><br><span class="line">1+1=$&#123;1+1&#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">1&gt;2?$&#123;1&gt;3&#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p><strong>EL 隐式对象</strong><br><code>pageContext</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;pageContext.request.contextPath&#125;</span></span><br><span class="line"><span class="variable">$&#123;pageContext.request.requestURI&#125;</span></span><br></pre></td></tr></table></figure>
+<p><code>pageScope</code>,<code>requestScope</code>,<code>sessionScope</code>,<code>applicationScope</code></p>
+<p>作用域的隐式对象是为了解决各个域中的重名获取问题，默认从小范围开始寻值。</p>
+<p><code>param</code>,<code>paramValues</code></p>
+<p>当前页面中表单提交参数对象</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/demo/demo.jsp&quot;</span> <span class="attr">method</span>=<span class="string">&quot;get&quot;</span>&gt;</span></span><br><span class="line">num1:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;num1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">num2:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;num&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">num3:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;num&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;submin&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line">num1:$&#123;param.num1 &#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">num2:$&#123;param.num[0] &#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">num3:$&#123;param.num[1] &#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>cookie</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;% response.addCookie(new Cookie(&quot;userName&quot;,&quot;qijieh&quot;)); %&gt;</span><br><span class="line">获取cookie对象：$&#123;cookie.userName &#125;</span><br><span class="line">获取cookie对象名称: $&#123;cookie.userName.name &#125;</span><br><span class="line">获取cookie对象值：$&#123;cookie.userName.value &#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="JSTL"><a href="#JSTL" class="headerlink" title="JSTL"></a>JSTL</h3><p>JSP标准标签库（JSTL JSP Stander Tag Libray）是一个JSP标签集合，它封装了JSP应用的通用核心功能。</p>
+<p>JSTL支持通用的、结构化的任务，比如迭代，条件判断，XML文档操作，国际化标签，SQL标签。 除了这些，它还提供了一个框架来使用集成JSTL的自定义标签。</p>
+<p>根据JSTL标签所提供的功能，可以将其分为5个类别。</p>
+<ul>
+<li>核心标签</li>
+<li>格式化标签</li>
+<li>SQL 标签</li>
+<li>XML 标签</li>
+<li>JSTL 函数</li>
+</ul>
+<h4 id="JSTL下载和使用"><a href="#JSTL下载和使用" class="headerlink" title="JSTL下载和使用"></a>JSTL下载和使用</h4><p>前往<a target="_blank" rel="noopener" href="http://tomcat.apache.org/download-taglibs.cgi">apache官网</a>下载 <code>taglibs-standard-impl-1.2.5.jar</code>和<code>taglibs-standard-spec-1.2.5.jar</code>两个jar包，将其导入项目即可。</p>
+<blockquote>
+<p>上面的链接指向了1.2版本的，如果你需要使用旧版本即1.1版本的可以前往<a target="_blank" rel="noopener" href="http://archive.apache.org/dist/jakarta/taglibs/standard/binaries/">apache release</a>下载<code>jakarta-taglibs-standard-1.1.2.zip</code>解压该文件后将lib目录下的<code>jstl.jar</code>和<code>standard.jar</code>引入项目文件即可。</p>
+</blockquote>
+<p>将jar包导入项目，在jsp文件中通过<code>taglibs</code>引入标签库。</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="meta">%</span>@ taglib uri=<span class="string">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> prefix=<span class="string">&quot;c&quot;</span> <span class="meta">%</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在jsp中使用标签测试是否引入成功</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:<span class="keyword">out</span> value=<span class="string">&quot;hello jstl&quot;</span>&gt;&lt;/c:<span class="keyword">out</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="JSTL-标签"><a href="#JSTL-标签" class="headerlink" title="JSTL 标签"></a>JSTL 标签</h4><p><strong><code>&lt;c:out&gt;</code></strong></p>
+<p>向网页输出内容</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:out <span class="attribute">value</span>=<span class="string">&quot;el表达式获取值&quot;</span> <span class="attribute">default</span>=<span class="string">&quot;默认值&quot;</span> <span class="attribute">escapeXml</span>=<span class="string">&quot;true或false&quot;</span>&gt;&lt;/c:out&gt;</span><br><span class="line">&lt;c:out <span class="attribute">value</span>=<span class="string">&quot;el表达式获取值&quot;</span> <span class="attribute">escapeXml</span>=<span class="string">&quot;true或false&quot;</span>&gt;默认值&lt;/c:out&gt;</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li><code>value</code>：输出内容</li>
+<li><code>default</code>：输出内容不存在时，显示默认值</li>
+<li><code>escapeXml</code>：原文输出和<code>HTML</code>输出，默认<code>true</code></li>
+</ul>
+<p><strong><code>&lt;c:if&gt;</code></strong></p>
+<p>条件判断</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;c<span class="keyword">:if</span> <span class="attribute">test</span>=<span class="string">&quot;条件表达式&quot;</span> <span class="attribute">var</span>=<span class="string">&quot;变量名称&quot;</span> <span class="attribute">scope</span>=<span class="string">&quot;作用域&quot;</span>&gt;&lt;/c:if&gt;</span><br><span class="line">&lt;c<span class="keyword">:if</span> <span class="attribute">test</span>=<span class="string">&quot;条件表达式&quot;</span> <span class="attribute">var</span>=<span class="string">&quot;变量名称&quot;</span> <span class="attribute">scope</span>=<span class="string">&quot;作用域&quot;</span>&gt;标签体内容&lt;/c:if&gt;</span><br></pre></td></tr></table></figure>
+<p>实例：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:<span class="keyword">set</span> <span class="keyword">var</span>=<span class="string">&quot;salary&quot;</span> scope=<span class="string">&quot;request&quot;</span> value=<span class="string">&quot;<span class="subst">$&#123;<span class="number">2000</span>*<span class="number">2</span>&#125;</span>&quot;</span>/&gt;</span><br><span class="line">&lt;c:<span class="keyword">if</span> test=<span class="string">&quot;<span class="subst">$&#123;salary &gt; <span class="number">2000</span>&#125;</span>&quot;</span>&gt;</span><br><span class="line">    &lt;p&gt;我的工资为: &lt;c:<span class="keyword">out</span> value=<span class="string">&quot;<span class="subst">$&#123;salary&#125;</span>&quot;</span>/&gt;&lt;p&gt;</span><br><span class="line">&lt;/c:<span class="keyword">if</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>&lt;c:choose&gt;</code></strong></p>
+<p>条件选择</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">c</span>:choose&gt;</span><br><span class="line">    &lt;<span class="keyword">c</span>:when test<span class="operator">=</span><span class="string">&quot;条件表达式&quot;</span>&gt;标签体内容&lt;/<span class="keyword">c</span>:when&gt;</span><br><span class="line">    &lt;<span class="keyword">c</span>:when test<span class="operator">=</span><span class="string">&quot;条件表达式&quot;</span>&gt;标签体内容&lt;/<span class="keyword">c</span>:when&gt;</span><br><span class="line">    ......</span><br><span class="line">    &lt;<span class="keyword">c</span>:otherwise&gt;标签体内容&lt;/<span class="keyword">c</span>:otherwise&gt;</span><br><span class="line">&lt;/<span class="keyword">c</span>:choose&gt;</span><br></pre></td></tr></table></figure>
+<p>实例：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">c</span>:choose&gt;</span><br><span class="line">    &lt;<span class="keyword">c</span>:when test<span class="operator">=</span><span class="string">&quot;$&#123;empty param.username &#125;&quot;</span>&gt;未知用户&lt;/<span class="keyword">c</span>:when&gt;</span><br><span class="line">    &lt;<span class="keyword">c</span>:when test<span class="operator">=</span><span class="string">&quot;$&#123;param.username==&#x27;qijieh&#x27; &#125;&quot;</span>&gt;$&#123;param.username &#125;，欢迎你&lt;/<span class="keyword">c</span>:when&gt;</span><br><span class="line">    &lt;<span class="keyword">c</span>:otherwise&gt;未经授权的用户&lt;/<span class="keyword">c</span>:otherwise&gt;</span><br><span class="line">&lt;/<span class="keyword">c</span>:choose&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>&lt;c:forEach&gt;</code></strong></p>
+<p>遍历域对象或集合</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;c<span class="keyword">:forEach</span> <span class="attribute">var</span>=<span class="string">&quot;遍历元素名&quot;</span> <span class="attribute">items</span>=<span class="string">&quot;数组或集合&quot;</span>&gt;&lt;/c:forEach&gt;</span><br><span class="line">&lt;c<span class="keyword">:forEach</span> <span class="attribute">var</span>=<span class="string">&quot;遍历元素名&quot;</span> <span class="attribute">items</span>=<span class="string">&quot;数组或集合&quot;</span> <span class="attribute">begin</span>=<span class="string">&quot;遍历开始下标&quot;</span> <span class="attribute">end</span>=<span class="string">&quot;遍历结束下标&quot;</span> <span class="attribute">step</span>=<span class="string">&quot;遍历增量&quot;</span>&gt;&lt;/c:forEach&gt;</span><br></pre></td></tr></table></figure>
+<p>实例：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;% </span><br><span class="line">    String[] book = &#123;<span class="string">&quot;Java 入门到精通&quot;</span>,<span class="string">&quot;Spring 项目实战&quot;</span>,<span class="string">&quot;Oracle 数据库高级教程&quot;</span>,<span class="string">&quot;Java Web 快速入门&quot;</span>&#125;;</span><br><span class="line">    request.setAttribute(<span class="string">&quot;books&quot;</span>, book);</span><br><span class="line">%&gt;</span><br><span class="line">遍历数组：&lt;<span class="keyword">br</span>&gt;</span><br><span class="line">&lt;c:<span class="keyword">forEach</span> <span class="keyword">var</span>=<span class="string">&quot;iter&quot;</span> items=<span class="string">&quot;$&#123;books &#125;&quot;</span>&gt;</span><br><span class="line">    <span class="variable">$&#123;iter</span> &#125;&lt;<span class="keyword">br</span>&gt;</span><br><span class="line">&lt;/c:<span class="keyword">forEach</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;%</span><br><span class="line">    Map&lt;String,String&gt; userMap = new HashMap&lt;&gt;();</span><br><span class="line">    userMap.put(<span class="string">&quot;001&quot;</span>, <span class="string">&quot;qijieh&quot;</span>);</span><br><span class="line">    userMap.put(<span class="string">&quot;002&quot;</span>, <span class="string">&quot;Tom&quot;</span>);</span><br><span class="line">    userMap.put(<span class="string">&quot;003&quot;</span>, <span class="string">&quot;Jack&quot;</span>);</span><br><span class="line">    userMap.put(<span class="string">&quot;004&quot;</span>, <span class="string">&quot;Mary&quot;</span>);</span><br><span class="line">    request.setAttribute(<span class="string">&quot;users&quot;</span>, userMap);</span><br><span class="line">%&gt;</span><br><span class="line">遍历集合：&lt;<span class="keyword">br</span>&gt;</span><br><span class="line">&lt;c:<span class="keyword">forEach</span> <span class="keyword">var</span>=<span class="string">&quot;iter&quot;</span> items=<span class="string">&quot;$&#123;users &#125;&quot;</span>&gt;</span><br><span class="line">    <span class="variable">$&#123;iter</span>.key&#125;  <span class="variable">$&#123;iter</span>.value &#125;&lt;<span class="keyword">br</span>&gt;</span><br><span class="line">&lt;/c:<span class="keyword">forEach</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;% </span><br><span class="line">    <span class="keyword">List</span>&lt;String&gt; <span class="keyword">numList</span> = new ArrayList&lt;String&gt;();</span><br><span class="line">    <span class="keyword">numList</span>.add(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">    <span class="keyword">numList</span>.add(<span class="string">&quot;2&quot;</span>);</span><br><span class="line">    <span class="keyword">numList</span>.add(<span class="string">&quot;3&quot;</span>);</span><br><span class="line">    <span class="keyword">numList</span>.add(<span class="string">&quot;4&quot;</span>);</span><br><span class="line">    <span class="keyword">numList</span>.add(<span class="string">&quot;5&quot;</span>);</span><br><span class="line">    request.setAttribute(<span class="string">&quot;nums&quot;</span>, <span class="keyword">numList</span>);</span><br><span class="line">%&gt;</span><br><span class="line">指定遍历：&lt;<span class="keyword">br</span>&gt;</span><br><span class="line">&lt;c:<span class="keyword">forEach</span> <span class="keyword">var</span>=<span class="string">&quot;iter&quot;</span> items=<span class="string">&quot;$&#123;nums &#125;&quot;</span> begin=<span class="string">&quot;1&quot;</span> end=<span class="string">&quot;4&quot;</span> step=<span class="string">&quot;2&quot;</span>&gt;</span><br><span class="line">    <span class="variable">$&#123;iter&#125;</span>&lt;<span class="keyword">br</span>&gt;</span><br><span class="line">&lt;/c:<span class="keyword">forEach</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">遍历数组：</span><br><span class="line"><span class="keyword">Java </span>入门到精通</span><br><span class="line">Spring 项目实战</span><br><span class="line"><span class="keyword">Oracle </span>数据库高级教程</span><br><span class="line"><span class="keyword">Java </span>Web 快速入门</span><br><span class="line">遍历集合：</span><br><span class="line"><span class="number">001</span> qijieh</span><br><span class="line"><span class="number">002</span> Tom</span><br><span class="line"><span class="number">003</span> <span class="keyword">Jack</span></span><br><span class="line"><span class="keyword">004 </span>Mary</span><br><span class="line">指定遍历：</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p>如同前端的模板语法一样，<code>&lt;c:forEach&gt;</code>标签也拥有一些索引属性</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:<span class="keyword">forEach</span> <span class="keyword">var</span>=<span class="string">&quot;iter&quot;</span> items=<span class="string">&quot;Array&quot;</span> varStatus=<span class="string">&quot;vsu&quot;</span>&gt;</span><br><span class="line">序号：<span class="variable">$&#123;vsu</span>.<span class="keyword">count</span>&#125;</span><br><span class="line">索引：<span class="variable">$&#123;vsu</span>.index&#125;</span><br><span class="line">是否为第一个元素：<span class="variable">$&#123;vsu</span>.first&#125;</span><br><span class="line">是否为最后一个元素：<span class="variable">$&#123;vsu</span>.last&#125;</span><br><span class="line">元素的值：<span class="variable">$&#123;iter&#125;</span></span><br><span class="line">&lt;/c:<span class="keyword">forEach</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意区分序号和索引的区别，序号指当前输出元素的序数，索引指的是当前元素在集合中的下标</p>
+<p><strong><code>&lt;c:url&gt;</code> <code>&lt;c:param&gt;</code></strong></p>
+<p>传递参数和设置路径</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="built_in">c</span>:url <span class="keyword">var</span>=<span class="string">&quot;变量名称&quot;</span> url=<span class="string">&quot;路径值&quot;</span>&gt;</span><br><span class="line">    &lt;<span class="built_in">c</span>:param name=<span class="string">&quot;attrName&quot;</span> value=<span class="string">&quot;attrValue&quot;</span>&gt;&lt;/<span class="built_in">c</span>:param&gt;</span><br><span class="line">    &lt;<span class="built_in">c</span>:param name=<span class="string">&quot;attrName&quot;</span> value=<span class="string">&quot;attrValue&quot;</span>&gt;&lt;/<span class="built_in">c</span>:param&gt;</span><br><span class="line">    ......</span><br><span class="line">&lt;/<span class="built_in">c</span>:url&gt;</span><br></pre></td></tr></table></figure>
+<p>实例：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="built_in">c</span>:url <span class="keyword">var</span>=<span class="string">&quot;URL&quot;</span> value=<span class="string">&quot;/login.html&quot;</span>&gt;</span><br><span class="line">    &lt;<span class="built_in">c</span>:param name=<span class="string">&quot;username&quot;</span> value=<span class="string">&quot;qijieh&quot;</span>&gt;&lt;/<span class="built_in">c</span>:param&gt;</span><br><span class="line">&lt;/<span class="built_in">c</span>:url&gt;</span><br><span class="line">&lt;a href=<span class="string">&quot;$&#123;URL &#125;&quot;</span>&gt;<span class="type">Link</span> <span class="number">2</span> login.html&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-11-25");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-10-31T16:00:00.000Z" itemprop="datePublished">2020-11-01</time>
+
+    , 最后修改于&nbsp;<time datetime="2020-11-25T09:26:27.912Z" itemprop="dateModified">2020-11-25</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/blog/categories/BackEnd/'>BackEnd</a>
+
+<a class="post-categories-list-item" href='/blog/categories/BackEnd/FrontEnd/'>FrontEnd</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/blog/tags/Java/" rel="tag">#&nbsp;Java</a>
+
+<a class="post-tags-list-item" href="/blog/tags/Java-Web/" rel="tag">#&nbsp;Java Web</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/blog/2020/11/02/BackEnd-2020-11-javaweb-9-jdbc/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Java Web(九) JDBC</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/blog/2020/10/28/BackEnd-2020-10-Javaweb-6-jsp/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Java Web(六) JSP</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="vcomments"></div>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = ''.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = '' === 'true';
+    var verify = '' === 'true';
+    new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        appId: "process.env.VALINEID",
+        appKey: "process.env.VALINEKEY",
+        placeholder: "Just go go",
+        meta: guest_info,
+        pageSize:'10',
+        avatar:'retro',
+        lang:'zh-cn',
+        guest_info: guest_info,
+        visitor: true
+    });
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://qijieh.gitee.io/blog">Qijieh's Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    Hosted on <a target="_blank" href="https://github.com/QiJieH" rel="nofollow noopener noreferrer noopener">Github Pages</a>
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+            <span id="http://qijieh.gitee.io/blog" class="leancloud-visitors" data-flag-title="Qijieh&#39;s Blog">
+    <span></span><!--
+ --><span class="leancloud-visitors-count">0</span><!--
+ --><span> Visitor |</span>
+</span>
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2019;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/blog/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

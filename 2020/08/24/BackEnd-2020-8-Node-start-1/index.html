@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="//cdn1.lncld.net">
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>Node.js 入门（一） | Qijieh&#39;s Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/blog/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/blog/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/blog/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/blog/css/highlight/atelier-heath-light.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/blog/css/highlight/atelier-heath-light.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Qijieh's Blog"><meta name="msapplication-starturl" content="http://qijieh.gitee.io/blog"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Qijieh's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="Node.js 入门（一） | Qijieh&#39;s Blog"><meta property="og:site_name" content="Qijieh&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="http://qijieh.gitee.io/blog/2020/08/24/BackEnd-2020-8-Node-start-1/"><meta property="og:locale" content="zh-CN"><meta name="description" content="Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 使用了一个事件驱动、非阻塞式 I&#x2F;O 的模型，使其轻量又高效。Node.js 的包管理器 npm，是全球最大的开源库生态系统。 - QiJieH - Qijieh&#39;s Blog"><meta name="keywords" content="Node.js"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200824132946.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200824113028.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200824121832.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200824132817.png"><meta property="article:published_time" content="2020-08-23T16:00:00.000Z"><meta property="article:modified_time" content="2020-11-25T09:26:27.922Z"><meta property="og:updated_time" content="2020-11-25T09:26:27.922Z"><meta property="article:author" content="QiJieH"><meta property="article:tag" content="Node.js"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://qijieh.gitee.io/blog/2020/08/24/BackEnd-2020-8-Node-start-1/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://qijieh.gitee.io/blog/2020/08/24/BackEnd-2020-8-Node-start-1/",
+    "@type": "BlogPosting",
+    "logo": "http://qijieh.gitee.io/blog/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://qijieh.gitee.io/blog/2020/08/24/BackEnd-2020-8-Node-start-1/"
+    },
+    "headline": "Node.js 入门（一） | Qijieh&#39;s Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2020-08-23T16:00:00.000Z",
+    "dateModified": "2020-11-25T09:26:27.922Z",
+    "author": {
+        "@type": "Person",
+        "name": "QiJieH",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/author.jpg"
+        },
+        "description": "hello world."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Qijieh&#39;s Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://qijieh.gitee.io/blog/blog/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Node.js",
+    "description": "Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。Node.js 的包管理器 npm，是全球最大的开源库生态系统。 - QiJieH - Qijieh&#39;s Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/blog/">Qijieh&#39;s Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                hello world.
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/blog/" class="navbar-link">首页</a>
+    
+    
+        <a href="/blog/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/blog/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/blog/tags" class="navbar-link">标签</a>
+    
+        <a href="/blog/links" class="navbar-link">友链</a>
+    
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">Node.js 入门（一）</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/blog/img/author.jpg" src="/blog/img/suka-lazyload.gif" alt="QiJieH's Avatar">
+        <span>2020-08-24</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/blog/categories/BackEnd/">BackEnd</a>
+        
+        
+        
+            <span class="suka-devide-dot"></span>
+<span id="/blog/2020/08/24/BackEnd-2020-8-Node-start-1/" class="leancloud-visitors" data-flag-title="Node.js 入门（一）">
+    <span>view </span>
+    <span class="leancloud-visitors-count">0</span>
+    <span></span>
+</span>
+        
+    </p>
+    <div class="post-header-info-right">
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Node-%E5%BC%80%E5%8F%91%E6%A6%82%E8%BF%B0"><span class="post-toc-number">1.</span> <span class="post-toc-text">Node 开发概述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6%E4%B9%A0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">为什么要学习服务器端开发基础</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A6%81%E5%81%9A%E7%9A%84%E4%BA%8B%E6%83%85"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">服务器端开发要做的事情</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-Node"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">为什么选择 Node</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Node"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">什么是 Node</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Node-%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="post-toc-number">2.</span> <span class="post-toc-text">Node 运行环境搭建</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Node-js-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="post-toc-number">3.</span> <span class="post-toc-text">Node.js 快速入门</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Node-js-%E7%9A%84%E7%BB%84%E6%88%90"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Node.js 的组成</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Node-js-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Node.js 基础语法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Node-js-%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91"><span class="post-toc-number">4.</span> <span class="post-toc-text">Node.js 模块化开发</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JavaScript-%E5%BC%80%E5%8F%91%E5%BC%8A%E7%AB%AF"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">JavaScript 开发弊端</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">生活中的模块开发</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%BD%AF%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">软件中的模块化开发</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Node-js-%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">Node.js 模块化开发规范</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">系统模块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">第三方模块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Gulp"><span class="post-toc-number">4.7.</span> <span class="post-toc-text">Gulp</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Node-js-%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="post-toc-number">5.</span> <span class="post-toc-text">Node.js 文件结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#node-modules"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">node_modules</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#package-json"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">package.json</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#package-lock-json"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">package-lock.json</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#scripts"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">scripts</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Node-js-%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6"><span class="post-toc-number">6.</span> <span class="post-toc-text">Node.js 模块加载机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%A8%A1%E5%9D%97%E6%9F%A5%E6%89%BE%E8%A7%84%E5%88%99"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">模块查找规则</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Node-js-%E5%85%A8%E5%B1%80%E5%AF%B9%E8%B1%A1"><span class="post-toc-number">7.</span> <span class="post-toc-text">Node.js 全局对象</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200824132946.png"></p>
+<p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。Node.js 的包管理器 npm，是全球最大的开源库生态系统。</p>
+<a id="more"></a>
+
+
+
+<h2 id="Node-开发概述"><a href="#Node-开发概述" class="headerlink" title="Node 开发概述"></a>Node 开发概述</h2><h3 id="为什么要学习服务器端开发基础"><a href="#为什么要学习服务器端开发基础" class="headerlink" title="为什么要学习服务器端开发基础"></a>为什么要学习服务器端开发基础</h3><ul>
+<li>能够和后端程序员更加紧密的配合</li>
+<li>网站业务逻辑前置，学习前端技术需要后端技术支撑 （Ajax)</li>
+<li>扩宽知识视野，能够站在更高的角度审视整个项目</li>
+</ul>
+<h3 id="服务器端开发要做的事情"><a href="#服务器端开发要做的事情" class="headerlink" title="服务器端开发要做的事情"></a>服务器端开发要做的事情</h3><ul>
+<li>实现网站业务逻辑</li>
+<li>数据的增删改查</li>
+</ul>
+<h3 id="为什么选择-Node"><a href="#为什么选择-Node" class="headerlink" title="为什么选择 Node"></a>为什么选择 Node</h3><ul>
+<li>使用 JavaScript 语法开发后端应用</li>
+<li>一些公司邀请前端工程师掌握Node开发</li>
+<li>生态系统活跃，有大量开源库可以使用</li>
+<li>前端开发工具大多基于 Node 开发</li>
+</ul>
+<h3 id="什么是-Node"><a href="#什么是-Node" class="headerlink" title="什么是 Node"></a>什么是 Node</h3><p>Node 是一个基于 Chrome V8 引擎的 JavaScript 代码运行环境</p>
+<p><strong>运行环境</strong></p>
+<ul>
+<li>浏览器（软件）能够运行JavaScript代码，浏览器就是JavaScript代码的运行环境</li>
+<li>Node（软件）能够运行JavaScript代码，Node就是JavaScript代码的运行环境</li>
+</ul>
+<h2 id="Node-运行环境搭建"><a href="#Node-运行环境搭建" class="headerlink" title="Node 运行环境搭建"></a>Node 运行环境搭建</h2><p><a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/">Node.js 官网</a> </p>
+<p>版本说明：</p>
+<ul>
+<li>LTS ：Long Term Support 长期支持版 稳定版</li>
+<li>Current ：拥有最新特性 实验版</li>
+</ul>
+<p>安装路径请勿包含中文路径</p>
+<p>安装完成后通过命令行工具键入下面命令查看是否安装成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>常见错误</p>
+<p>**2502，2503 **</p>
+<ul>
+<li>错误原因：系统账户权限不足</li>
+<li>解决方法<ul>
+<li>以管理员身份运行命令行</li>
+<li>输入运行安装包命令 `msiexec /package nodePath.msi</li>
+</ul>
+</li>
+</ul>
+<p><strong>无法识别命令</strong></p>
+<ul>
+<li>失败原因：Node安装目录写入环境变量失败</li>
+<li>解决方法：手动设定Node安装路径到PATH环境变量</li>
+</ul>
+</blockquote>
+<h2 id="Node-js-快速入门"><a href="#Node-js-快速入门" class="headerlink" title="Node.js 快速入门"></a>Node.js 快速入门</h2><h3 id="Node-js-的组成"><a href="#Node-js-的组成" class="headerlink" title="Node.js 的组成"></a>Node.js 的组成</h3><ul>
+<li>JavaScript 由三部分组成：ECAMScript , DOM , BOM</li>
+<li>Node.js 是由 ECMAScript 及 Node环境提供的一些附加API组成，包括文件，网络，路径等等一些更加强大的API</li>
+</ul>
+<h3 id="Node-js-基础语法"><a href="#Node-js-基础语法" class="headerlink" title="Node.js 基础语法"></a>Node.js 基础语法</h3><p>所有 ECMAScript 语法在 Node 环境中都可以使用</p>
+<p>在项目文件下新建 <code>index.js</code> 文件，书写以下代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> hollo = <span class="string">&quot;Hello Node.js&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> say = <span class="function">() =&gt;</span> <span class="built_in">console</span>.log(hello);</span><br><span class="line">say();</span><br></pre></td></tr></table></figure>
+
+<p>在项目目录下打开终端，键入 node 命令运行 js</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node index.js</span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用技巧</p>
+<ul>
+<li>在资源管理器的工作目录中按住 Shift 键 + 鼠标右键，弹出的菜单内会出现在此处打开 PowerShell 窗口，此时的终端目录就会定位在当前目录下。</li>
+<li>在使用 node 键入执行文件名时，可以使用 Tab 键自动补全</li>
+<li>终端会记录命令历史，使用方向键上下可以切换历史命令</li>
+<li>使用 cls 命令清空终端页面缓冲</li>
+</ul>
+<h2 id="Node-js-模块化开发"><a href="#Node-js-模块化开发" class="headerlink" title="Node.js 模块化开发"></a>Node.js 模块化开发</h2><h3 id="JavaScript-开发弊端"><a href="#JavaScript-开发弊端" class="headerlink" title="JavaScript 开发弊端"></a>JavaScript 开发弊端</h3><p>JavaScript 在使用时存在两大问题，文件依赖和命名冲突</p>
+<p>由于 JavaScript 执行机制，当文件之间反复依赖，或相互依赖，会很难理清文件依赖关系。</p>
+<p>如果文件与文件中存在相同命名的变量，可能会出现命名冲突</p>
+<h3 id="生活中的模块开发"><a href="#生活中的模块开发" class="headerlink" title="生活中的模块开发"></a>生活中的模块开发</h3><ul>
+<li>电脑<ul>
+<li>屏幕</li>
+<li>显卡</li>
+<li>内存</li>
+<li>鼠标</li>
+<li>电源</li>
+</ul>
+</li>
+</ul>
+<h3 id="软件中的模块化开发"><a href="#软件中的模块化开发" class="headerlink" title="软件中的模块化开发"></a>软件中的模块化开发</h3><p>一个功能就是一个模块，多个模块可以组成完整应用，抽离一个模块不会影响其他功能的运行。</p>
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200824113028.png"></p>
+<h3 id="Node-js-模块化开发规范"><a href="#Node-js-模块化开发规范" class="headerlink" title="Node.js 模块化开发规范"></a>Node.js 模块化开发规范</h3><ul>
+<li>Node.js 规定一个 js 文件就是一个模块，模块内部定义的变量和函数默认情况下在外部无法得到</li>
+<li>模块内部可以使用 exports 对象进行成员导出，使用 require 方法导入其他模块。</li>
+</ul>
+<p><strong>模块成员导出</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> add = <span class="function">(<span class="params">x,y</span>) =&gt;</span> x+y;</span><br><span class="line"><span class="built_in">exports</span>.add = add;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 为 exports 属性新增 add 属性，其值为当前定义的 add函数</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>模块成员引入</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">&#x27;./a.js&#x27;</span>)</span><br><span class="line"><span class="comment">// const a = require(&#x27;./a&#x27;) 可忽略后缀</span></span><br><span class="line"><span class="comment">// const &#123;add&#125; = require(&#x27;./a&#x27;) 使用对象解构方式</span></span><br><span class="line">a.add(<span class="number">1</span>,<span class="number">2</span>); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// a = &#123; add: [Function: add] &#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>模块成员导出的另一种方式</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports.key = value;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>两种导出方式的区别</strong></p>
+<p>区别：exports 是 module.exports 的别名（地址引用关系），导出对象最终以 module.exports 为准</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="built_in">exports</span>.x = <span class="number">100</span>;</span><br><span class="line"><span class="built_in">module</span>.exports.x = <span class="number">200</span>;</span><br><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="keyword">const</span> tmp = <span class="built_in">require</span>(<span class="string">&#x27;./a.js&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log( tmp ); <span class="comment">// &#123; x:200 &#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//==========================</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="built_in">exports</span>.x = <span class="number">100</span>;</span><br><span class="line"><span class="built_in">module</span>.exports.x = <span class="number">200</span>;</span><br><span class="line"><span class="built_in">exports</span> = &#123;</span><br><span class="line">    name: <span class="string">&#x27;zhangsan&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="keyword">const</span> tmp = <span class="built_in">require</span>(<span class="string">&#x27;./a.js&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log( tmp ); <span class="comment">// &#123; x:200 &#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//==========================</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="built_in">exports</span>.x = <span class="number">100</span>;</span><br><span class="line"><span class="built_in">module</span>.exports.x = <span class="number">200</span>;</span><br><span class="line"><span class="built_in">exports</span> = &#123;</span><br><span class="line">    name: <span class="string">&#x27;zhangsan&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    name: <span class="string">&#x27;lisi&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="keyword">const</span> tmp = <span class="built_in">require</span>(<span class="string">&#x27;./a.js&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log( tmp ); <span class="comment">// &#123; name:lisi &#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="系统模块"><a href="#系统模块" class="headerlink" title="系统模块"></a>系统模块</h3><p>Node 运行环境提供的 API ，因为这些 API 都是以模块化的方式进行开发的，使用我们又称 Node 运行环境提供的 API 为系统模块。</p>
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200824121832.png"></p>
+<p><strong>文件模块 fs</strong></p>
+<hr>
+<p>filesystem : 文件系统</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>提供打印 fs ，可以获取到 fs 对象内的所有属性</p>
+<p>::: details</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(fs);</span><br><span class="line"><span class="comment">//=================================</span></span><br><span class="line">&#123;</span><br><span class="line">  appendFile: [<span class="built_in">Function</span>: appendFile],</span><br><span class="line">  appendFileSync: [<span class="built_in">Function</span>: appendFileSync],</span><br><span class="line">  access: [<span class="built_in">Function</span>: access],</span><br><span class="line">  accessSync: [<span class="built_in">Function</span>: accessSync],</span><br><span class="line">  chown: [<span class="built_in">Function</span>: chown],</span><br><span class="line">  chownSync: [<span class="built_in">Function</span>: chownSync],</span><br><span class="line">  chmod: [<span class="built_in">Function</span>: chmod],</span><br><span class="line">  chmodSync: [<span class="built_in">Function</span>: chmodSync],</span><br><span class="line">  close: [<span class="built_in">Function</span>: close],</span><br><span class="line">  closeSync: [<span class="built_in">Function</span>: closeSync],</span><br><span class="line">  copyFile: [<span class="built_in">Function</span>: copyFile],</span><br><span class="line">  copyFileSync: [<span class="built_in">Function</span>: copyFileSync],</span><br><span class="line">  createReadStream: [<span class="built_in">Function</span>: createReadStream],</span><br><span class="line">  createWriteStream: [<span class="built_in">Function</span>: createWriteStream],</span><br><span class="line">  exists: [<span class="built_in">Function</span>: exists],</span><br><span class="line">  existsSync: [<span class="built_in">Function</span>: existsSync],</span><br><span class="line">  fchown: [<span class="built_in">Function</span>: fchown],</span><br><span class="line">  fchownSync: [<span class="built_in">Function</span>: fchownSync],</span><br><span class="line">  fchmod: [<span class="built_in">Function</span>: fchmod],</span><br><span class="line">  fchmodSync: [<span class="built_in">Function</span>: fchmodSync],</span><br><span class="line">  fdatasync: [<span class="built_in">Function</span>: fdatasync],</span><br><span class="line">  fdatasyncSync: [<span class="built_in">Function</span>: fdatasyncSync],</span><br><span class="line">  fstat: [<span class="built_in">Function</span>: fstat],</span><br><span class="line">  fstatSync: [<span class="built_in">Function</span>: fstatSync],</span><br><span class="line">  fsync: [<span class="built_in">Function</span>: fsync],</span><br><span class="line">  fsyncSync: [<span class="built_in">Function</span>: fsyncSync],</span><br><span class="line">  ftruncate: [<span class="built_in">Function</span>: ftruncate],</span><br><span class="line">  ftruncateSync: [<span class="built_in">Function</span>: ftruncateSync],</span><br><span class="line">  futimes: [<span class="built_in">Function</span>: futimes],</span><br><span class="line">  futimesSync: [<span class="built_in">Function</span>: futimesSync],</span><br><span class="line">  lchown: [<span class="built_in">Function</span>: lchown],</span><br><span class="line">  lchownSync: [<span class="built_in">Function</span>: lchownSync],</span><br><span class="line">  lchmod: <span class="literal">undefined</span>,</span><br><span class="line">  lchmodSync: <span class="literal">undefined</span>,</span><br><span class="line">  link: [<span class="built_in">Function</span>: link],</span><br><span class="line">  linkSync: [<span class="built_in">Function</span>: linkSync],</span><br><span class="line">  lstat: [<span class="built_in">Function</span>: lstat],</span><br><span class="line">  lstatSync: [<span class="built_in">Function</span>: lstatSync],</span><br><span class="line">  mkdir: [<span class="built_in">Function</span>: mkdir],</span><br><span class="line">  mkdirSync: [<span class="built_in">Function</span>: mkdirSync],</span><br><span class="line">  mkdtemp: [<span class="built_in">Function</span>: mkdtemp],</span><br><span class="line">  mkdtempSync: [<span class="built_in">Function</span>: mkdtempSync],</span><br><span class="line">  open: [<span class="built_in">Function</span>: open],</span><br><span class="line">  openSync: [<span class="built_in">Function</span>: openSync],</span><br><span class="line">  opendir: [<span class="built_in">Function</span>: opendir],</span><br><span class="line">  opendirSync: [<span class="built_in">Function</span>: opendirSync],</span><br><span class="line">  readdir: [<span class="built_in">Function</span>: readdir],</span><br><span class="line">  readdirSync: [<span class="built_in">Function</span>: readdirSync],</span><br><span class="line">  read: [<span class="built_in">Function</span>: read],</span><br><span class="line">  readSync: [<span class="built_in">Function</span>: readSync],</span><br><span class="line">  readv: [<span class="built_in">Function</span>: readv],</span><br><span class="line">  readvSync: [<span class="built_in">Function</span>: readvSync],</span><br><span class="line">  readFile: [<span class="built_in">Function</span>: readFile],</span><br><span class="line">  readFileSync: [<span class="built_in">Function</span>: readFileSync],</span><br><span class="line">  readlink: [<span class="built_in">Function</span>: readlink],</span><br><span class="line">  readlinkSync: [<span class="built_in">Function</span>: readlinkSync],</span><br><span class="line">  realpath: [<span class="built_in">Function</span>: realpath] &#123; <span class="attr">native</span>: [<span class="built_in">Function</span>] &#125;,</span><br><span class="line">  realpathSync: [<span class="built_in">Function</span>: realpathSync] &#123; <span class="attr">native</span>: [<span class="built_in">Function</span>] &#125;,</span><br><span class="line">  rename: [<span class="built_in">Function</span>: rename],</span><br><span class="line">  renameSync: [<span class="built_in">Function</span>: renameSync],</span><br><span class="line">  rmdir: [<span class="built_in">Function</span>: rmdir],</span><br><span class="line">  rmdirSync: [<span class="built_in">Function</span>: rmdirSync],</span><br><span class="line">  stat: [<span class="built_in">Function</span>: stat],</span><br><span class="line">  statSync: [<span class="built_in">Function</span>: statSync],</span><br><span class="line">  symlink: [<span class="built_in">Function</span>: symlink],</span><br><span class="line">  symlinkSync: [<span class="built_in">Function</span>: symlinkSync],</span><br><span class="line">  truncate: [<span class="built_in">Function</span>: truncate],</span><br><span class="line">  truncateSync: [<span class="built_in">Function</span>: truncateSync],</span><br><span class="line">  unwatchFile: [<span class="built_in">Function</span>: unwatchFile],</span><br><span class="line">  unlink: [<span class="built_in">Function</span>: unlink],</span><br><span class="line">  unlinkSync: [<span class="built_in">Function</span>: unlinkSync],</span><br><span class="line">  utimes: [<span class="built_in">Function</span>: utimes],</span><br><span class="line">  utimesSync: [<span class="built_in">Function</span>: utimesSync],</span><br><span class="line">  watch: [<span class="built_in">Function</span>: watch],</span><br><span class="line">  watchFile: [<span class="built_in">Function</span>: watchFile],</span><br><span class="line">  writeFile: [<span class="built_in">Function</span>: writeFile],</span><br><span class="line">  writeFileSync: [<span class="built_in">Function</span>: writeFileSync],</span><br><span class="line">  write: [<span class="built_in">Function</span>: write],</span><br><span class="line">  writeSync: [<span class="built_in">Function</span>: writeSync],</span><br><span class="line">  writev: [<span class="built_in">Function</span>: writev],</span><br><span class="line">  writevSync: [<span class="built_in">Function</span>: writevSync],</span><br><span class="line">  Dir: [<span class="built_in">Function</span>: Dir],</span><br><span class="line">  Dirent: [<span class="built_in">Function</span>: Dirent],</span><br><span class="line">  Stats: [<span class="built_in">Function</span>: Stats],</span><br><span class="line">  ReadStream: [Getter/Setter],</span><br><span class="line">  WriteStream: [Getter/Setter],</span><br><span class="line">  FileReadStream: [Getter/Setter],</span><br><span class="line">  FileWriteStream: [Getter/Setter],</span><br><span class="line">  _toUnixTimestamp: [<span class="built_in">Function</span>: toUnixTimestamp],</span><br><span class="line">  F_OK: <span class="number">0</span>,</span><br><span class="line">  R_OK: <span class="number">4</span>,</span><br><span class="line">  W_OK: <span class="number">2</span>,</span><br><span class="line">  X_OK: <span class="number">1</span>,</span><br><span class="line">  constants: [<span class="built_in">Object</span>: <span class="literal">null</span> prototype] &#123;</span><br><span class="line">    UV_FS_SYMLINK_DIR: <span class="number">1</span>,</span><br><span class="line">    UV_FS_SYMLINK_JUNCTION: <span class="number">2</span>,</span><br><span class="line">    O_RDONLY: <span class="number">0</span>,</span><br><span class="line">    O_WRONLY: <span class="number">1</span>,</span><br><span class="line">    O_RDWR: <span class="number">2</span>,</span><br><span class="line">    UV_DIRENT_UNKNOWN: <span class="number">0</span>,</span><br><span class="line">    UV_DIRENT_FILE: <span class="number">1</span>,</span><br><span class="line">    UV_DIRENT_DIR: <span class="number">2</span>,</span><br><span class="line">    UV_DIRENT_LINK: <span class="number">3</span>,</span><br><span class="line">    UV_DIRENT_FIFO: <span class="number">4</span>,</span><br><span class="line">    UV_DIRENT_SOCKET: <span class="number">5</span>,</span><br><span class="line">    UV_DIRENT_CHAR: <span class="number">6</span>,</span><br><span class="line">    UV_DIRENT_BLOCK: <span class="number">7</span>,</span><br><span class="line">    S_IFMT: <span class="number">61440</span>,</span><br><span class="line">    S_IFREG: <span class="number">32768</span>,</span><br><span class="line">    S_IFDIR: <span class="number">16384</span>,</span><br><span class="line">    S_IFCHR: <span class="number">8192</span>,</span><br><span class="line">    S_IFLNK: <span class="number">40960</span>,</span><br><span class="line">    O_CREAT: <span class="number">256</span>,</span><br><span class="line">    O_EXCL: <span class="number">1024</span>,</span><br><span class="line">    UV_FS_O_FILEMAP: <span class="number">536870912</span>,</span><br><span class="line">    O_TRUNC: <span class="number">512</span>,</span><br><span class="line">    O_APPEND: <span class="number">8</span>,</span><br><span class="line">    F_OK: <span class="number">0</span>,</span><br><span class="line">    R_OK: <span class="number">4</span>,</span><br><span class="line">    W_OK: <span class="number">2</span>,</span><br><span class="line">    X_OK: <span class="number">1</span>,</span><br><span class="line">    UV_FS_COPYFILE_EXCL: <span class="number">1</span>,</span><br><span class="line">    COPYFILE_EXCL: <span class="number">1</span>,</span><br><span class="line">    UV_FS_COPYFILE_FICLONE: <span class="number">2</span>,</span><br><span class="line">    COPYFILE_FICLONE: <span class="number">2</span>,</span><br><span class="line">    UV_FS_COPYFILE_FICLONE_FORCE: <span class="number">4</span>,</span><br><span class="line">    COPYFILE_FICLONE_FORCE: <span class="number">4</span></span><br><span class="line">  &#125;,</span><br><span class="line">  promises: [Getter]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<p><strong>读取文件内容</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(<span class="string">&#x27;path&#x27;</span>[,<span class="string">&#x27;filecode&#x27;</span>],callback);</span><br></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<ul>
+<li><code>path</code> : 文件路径，包含文件</li>
+<li><code>filecode</code> : 文件编码，可选</li>
+<li><code>callback</code> ：回调函数，包含两个参数 <ul>
+<li><code>err</code> ：object 错误对象 如果错误抛出 null</li>
+<li><code>doc</code> ：string 文件内容</li>
+</ul>
+</li>
+</ul>
+<p>实例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line">fs.readFile(<span class="string">&#x27;./a.jsp&#x27;</span>,<span class="string">&#x27;utf-8&#x27;</span>,<span class="function">(<span class="params">err, doc</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(doc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>写入文件内容</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.writeFile(<span class="string">&#x27;filepath&#x27;</span>,<span class="string">&#x27;data&#x27;</span>,callback)</span><br></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<ul>
+<li><code>path</code> : 文件路径，包含文件，需要写入的文件</li>
+<li><code>data</code> : 写入内容</li>
+<li><code>callback</code> ：回调函数<ul>
+<li><code>err</code> ：object 错误对象 如果错误抛出 null</li>
+</ul>
+</li>
+</ul>
+<p>该方法会覆盖文件原有内容，如果文件不存在则会新建</p>
+<p>实例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> content = <span class="string">&#x27;exports.index = 333&#x27;</span></span><br><span class="line">fs.writeFile(<span class="string">&#x27;./a.js&#x27;</span>,content, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;写入成功&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p><strong>路径模块 path</strong></p>
+<hr>
+<p>为什么要进行路径拼接：</p>
+<ul>
+<li>不同操作系统的路径分隔符不统一</li>
+<li>windows 上是 \ /</li>
+<li>linux 上是 /</li>
+</ul>
+<p>语法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path.join(<span class="string">&#x27;path1&#x27;</span>,<span class="string">&#x27;path2&#x27;</span>,...);</span><br></pre></td></tr></table></figure>
+
+<p>实例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> finialPath = path.join(<span class="string">&#x27;css&#x27;</span>,<span class="string">&#x27;index.css&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(finialPath);</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>相对路径与绝对路径</strong></p>
+<ul>
+<li>大多数情况下使用绝对路径，因为相对路径有时候<strong>相对的是命令行工具的当前工作目录</strong>，很多情况下，命令行工具的工作目录是经常改变的</li>
+<li>在读取文件或者设置文件路径时都会选择绝对路径</li>
+<li>使用 <code>__dirname</code> 获取当前文件所在的绝对路径</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> filePath = path.join(__dirname,<span class="string">&#x27;./c.js&#x27;</span>);</span><br><span class="line"></span><br><span class="line">fs.readFile( filePath, <span class="string">&#x27;utf-8&#x27;</span>, <span class="function">(<span class="params">err, doc</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(doc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="第三方模块"><a href="#第三方模块" class="headerlink" title="第三方模块"></a>第三方模块</h3><p><strong>什么是第三方模块</strong></p>
+<hr>
+<p>别人写好的、具有特定功能的、我们能直接使用的模块即第三方模块，由于第三方模块通常都是由多个文件组成并且被放置在一个文件夹中，所以又名包。</p>
+<p>第三方模块存在的两种形式：</p>
+<ul>
+<li>以js文件的形式存在，提供实现项目具体功能的API接口。</li>
+<li>以命令行工具形式存在，辅助项目开发</li>
+</ul>
+<p><strong>获取第三方模块</strong></p>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/">npmjs.com</a> ： 第三方模块的存储和分发仓库</p>
+<p>npm (node package manager) ：node 包管理器</p>
+<ul>
+<li>下载：npm install 模块名称</li>
+<li>删除：npm uninstall 模块名称</li>
+</ul>
+<p>本地安装和全局安装</p>
+<ul>
+<li>默认进行本地安装，只有当前项目能够使用，一般库文件进行本地安装</li>
+<li>全局安装是使用 -g 参数进行，能够让该计算机上的所有项目使用，一般对命令行工具进行全局安装</li>
+</ul>
+<p>该命令会在命令行工作目录下创建 node_modules 和 packages-lock.json 两个文件，其中模块会存储在 node_modules 下。</p>
+<p><strong>nodemon</strong></p>
+<hr>
+<p>nodemon 是一个命令行工具，用以辅助项目开发</p>
+<p>在 Node.js 中，每次修改文件都要在命令行重新执行该文件，非常繁琐</p>
+<p>而 nodemon 会为我们监控文件修改，一旦修改立即执行文件。</p>
+<p>使用：</p>
+<ol>
+<li>使用 <code>npm install nodemon -g</code> 下载</li>
+<li>在命令行工具中使用 nodemon 命令替代 node</li>
+<li>使用 ctrl + c 关闭监控</li>
+</ol>
+<p><strong>nrm</strong></p>
+<hr>
+<p>nrm (npm registry manager): npm 下载地址切换工具</p>
+<p>npm  默认下载地址在国外，国内下载速度很慢</p>
+<p>使用：</p>
+<ol>
+<li>使用 <code>npm install nrm -g</code> 下载</li>
+<li>查询可用下载列表 <code>nrm ls</code></li>
+<li>切换 npm 下载地址 nrm use 名称</li>
+</ol>
+<p>单独使用 cnpm：</p>
+<ol>
+<li>使用命令下载</li>
+</ol>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https:<span class="regexp">//</span>registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>查看是否成功 <code>cnpm -v</code></li>
+<li>使用 <code>cnpm</code> 替代 <code>npm</code> 命令</li>
+</ol>
+<h3 id="Gulp"><a href="#Gulp" class="headerlink" title="Gulp"></a>Gulp</h3><hr>
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200824132817.png"></p>
+<p>gulp.js - 基于流(stream)的自动化构建工具。Grunt 采用配置文件的方式执行任务，而 Gulp 一切都通过代码实现。</p>
+<p>基于node平台开发的前端构建工具</p>
+<p>将机械化操作编写成任务, 想要执行机械化操作时执行一个命令行命令任务就能自动执行了</p>
+<p>用机器代替手工，提高开发效率。</p>
+<p><strong>Gulp 能做什么</strong></p>
+<hr>
+<ul>
+<li><p>项目上线，HTML、CSS、JS文件压缩合并</p>
+</li>
+<li><p>语法转换（es6、less …）</p>
+</li>
+<li><p>公共文件抽离</p>
+</li>
+<li><p>修改文件浏览器自动刷新</p>
+</li>
+</ul>
+<p><strong>Gulp 使用</strong></p>
+<hr>
+<ol>
+<li>下载</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install gulp</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>在项目根目录下建立 <code>gulpfile.js</code> 文件</p>
+</li>
+<li><p>重构项目的文件夹结构 <code>src</code> 目录放置源代码文件 <code>dist</code> 目录存放构建后文件</p>
+</li>
+<li><p>在 <code>gulpfile.js</code> 文件中编写任务</p>
+</li>
+<li><p>在命令行工具中执行 gulp 任务</p>
+</li>
+</ol>
+<p><strong>Gulp中提供的方法</strong></p>
+<hr>
+<p><code>gulp.src()</code>：获取任务要处理的文件</p>
+<p><code>gulp.dest()</code>：输出文件</p>
+<p><code>gulp.task()</code>：建立gulp任务</p>
+<p><code>gulp.watch()</code>：监控文件的变化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gulpfile.js</span></span><br><span class="line"><span class="keyword">const</span> gulp = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>);</span><br><span class="line"><span class="comment">// 使用gulp.task()方法建立任务</span></span><br><span class="line">gulp.task(<span class="string">&#x27;first&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 获取要处理的文件</span></span><br><span class="line">    gulp.src(<span class="string">&#x27;./src/css/base.css&#x27;</span>) </span><br><span class="line">    <span class="comment">// 将处理后的文件输出到dist目录</span></span><br><span class="line">    .pipe(gulp.dest(<span class="string">&#x27;./dist/css&#x27;</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>想要运行 gulp 文件，需要下载 gulp 提供的另一个模块</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install gulp-cli -g</span><br></pre></td></tr></table></figure>
+
+<p>之后使用执行任务，gulp 会自动寻找 gulpfile.js 文件中的 first 任务并执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp first</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>Gulp插件</strong></p>
+<hr>
+<ul>
+<li><p>gulp-htmlmin ：html文件压缩</p>
+</li>
+<li><p>gulp-csso ：压缩css</p>
+</li>
+<li><p>gulp-babel ：JavaScript语法转化</p>
+</li>
+<li><p>gulp-less: less语法转化</p>
+</li>
+<li><p>gulp-uglify ：压缩混淆JavaScript</p>
+</li>
+<li><p>gulp-file-include： 公共文件包含</p>
+</li>
+<li><p>browsersync： 浏览器实时同步</p>
+</li>
+</ul>
+<p>实例</p>
+<p>::: details</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用gulp模块</span></span><br><span class="line"><span class="keyword">const</span> gulp = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> htmlmin = <span class="built_in">require</span>(<span class="string">&#x27;gulp-htmlmin&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fileinclude = <span class="built_in">require</span>(<span class="string">&#x27;gulp-file-include&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> less = <span class="built_in">require</span>(<span class="string">&#x27;gulp-less&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> csso = <span class="built_in">require</span>(<span class="string">&#x27;gulp-csso&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> babel = <span class="built_in">require</span>(<span class="string">&#x27;gulp-babel&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> uglify = <span class="built_in">require</span>(<span class="string">&#x27;gulp-uglify&#x27;</span>);</span><br><span class="line"><span class="comment">// 使用gulp.task建立任务</span></span><br><span class="line"><span class="comment">// 1.任务的名称</span></span><br><span class="line"><span class="comment">// 2.任务的回调函数</span></span><br><span class="line">gulp.task(<span class="string">&#x27;first&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;我们人生中的第一个gulp任务执行了&#x27;</span>);</span><br><span class="line">	<span class="comment">// 1.使用gulp.src获取要处理的文件</span></span><br><span class="line">	gulp.src(<span class="string">&#x27;./src/css/base.css&#x27;</span>)</span><br><span class="line">		.pipe(gulp.dest(<span class="string">&#x27;dist/css&#x27;</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// html任务</span></span><br><span class="line"><span class="comment">// 1.html文件中代码的压缩操作</span></span><br><span class="line"><span class="comment">// 2.抽取html文件中的公共代码</span></span><br><span class="line">gulp.task(<span class="string">&#x27;htmlmin&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">	gulp.src(<span class="string">&#x27;./src/*.html&#x27;</span>)</span><br><span class="line">		.pipe(fileinclude())</span><br><span class="line">		<span class="comment">// 压缩html文件中的代码</span></span><br><span class="line">		.pipe(htmlmin(&#123; <span class="attr">collapseWhitespace</span>: <span class="literal">true</span> &#125;))</span><br><span class="line">		.pipe(gulp.dest(<span class="string">&#x27;dist&#x27;</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// css任务</span></span><br><span class="line"><span class="comment">// 1.less语法转换</span></span><br><span class="line"><span class="comment">// 2.css代码压缩</span></span><br><span class="line">gulp.task(<span class="string">&#x27;cssmin&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">	<span class="comment">// 选择css目录下的所有less文件以及css文件</span></span><br><span class="line">	gulp.src([<span class="string">&#x27;./src/css/*.less&#x27;</span>, <span class="string">&#x27;./src/css/*.css&#x27;</span>])</span><br><span class="line">		<span class="comment">// 将less语法转换为css语法</span></span><br><span class="line">		.pipe(less())</span><br><span class="line">		<span class="comment">// 将css代码进行压缩</span></span><br><span class="line">		.pipe(csso())</span><br><span class="line">		<span class="comment">// 将处理的结果进行输出</span></span><br><span class="line">		.pipe(gulp.dest(<span class="string">&#x27;dist/css&#x27;</span>))</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// js任务</span></span><br><span class="line"><span class="comment">// 1.es6代码转换</span></span><br><span class="line"><span class="comment">// 2.代码压缩</span></span><br><span class="line">gulp.task(<span class="string">&#x27;jsmin&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">	gulp.src(<span class="string">&#x27;./src/js/*.js&#x27;</span>)</span><br><span class="line">		.pipe(babel(&#123;</span><br><span class="line">			<span class="comment">// 它可以判断当前代码的运行环境 将代码转换为当前运行环境所支持的代码</span></span><br><span class="line">            presets: [<span class="string">&#x27;@babel/env&#x27;</span>]</span><br><span class="line">        &#125;))</span><br><span class="line">        .pipe(uglify())</span><br><span class="line">        .pipe(gulp.dest(<span class="string">&#x27;dist/js&#x27;</span>))</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 复制文件夹</span></span><br><span class="line">gulp.task(<span class="string">&#x27;copy&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">	gulp.src(<span class="string">&#x27;./src/images/*&#x27;</span>)</span><br><span class="line">		.pipe(gulp.dest(<span class="string">&#x27;dist/images&#x27;</span>));</span><br><span class="line"></span><br><span class="line">	gulp.src(<span class="string">&#x27;./src/lib/*&#x27;</span>)</span><br><span class="line">		.pipe(gulp.dest(<span class="string">&#x27;dist/lib&#x27;</span>))</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 构建任务</span></span><br><span class="line">gulp.task(<span class="string">&#x27;default&#x27;</span>, [<span class="string">&#x27;htmlmin&#x27;</span>, <span class="string">&#x27;cssmin&#x27;</span>, <span class="string">&#x27;jsmin&#x27;</span>, <span class="string">&#x27;copy&#x27;</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<h2 id="Node-js-文件结构"><a href="#Node-js-文件结构" class="headerlink" title="Node.js 文件结构"></a>Node.js 文件结构</h2><h3 id="node-modules"><a href="#node-modules" class="headerlink" title="node_modules"></a>node_modules</h3><hr>
+<p>文件夹及文件过多过碎，当我们将项目整体拷贝给别人的时候，传输速度会很慢</p>
+<p>复杂的模块依赖关系需要被记录，确保模块的版本和当前保持一致，否则会导致当前项目运行报错</p>
+<p>在 node_modules 文件中存储的是当前项目的各项依赖，这个文件会十分复杂碎片且庞大。</p>
+<h3 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h3><hr>
+<p>项目描述文件，记录了当前项目信息，例如项目名称、版本、作者、github地址、当前项目依赖了哪些第三方模块等。</p>
+<p>在项目根目录下使用 <code>npm init </code> 命令生成，使用 <code>npm init -y</code> 快速生成，无需填写相关信息</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;NodePkg&quot;</span>,		<span class="comment">// 项目名称</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span>: <span class="string">&quot;1.0.0&quot;</span>,		<span class="comment">// 项目版本</span></span><br><span class="line">  <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;&quot;</span>,		<span class="comment">// 项目描述</span></span><br><span class="line">  <span class="attr">&quot;main&quot;</span>: <span class="string">&quot;index.js&quot;</span>,		<span class="comment">// 入口函数</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span>: &#123;				<span class="comment">// 命令别名</span></span><br><span class="line">    <span class="attr">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;keywords&quot;</span>: [],			<span class="comment">// 关键字</span></span><br><span class="line">  <span class="attr">&quot;author&quot;</span>: <span class="string">&quot;&quot;</span>,				<span class="comment">// 作者</span></span><br><span class="line">  <span class="attr">&quot;license&quot;</span>: <span class="string">&quot;ISC&quot;</span>			<span class="comment">// 开源许可</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>当项目中存在 package.json 文件后，每次 install 第三方模块都会记录到<code>dependencies</code> 字段中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install formidable mime</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    </span><br><span class="line">    <span class="attr">&quot;dependencies&quot;</span>: &#123;</span><br><span class="line">    	<span class="attr">&quot;formidable&quot;</span>: <span class="string">&quot;^1.2.2&quot;</span>,</span><br><span class="line">    	<span class="attr">&quot;mime&quot;</span>: <span class="string">&quot;^2.4.6&quot;</span></span><br><span class="line">  	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>需要注意的是如果你使用 cnpm 命令下载，是不会构建到 dependencies 中去的。</p>
+</blockquote>
+<p>别人可以根据 <code>package.json</code> 获取你当前项目的依赖，<code>npm install</code> 会自动根据 <code>package.json</code> 文件下载相关依赖。</p>
+<p><strong>项目依赖</strong></p>
+<ul>
+<li>在项目的开发阶段和线上运营阶段，都需要依赖的第三方包，称为项目依赖</li>
+<li>使用 <code>npm install 包名</code> 命令下载的文件会默认被添加到 <code>package.json</code> 文件的 <code>dependencies</code> 字段中</li>
+</ul>
+<p><strong>开发依赖</strong></p>
+<ul>
+<li>在项目的开发阶段需要依赖，线上运营阶段不需要依赖的第三方包，称为开发依赖</li>
+<li>使用 <code>npm install 包名 --save-dev</code> 命令将包添加到 <code>package.json</code> 文件的 <code>devDependencies</code> 字段中</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install gulp --save-dev</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">    </span><br><span class="line">	<span class="attr">&quot;devDependencies&quot;</span>: &#123;</span><br><span class="line">		<span class="attr">&quot;gulp&quot;</span>: <span class="string">&quot;^3.9.1&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>开发环境：使用 <code>npm install</code> 下载全部依赖</p>
+<p>生产环境：使用 <code>npm install --production</code> 不下载开发环境依赖</p>
+<h3 id="package-lock-json"><a href="#package-lock-json" class="headerlink" title="package-lock.json"></a>package-lock.json</h3><hr>
+<ul>
+<li>锁定包的版本，确保再次下载时不会因为包版本不同而产生问题</li>
+<li>加快下载速度，因为该文件中已经记录了项目所依赖第三方包的树状结构和包的下载地址，重新安装时只需下载即可，不需要做额外的工作</li>
+</ul>
+<h3 id="scripts"><a href="#scripts" class="headerlink" title="scripts"></a>scripts</h3><p>命令别名，当命令行命令过长或复杂时，可以为将其键入 scripts 中，并赋予简单的别名，之后便可以提高 <code>npm run 别名</code> 执行这段命令。</p>
+<h2 id="Node-js-模块加载机制"><a href="#Node-js-模块加载机制" class="headerlink" title="Node.js 模块加载机制"></a>Node.js 模块加载机制</h2><h3 id="模块查找规则"><a href="#模块查找规则" class="headerlink" title="模块查找规则"></a>模块查找规则</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;./find.js&#x27;</span>)</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;./find&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>require方法根据模块路径查找模块，如果是完整路径，直接引入模块。</p>
+</li>
+<li><p>如果模块后缀省略，先找同名JS文件再找同名JS文件夹</p>
+</li>
+<li><p>如果找到了同名文件夹，找文件夹中的index.js</p>
+</li>
+<li><p>如果文件夹中没有index.js就会去当前文件夹中的package.json文件中查找main选项中的入口文件</p>
+</li>
+<li><p>如果找指定的入口文件不存在或者没有指定入口文件就会报错，模块没有被找到</p>
+</li>
+</ol>
+<p><strong>无路径无后缀</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;find&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>Node.js 会假设它是系统模块</li>
+<li>Node.js 会去 node_modulcs 文件中去查找</li>
+<li>查找同名 js 文件</li>
+<li>查找同名文件夹下的 index.js</li>
+<li>查看文件夹的 package.json 的 main 选项，并去文件查找</li>
+<li>如果仍未找到，报错</li>
+</ol>
+<h2 id="Node-js-全局对象"><a href="#Node-js-全局对象" class="headerlink" title="Node.js 全局对象"></a>Node.js 全局对象</h2><p>在浏览器中全局对象是window，在node中全局对象是global</p>
+<p>node全局对象中有以下方法，可以在任何地方使用，global可以省略</p>
+<ul>
+<li><code>console.log()</code> ：控制台输出</li>
+<li><code>setTimeout()</code> ： 设置超时定时器</li>
+<li><code>cleartimeout()</code>：清除超时定时器</li>
+<li><code>setInterval()</code> ：设置间歇定时器</li>
+<li><code>clearInterval()</code> ：清除间歇定时器</li>
+</ul>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-11-25");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-08-23T16:00:00.000Z" itemprop="datePublished">2020-08-24</time>
+
+    , 最后修改于&nbsp;<time datetime="2020-11-25T09:26:27.922Z" itemprop="dateModified">2020-11-25</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/blog/categories/BackEnd/'>BackEnd</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/blog/tags/Node-js/" rel="tag">#&nbsp;Node.js</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/blog/2020/08/24/BackEnd-2020-8-Node-start-2/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Node.js 入门（二）</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/blog/2020/08/23/FontEnd-2020-8-Js-senior-5/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">JavaScipt高级（五）ES6</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="vcomments"></div>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = ''.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = '' === 'true';
+    var verify = '' === 'true';
+    new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        appId: "process.env.VALINEID",
+        appKey: "process.env.VALINEKEY",
+        placeholder: "Just go go",
+        meta: guest_info,
+        pageSize:'10',
+        avatar:'retro',
+        lang:'zh-cn',
+        guest_info: guest_info,
+        visitor: true
+    });
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://qijieh.gitee.io/blog">Qijieh's Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    Hosted on <a target="_blank" href="https://github.com/QiJieH" rel="nofollow noopener noreferrer noopener">Github Pages</a>
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+            <span id="http://qijieh.gitee.io/blog" class="leancloud-visitors" data-flag-title="Qijieh&#39;s Blog">
+    <span></span><!--
+ --><span class="leancloud-visitors-count">0</span><!--
+ --><span> Visitor |</span>
+</span>
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2019;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/blog/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

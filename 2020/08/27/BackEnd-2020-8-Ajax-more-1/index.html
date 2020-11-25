@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="//cdn1.lncld.net">
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>Ajax 编程扩展（一） | Qijieh&#39;s Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/blog/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/blog/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/blog/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/blog/css/highlight/atelier-heath-light.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/blog/css/highlight/atelier-heath-light.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Qijieh's Blog"><meta name="msapplication-starturl" content="http://qijieh.gitee.io/blog"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Qijieh's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="Ajax 编程扩展（一） | Qijieh&#39;s Blog"><meta property="og:site_name" content="Qijieh&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="http://qijieh.gitee.io/blog/2020/08/27/BackEnd-2020-8-Ajax-more-1/"><meta property="og:locale" content="zh-CN"><meta name="description" content="Ajax应用模板引擎   FormData 对象  同源政策  JSONP 解决方案  CORS 跨域资源访问 - QiJieH - Qijieh&#39;s Blog"><meta name="keywords" content="Ajax, Node.js"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200827131350.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200827131457.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200827131640.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200827131058.png"><meta property="og:image" content="c:/Users/user/AppData/Roaming/Typora/typora-user-images/image-20200827152014739.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200827152116.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200827162921.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200827164647.png"><meta property="article:published_time" content="2020-08-26T16:00:00.000Z"><meta property="article:modified_time" content="2020-11-25T09:26:27.917Z"><meta property="og:updated_time" content="2020-11-25T09:26:27.917Z"><meta property="article:author" content="QiJieH"><meta property="article:tag" content="Ajax, Node.js"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://qijieh.gitee.io/blog/2020/08/27/BackEnd-2020-8-Ajax-more-1/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://qijieh.gitee.io/blog/2020/08/27/BackEnd-2020-8-Ajax-more-1/",
+    "@type": "BlogPosting",
+    "logo": "http://qijieh.gitee.io/blog/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://qijieh.gitee.io/blog/2020/08/27/BackEnd-2020-8-Ajax-more-1/"
+    },
+    "headline": "Ajax 编程扩展（一） | Qijieh&#39;s Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2020-08-26T16:00:00.000Z",
+    "dateModified": "2020-11-25T09:26:27.917Z",
+    "author": {
+        "@type": "Person",
+        "name": "QiJieH",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/author.jpg"
+        },
+        "description": "hello world."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Qijieh&#39;s Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://qijieh.gitee.io/blog/blog/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Ajax, Node.js",
+    "description": "Ajax应用模板引擎   FormData 对象  同源政策  JSONP 解决方案  CORS 跨域资源访问 - QiJieH - Qijieh&#39;s Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/blog/">Qijieh&#39;s Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                hello world.
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/blog/" class="navbar-link">首页</a>
+    
+    
+        <a href="/blog/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/blog/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/blog/tags" class="navbar-link">标签</a>
+    
+        <a href="/blog/links" class="navbar-link">友链</a>
+    
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">Ajax 编程扩展（一）</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/blog/img/author.jpg" src="/blog/img/suka-lazyload.gif" alt="QiJieH's Avatar">
+        <span>2020-08-27</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/blog/categories/FrontEnd/">FrontEnd</a><span class="suka-devide-dot"></span><a class="category-link" href="/blog/categories/FrontEnd/BackEnd/">BackEnd</a>
+        
+        
+        
+            <span class="suka-devide-dot"></span>
+<span id="/blog/2020/08/27/BackEnd-2020-8-Ajax-more-1/" class="leancloud-visitors" data-flag-title="Ajax 编程扩展（一）">
+    <span>view </span>
+    <span class="leancloud-visitors-count">0</span>
+    <span></span>
+</span>
+        
+    </p>
+    <div class="post-header-info-right">
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E"><span class="post-toc-number">1.</span> <span class="post-toc-text">模板引擎</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="post-toc-number">2.</span> <span class="post-toc-text">案例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%AA%8C%E8%AF%81%E9%82%AE%E7%AE%B1%E5%9C%B0%E5%9D%80%E5%94%AF%E4%B8%80%E6%80%A7"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">验证邮箱地址唯一性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%90%9C%E7%B4%A2%E6%A1%86%E5%86%85%E5%AE%B9%E8%87%AA%E5%8A%A8%E6%8F%90%E7%A4%BA"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">搜索框内容自动提示</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%9C%81%E5%B8%82%E5%8C%BA%E4%B8%89%E7%BA%A7%E8%81%94%E5%8A%A8"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">省市区三级联动</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#FormData"><span class="post-toc-number">3.</span> <span class="post-toc-text">FormData</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#FormData-%E4%BD%9C%E7%94%A8"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">FormData 作用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#FormData-%E4%BD%BF%E7%94%A8"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">FormData 使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#FormData-%E6%96%B9%E6%B3%95"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">FormData 方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#FormData-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">FormData 二进制文件上传</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#FormData-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E8%BF%9B%E5%BA%A6%E6%8F%90%E7%A4%BA"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">FormData 文件上传进度提示</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#FormData-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%8D%B3%E6%97%B6%E9%A2%84%E8%A7%88"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">FormData 文件上传图片即时预览</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%AE%8C%E6%95%B4%E6%BA%90%E7%A0%81"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">文件上传完整源码</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%90%8C%E6%BA%90%E6%94%BF%E7%AD%96"><span class="post-toc-number">4.</span> <span class="post-toc-text">同源政策</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Ajax-%E8%AF%B7%E6%B1%82%E9%99%90%E5%88%B6"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Ajax 请求限制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%90%8C%E6%BA%90"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">什么是同源</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%90%8C%E6%BA%90%E6%94%BF%E7%AD%96%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">同源政策的目的</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JSONP"><span class="post-toc-number">5.</span> <span class="post-toc-text">JSONP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JSONP-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">JSONP 代码优化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A%E8%85%BE%E8%AE%AF%E5%A4%A9%E6%B0%94-JSONP"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">案例：腾讯天气 JSONP</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CORS-%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB"><span class="post-toc-number">6.</span> <span class="post-toc-text">CORS 跨域资源共享</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E4%BB%A3%E7%90%86%E8%B7%A8%E5%9F%9F"><span class="post-toc-number">7.</span> <span class="post-toc-text">服务器端代理跨域</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <ul>
+<li><p>Ajax应用模板引擎 </p>
+</li>
+<li><p>FormData 对象</p>
+</li>
+<li><p>同源政策</p>
+</li>
+<li><p>JSONP 解决方案</p>
+</li>
+<li><p>CORS 跨域资源访问</p>
+</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h2><p>作用：使用模板引擎提供的模板语法，可以将数据和 HTML 拼接起来。</p>
+<p><strong>下载</strong></p>
+<p><a target="_blank" rel="noopener" href="https://aui.github.io/art-template/zh-cn/docs/installation.html">art-template</a> </p>
+<p><strong>在 HTML 中引入</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./js/template-web.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>准备 art-template 模板</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">id</span>=<span class="string">&quot;tpl&quot;</span> <span class="attr">type</span>&quot;<span class="attr">text</span>/<span class="attr">html</span>&quot;&gt;</span></span><br><span class="line"><span class="javascript">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;box&quot;</span>&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>数据注入</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> html = template(<span class="string">&#x27;tpl&#x27;</span>, &#123;<span class="attr">uname</span>:<span class="string">&#x27;zs&#x27;</span>, <span class="attr">age</span>: <span class="number">20</span>&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>插入页面</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&#x27;container&#x27;</span>).innerHTML = html;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>数据拼接</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">id</span>=<span class="string">&quot;tpl&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/html&quot;</span>&gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span> </span><span class="template-variable">&#123;&#123; <span class="name">username</span> &#125;&#125;</span><span class="xml"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>完整实例</strong></p>
+<p>::: details</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/template-web.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;container&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/html&quot;</span> <span class="attr">id</span>=<span class="string">&#x27;tpl&#x27;</span>&gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span></span><span class="template-variable">&#123;&#123;<span class="name">uname</span>&#125;&#125;</span><span class="xml"> </span><span class="template-variable">&#123;&#123;<span class="name">pwd</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> html = template(<span class="string">&#x27;tpl&#x27;</span>, &#123;<span class="attr">uname</span>:<span class="string">&#x27;zs&#x27;</span>,<span class="attr">pwd</span>:<span class="number">123</span>&#125;);</span></span><br><span class="line"><span class="javascript">    $(<span class="string">&#x27;#container&#x27;</span>).append(html);</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><h3 id="验证邮箱地址唯一性"><a href="#验证邮箱地址唯一性" class="headerlink" title="验证邮箱地址唯一性"></a>验证邮箱地址唯一性</h3><p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200827131350.png"></p>
+<ol>
+<li><p>获取文本框并为其添加离开焦点事件</p>
+</li>
+<li><p>离开焦点时，检测用户输入的邮箱地址是否符合规则</p>
+</li>
+<li><p>如果不符合规则，阻止程序向下执行并给出提示信息</p>
+</li>
+<li><p>向服务器端发送请求，检测邮箱地址是否被别人注册</p>
+</li>
+<li><p>根据服务器端返回值决定客户端显示何种提示信息</p>
+</li>
+</ol>
+<p>邮箱验证正则表达式</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^<span class="comment">[A-Za-z\d]</span>+(<span class="comment">[-_.]</span><span class="comment">[A-Za-z\d]</span>+)*@(<span class="comment">[A-Za-z\d]</span>+<span class="comment">[-.]</span>)+<span class="comment">[A-Za-z\d]</span>&#123;2,4&#125;$/</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>完整源码</strong></p>
+<p>ajax 完整封装，后面的案例都将引用该方法</p>
+<p>::: details</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ajax.js</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajax</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> defaults = &#123;</span><br><span class="line">        type : <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">        url : <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        data: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        header: &#123;<span class="string">&#x27;Content-Type&#x27;</span> : <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>&#125;,</span><br><span class="line">        succrss: <span class="function">()=&gt;</span>&#123;&#125;,</span><br><span class="line">        error: <span class="function">()=&gt;</span>&#123;&#125;,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Object</span>.assign(defaults, options);</span><br><span class="line">    <span class="keyword">let</span> &#123;type, url, data, header, success, error&#125; = defaults;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> params = (<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> tmp = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">var</span> attr <span class="keyword">in</span> data) &#123;</span><br><span class="line">            tmp += <span class="string">`<span class="subst">$&#123;attr&#125;</span>=<span class="subst">$&#123;data[attr]&#125;</span>&amp;`</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        tmp = tmp.substr(<span class="number">0</span>, tmp.length - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> tmp;</span><br><span class="line">    &#125;)();</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(type == <span class="string">&#x27;post&#x27;</span>)&#123;</span><br><span class="line">        <span class="keyword">let</span> contentType = header[<span class="string">&#x27;Content-Type&#x27;</span>];</span><br><span class="line">        xhr.open(type, url);</span><br><span class="line">        xhr.setRequestHeader(<span class="string">&#x27;Content-Type&#x27;</span>, contentType);</span><br><span class="line">        <span class="keyword">if</span>(contentType == <span class="string">&#x27;application/json&#x27;</span>)&#123;</span><br><span class="line">            xhr.send(<span class="built_in">JSON</span>.stringify(data))</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            xhr.send(params);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(type == <span class="string">&#x27;get&#x27;</span>)&#123;</span><br><span class="line">        url = <span class="string">`<span class="subst">$&#123;url&#125;</span>?<span class="subst">$&#123;params&#125;</span>`</span>;</span><br><span class="line">        xhr.open(type, url);</span><br><span class="line">        xhr.send();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    xhr.onload = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> contentType = xhr.getResponseHeader(<span class="string">&#x27;Content-Type&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span>(xhr.status == <span class="number">200</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(contentType.includes(<span class="string">&#x27;application/json&#x27;</span>))&#123;</span><br><span class="line">                success(<span class="built_in">JSON</span>.parse(xhr.responseText), xhr);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                success(xhr.responseText, xhr);</span><br><span class="line">            &#125;          </span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(contentType.includes(<span class="string">&#x27;application/json&#x27;</span>))&#123;</span><br><span class="line">                error(<span class="built_in">JSON</span>.parse(xhr.responseText), xhr);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                error(xhr.responseText, xhr);</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用示例</span></span><br><span class="line"><span class="comment">// ajax(&#123;</span></span><br><span class="line"><span class="comment">//     type : &#x27;post&#x27;,</span></span><br><span class="line"><span class="comment">//     url : &#x27;http://localhost:3000/first&#x27;,</span></span><br><span class="line"><span class="comment">//     data : &#123;</span></span><br><span class="line"><span class="comment">//         uname : &#x27;zs&#x27;,</span></span><br><span class="line"><span class="comment">//         pwd : 123</span></span><br><span class="line"><span class="comment">//     &#125;,</span></span><br><span class="line"><span class="comment">//     success : (data, xhr) =&gt; &#123;</span></span><br><span class="line"><span class="comment">//         console.log(data);</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">// &#125;);</span></span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<p>网站服务器响应，模拟数据库查询，后续案例将只书写关键部分</p>
+<p>::: details</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js 模拟数据库查询</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;body-parser&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line">app.use(bodyParser.urlencoded(&#123;<span class="attr">extended</span>: <span class="literal">false</span>&#125;));</span><br><span class="line"></span><br><span class="line">app.use(express.static(path.join(__dirname, <span class="string">&#x27;public&#x27;</span>)));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/verifyEmailAdress&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="comment">// 接收客户端传递过来的邮箱地址</span></span><br><span class="line">	<span class="keyword">const</span> &#123;email&#125; = req.query;</span><br><span class="line">	<span class="comment">// 判断邮箱地址注册过的情况</span></span><br><span class="line">	<span class="keyword">if</span> (email == <span class="string">&#x27;123@qq.com&#x27;</span>) &#123;</span><br><span class="line">		<span class="comment">// 设置http状态码并对客户端做出响应</span></span><br><span class="line">		res.status(<span class="number">400</span>).send(&#123;<span class="attr">message</span>: <span class="string">&#x27;邮箱地址已经注册过了, 请更换其他邮箱地址&#x27;</span>&#125;);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="comment">// 邮箱地址可用的情况</span></span><br><span class="line">		<span class="comment">// 对客户端做出响应</span></span><br><span class="line">		res.send(&#123;<span class="attr">message</span>: <span class="string">&#x27;恭喜, 邮箱地址可用&#x27;</span>&#125;);</span><br><span class="line">	&#125; </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;服务器监听：http://localhost:3000&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<p>完整html实现源码，后续将只给出关键代码</p>
+<p>::: details</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;en&quot;</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">&quot;viewport&quot;</span> content=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;script src=<span class="string">&quot;https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=<span class="string">&quot;/js/template-web.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=<span class="string">&quot;/js/ajax.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line">    &lt;link rel=<span class="string">&quot;stylesheet&quot;</span> href=<span class="string">&quot;https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css&quot;</span> integrity=<span class="string">&quot;sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u&quot;</span> crossorigin=<span class="string">&quot;anonymous&quot;</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;container&quot;</span>&gt;</span><br><span class="line">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;row&quot;</span>&gt;</span><br><span class="line">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;form-group col-md-4 col-md-offset-4&quot;</span>&gt;</span><br><span class="line">                &lt;label <span class="keyword">for</span>=<span class="string">&quot;email&quot;</span>&gt;邮箱地址&lt;/label&gt;</span><br><span class="line">                &lt;input type=<span class="string">&quot;email&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;form-control&quot;</span> id=<span class="string">&quot;email&quot;</span> placeholder=<span class="string">&quot;Email&quot;</span>&gt;</span><br><span class="line">                &lt;p id=<span class="string">&quot;info&quot;</span>&gt;&lt;/p&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">    p:<span class="function"><span class="title">not</span>(<span class="params">:empty</span>)</span> &#123;</span><br><span class="line">        margin-top: 10px;</span><br><span class="line">        padding: 10px;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">let</span> email_input = $(<span class="string">&#x27;#email&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> info = $(<span class="string">&#x27;#info&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    email_input.on(<span class="string">&#x27;blur&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> email = $(<span class="built_in">this</span>).val();</span><br><span class="line">        <span class="keyword">let</span> reg = <span class="regexp">/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]&#123;2,4&#125;$/</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!reg.test(email))&#123;</span><br><span class="line">            info.addClass(<span class="string">&#x27;bg-warning&#x27;</span>);</span><br><span class="line">            info.html(<span class="string">`请填写正确的邮箱格式`</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ajax(&#123;</span><br><span class="line">            type: <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">            url : <span class="string">&#x27;http://localhost:3000/verifyEmailAdress&#x27;</span>,</span><br><span class="line">            data: &#123;</span><br><span class="line">                email : email</span><br><span class="line">            &#125;,</span><br><span class="line">            success: <span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(result);</span><br><span class="line">                info.html(result.message);</span><br><span class="line">                info[<span class="number">0</span>].className = <span class="string">&#x27;bg-success&#x27;</span>;</span><br><span class="line">            &#125;,</span><br><span class="line">            error: <span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(result);</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="keyword">typeof</span> result);</span><br><span class="line">                info.html(result.message);</span><br><span class="line">                info[<span class="number">0</span>].className = <span class="string">&#x27;bg-danger&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<h3 id="搜索框内容自动提示"><a href="#搜索框内容自动提示" class="headerlink" title="搜索框内容自动提示"></a>搜索框内容自动提示</h3><p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200827131457.png"></p>
+<ol>
+<li><p>获取搜索框并为其添加用户输入事件</p>
+</li>
+<li><p>获取用户输入的关键字</p>
+</li>
+<li><p>向服务器端发送请求并携带关键字作为请求参数</p>
+</li>
+<li><p>将响应数据显示在搜索框底部</p>
+</li>
+</ol>
+<p><strong>源码</strong></p>
+<p>服务器端数据库查询模拟</p>
+<p>::: details</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输入框文字提示</span></span><br><span class="line">app.get(<span class="string">&#x27;/searchAutoPrompt&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="comment">// 搜索关键字</span></span><br><span class="line">	<span class="keyword">const</span> &#123;key&#125; = req.query;</span><br><span class="line">	<span class="comment">// 提示文字列表</span></span><br><span class="line">	<span class="keyword">const</span> list = [</span><br><span class="line">		<span class="string">&#x27;黑马程序员&#x27;</span>,</span><br><span class="line">		<span class="string">&#x27;黑马程序员官网&#x27;</span>,</span><br><span class="line">		<span class="string">&#x27;黑马程序员顺义校区&#x27;</span>,</span><br><span class="line">		<span class="string">&#x27;黑马程序员学院报名系统&#x27;</span>,</span><br><span class="line">		<span class="string">&#x27;传智播客&#x27;</span>,</span><br><span class="line">		<span class="string">&#x27;传智博客前端与移动端开发&#x27;</span>,</span><br><span class="line">		<span class="string">&#x27;传智播客大数据&#x27;</span>,</span><br><span class="line">		<span class="string">&#x27;传智播客python&#x27;</span>,</span><br><span class="line">		<span class="string">&#x27;传智播客java&#x27;</span>,</span><br><span class="line">		<span class="string">&#x27;传智播客c++&#x27;</span>,</span><br><span class="line">		<span class="string">&#x27;传智播客怎么样&#x27;</span></span><br><span class="line">	];</span><br><span class="line">	<span class="comment">// 搜索结果</span></span><br><span class="line">	<span class="keyword">let</span> result = list.filter(<span class="function"><span class="params">item</span> =&gt;</span> item.includes(key));</span><br><span class="line">	<span class="comment">// 将查询结果返回给客户端</span></span><br><span class="line">	res.send(result);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<p>实现</p>
+<p>::: details</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/template-web.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/ajax.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css&quot;</span> <span class="attr">integrity</span>=<span class="string">&quot;sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u&quot;</span> <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group col-md-4 col-md-offset-4&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入搜索关键字&quot;</span> <span class="attr">id</span>=<span class="string">&quot;search&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;list-group&quot;</span> <span class="attr">id</span>=<span class="string">&quot;list-box&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.container</span> &#123;</span></span><br><span class="line">        padding-top: 150px;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="selector-class">.list-group</span> &#123;</span></span><br><span class="line">        display: none;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/template-web.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&#x27;text/html&#x27;</span> <span class="attr">id</span>=<span class="string">&#x27;tpl&#x27;</span>&gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">    </span><span class="template-variable">&#123;&#123;<span class="name"><span class="builtin-name">each</span></span> result&#125;&#125;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;list-group-item&quot;</span>&gt;</span></span><span class="template-variable">&#123;&#123;<span class="name">$value</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    </span><span class="template-tag">&#123;&#123;/<span class="name"><span class="builtin-name">each</span></span>&#125;&#125;</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> searchInput = $(<span class="string">&#x27;#search&#x27;</span>);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> listBox = $(<span class="string">&#x27;#list-box&#x27;</span>);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> timer = <span class="literal">null</span>;</span></span><br><span class="line"><span class="javascript">    searchInput.on(<span class="string">&#x27;input&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">clearTimeout</span>(timer);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> key = searchInput.val();</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span>(!key.trim().length) &#123;</span></span><br><span class="line">            listBox.hide();</span><br><span class="line"><span class="javascript">            <span class="keyword">return</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span></span><br><span class="line">            ajax(&#123;</span><br><span class="line"><span class="javascript">                type : <span class="string">&#x27;get&#x27;</span>,</span></span><br><span class="line"><span class="javascript">                url : <span class="string">&#x27;http://localhost:3000/searchAutoPrompt&#x27;</span>,</span></span><br><span class="line">                data : &#123;</span><br><span class="line">                    key : key</span><br><span class="line">                &#125;,</span><br><span class="line"><span class="javascript">                success: <span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">let</span> suggest = template(<span class="string">&#x27;tpl&#x27;</span>,&#123;<span class="attr">result</span>:result&#125;);</span></span><br><span class="line">                    listBox.empty().append(suggest).show();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;, 800);</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<h3 id="省市区三级联动"><a href="#省市区三级联动" class="headerlink" title="省市区三级联动"></a>省市区三级联动</h3><p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200827131640.png"></p>
+<ol>
+<li><p>通过接口获取省份信息</p>
+</li>
+<li><p>使用JavaScript获取到省市区下拉框元素</p>
+</li>
+<li><p>将服务器端返回的省份信息显示在下拉框中</p>
+</li>
+<li><p>为下拉框元素添加表单值改变事件（onchange）</p>
+</li>
+<li><p>当用户选择省份时，根据省份id获取城市信息</p>
+</li>
+<li><p>当用户选择城市时，根据城市id获取县城信息</p>
+</li>
+</ol>
+<p><strong>关键源码</strong></p>
+<p>::: details</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> province = $(<span class="string">&#x27;#province&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> city = $(<span class="string">&#x27;#city&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> area = $(<span class="string">&#x27;#area&#x27;</span>);</span><br><span class="line"></span><br><span class="line">ajax(&#123;</span><br><span class="line">    type:<span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">    url : <span class="string">&#x27;http://localhost:3000/province&#x27;</span>,</span><br><span class="line">    success : <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> provinceItem = template(<span class="string">&#x27;provinceTpl&#x27;</span>, &#123;<span class="attr">province</span>:data&#125;);</span><br><span class="line">        province.append(provinceItem);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">province.on(<span class="string">&#x27;change&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> pid = <span class="built_in">this</span>.value;</span><br><span class="line">    ajax(&#123;</span><br><span class="line">        type: <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">        url : <span class="string">&#x27;http://localhost:3000/cities&#x27;</span>,</span><br><span class="line">        data: &#123;</span><br><span class="line">            id : pid</span><br><span class="line">        &#125;,</span><br><span class="line">        success:<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> citiesItem = template(<span class="string">&#x27;cityTpl&#x27;</span>, &#123;<span class="attr">cities</span>:data&#125;);</span><br><span class="line">            city.append(citiesItem);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">city.on(<span class="string">&#x27;change&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> cid = <span class="built_in">this</span>.value;</span><br><span class="line">    ajax(&#123;</span><br><span class="line">        type: <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">        url : <span class="string">&#x27;http://localhost:3000/areas&#x27;</span>,</span><br><span class="line">        data: &#123;</span><br><span class="line">            id : cid</span><br><span class="line">        &#125;,</span><br><span class="line">        success:<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> areasItem = template(<span class="string">&#x27;areaTpl&#x27;</span>, &#123;<span class="attr">areas</span>:data&#125;);</span><br><span class="line">            area.append(areasItem);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<h2 id="FormData"><a href="#FormData" class="headerlink" title="FormData"></a>FormData</h2><h3 id="FormData-作用"><a href="#FormData-作用" class="headerlink" title="FormData 作用"></a>FormData 作用</h3><ol>
+<li>模拟HTML表单，相当于将HTML表单映射成表单对象，自动将表单对象中的数据拼接成请求参数的格式。</li>
+<li>异步上传二进制文件（图片，音频）</li>
+</ol>
+<h3 id="FormData-使用"><a href="#FormData-使用" class="headerlink" title="FormData 使用"></a>FormData 使用</h3><ol>
+<li>准备 HTML 表单</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">&quot;form&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>将 HTML 表单转化为 formData 对象</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> form = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;form&#x27;</span>); </span><br><span class="line"><span class="keyword">var</span> formData = <span class="keyword">new</span> FormData(form);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>提交表单对象（仅 POST 请求）</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.send(formData);</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>注意：</strong></p>
+<ol>
+<li><p>Formdata 对象不能用于 get 请求，因为对象需要被传递到 send 方法中，而 get 请求方式的请求参数只能放在请求地址的后面。</p>
+</li>
+<li><p>服务器端 bodyParser 模块不能解析 formData 对象表单数据，我们需要使用 formidable 模块进行解析。</p>
+</li>
+</ol>
+<h3 id="FormData-方法"><a href="#FormData-方法" class="headerlink" title="FormData 方法"></a>FormData 方法</h3><p>获取表单对象属性值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">formData.get(<span class="string">&#x27;key&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>设置表单对象中属性值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">formData.set(<span class="string">&#x27;key&#x27;</span>, <span class="string">&#x27;value&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不存在，创建</li>
+<li>存在，覆盖原有值</li>
+</ul>
+<p>删除表单对象中属性值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">formData.delete(<span class="string">&#x27;key&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>追加表单对象中的属性值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">formData.append(<span class="string">&#x27;key&#x27;</span>, <span class="string">&#x27;value&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>注意：set 方法与 append 方法的区别是，在属性名已存在的情况下，set 会覆盖已有键名的值，append会保留两个值。</p>
+<h3 id="FormData-二进制文件上传"><a href="#FormData-二进制文件上传" class="headerlink" title="FormData 二进制文件上传"></a>FormData 二进制文件上传</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">id</span>=<span class="string">&quot;file&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> file = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;file&#x27;</span>)</span><br><span class="line"><span class="comment">// 当用户选择文件的时候</span></span><br><span class="line">file.onchange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 创建空表单对象</span></span><br><span class="line">    <span class="keyword">var</span> formData = <span class="keyword">new</span> FormData();</span><br><span class="line">    <span class="comment">// 将用户选择的二进制文件追加到表单对象中</span></span><br><span class="line">    formData.append(<span class="string">&#x27;attrName&#x27;</span>, <span class="built_in">this</span>.files[<span class="number">0</span>]);</span><br><span class="line">    <span class="comment">// 配置ajax对象，请求方式必须为post</span></span><br><span class="line">    xhr.open(<span class="string">&#x27;post&#x27;</span>, <span class="string">&#x27;/file&#x27;</span>);</span><br><span class="line">    xhr.send(formData);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="FormData-文件上传进度提示"><a href="#FormData-文件上传进度提示" class="headerlink" title="FormData 文件上传进度提示"></a>FormData 文件上传进度提示</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当用户选择文件的时候</span></span><br><span class="line">file.onchange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 文件上传过程中持续触发onprogress事件</span></span><br><span class="line">    xhr.upload.onprogress = <span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 当前上传文件大小/文件总大小 再将结果转换为百分数</span></span><br><span class="line">        <span class="comment">// 将结果赋值给进度条的宽度属性 </span></span><br><span class="line">        bar.style.width = (ev.loaded / ev.total) * <span class="number">100</span> + <span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="FormData-文件上传图片即时预览"><a href="#FormData-文件上传图片即时预览" class="headerlink" title="FormData 文件上传图片即时预览"></a>FormData 文件上传图片即时预览</h3><p>在我们将图片上传到服务器端以后，服务器端通常都会将图片地址做为响应数据传递到客户端，客户端可以从响应数据中获取图片地址，然后将图片再显示在页面中。</p>
+<h3 id="文件上传完整源码"><a href="#文件上传完整源码" class="headerlink" title="文件上传完整源码"></a>文件上传完整源码</h3><p><strong>完成图</strong></p>
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200827131058.png"></p>
+<p><strong>app.js</strong></p>
+<p>::: details</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> formidable = <span class="built_in">require</span>(<span class="string">&#x27;formidable&#x27;</span>);</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">&#x27;/upload&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">let</span> form = <span class="keyword">new</span> formidable.IncomingForm();</span><br><span class="line">	form.uploadDir = path.join(__dirname, <span class="string">&#x27;public&#x27;</span>, <span class="string">&#x27;uploads&#x27;</span>);</span><br><span class="line">	form.keepExtensions = <span class="literal">true</span>;</span><br><span class="line">	form.parse(req, <span class="function">(<span class="params">err, fields, files</span>) =&gt;</span> &#123;</span><br><span class="line">		res.send(&#123;</span><br><span class="line">			path : files.fileName.path.split(<span class="string">&#x27;public&#x27;</span>)[<span class="number">1</span>]</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<p><strong>index.html</strong></p>
+<p>::: details</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/template-web.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/ajax.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css&quot;</span> <span class="attr">integrity</span>=<span class="string">&quot;sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u&quot;</span> <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group col-md-4 col-md-offset-4&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;file&quot;</span>&gt;</span>请选择文件<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> <span class="attr">id</span>=<span class="string">&quot;file_input&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;progress&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;progress-bar&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;padding preimg-wrp&quot;</span>&gt;</span></span><br><span class="line">                    </span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.container</span> &#123;</span></span><br><span class="line">        padding-top: 150px;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> file = $(<span class="string">&#x27;#file_input&#x27;</span>);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> progress_bar = $(<span class="string">&#x27;.progress-bar&#x27;</span>);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> preimg_wrp = $(<span class="string">&#x27;.preimg-wrp&#x27;</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    file.on(<span class="string">&#x27;change&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> formData = <span class="keyword">new</span> FormData();</span></span><br><span class="line"><span class="javascript">        formData.append(<span class="string">&#x27;fileName&#x27;</span>, <span class="built_in">this</span>.files[<span class="number">0</span>]);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></span><br><span class="line"><span class="javascript">        xhr.open(<span class="string">&#x27;post&#x27;</span>, <span class="string">&#x27;/upload&#x27;</span>);</span></span><br><span class="line"><span class="javascript">        xhr.upload.onprogress = <span class="function">(<span class="params">ev</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> progress = <span class="built_in">Math</span>.trunc((ev.loaded/ev.total) * <span class="number">100</span>) + <span class="string">&#x27;%&#x27;</span>;</span></span><br><span class="line"><span class="javascript">            progress_bar.text(progress).css(<span class="string">&#x27;width&#x27;</span>,progress);</span></span><br><span class="line">        &#125;;</span><br><span class="line">        xhr.send(formData);</span><br><span class="line"><span class="javascript">        xhr.onload = <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> result = <span class="built_in">JSON</span>.parse(xhr.responseText);</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> preimg = $(<span class="string">`&lt;img src=&quot;<span class="subst">$&#123;result.path&#125;</span>&quot; class=&quot;img-rounded img-responsive&quot;&gt;`</span>);</span></span><br><span class="line">            preimg_wrp.append(preimg);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>:::</p>
+<h2 id="同源政策"><a href="#同源政策" class="headerlink" title="同源政策"></a>同源政策</h2><h3 id="Ajax-请求限制"><a href="#Ajax-请求限制" class="headerlink" title="Ajax 请求限制"></a>Ajax 请求限制</h3><p>Ajax 只能向自己的服务器发送请求。比如现在有一个A网站、有一个B网站，A网站中的 HTML 文件只能向A网站服务器中发送 Ajax 请求，B网站中的 HTML 文件只能向 B 网站中发送 Ajax 请求，但是 A 网站是不能向 B 网站发送 Ajax请求的，同理，B 网站也不能向 A 网站发送 Ajax请求。</p>
+<h3 id="什么是同源"><a href="#什么是同源" class="headerlink" title="什么是同源"></a>什么是同源</h3><p>如果两个页面拥有相同的协议、域名和端口，那么这两个页面就属于同一个源，其中只要有一个不相同，就是不同源。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span>www.example.com<span class="regexp">/dir/</span>page.html 目标页面</span><br><span class="line"></span><br><span class="line">http:<span class="regexp">//</span>www.example.com<span class="regexp">/dir2/</span>other.html：同源</span><br><span class="line">http:<span class="regexp">//</span>example.com<span class="regexp">/dir/</span>other.html：不同源（域名不同）</span><br><span class="line">http:<span class="regexp">//</span>v2.www.example.com<span class="regexp">/dir/</span>other.html：不同源（域名不同）</span><br><span class="line">http:<span class="regexp">//</span>www.example.com:<span class="number">81</span><span class="regexp">/dir/</span>other.html：不同源（端口不同）</span><br><span class="line">https:<span class="regexp">//</span>www.example.com<span class="regexp">/dir/</span>page.html：不同源（协议不同）</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="同源政策的目的"><a href="#同源政策的目的" class="headerlink" title="同源政策的目的"></a>同源政策的目的</h3><p>同源政策是为了保证用户信息的安全，防止恶意的网站窃取数据。最初的同源政策是指 A 网站在客户端设置的 Cookie，B网站是不能访问的。</p>
+<p>随着互联网的发展，同源政策也越来越严格，在不同源的情况下，其中有一项规定就是无法向非同源地址发送Ajax 请求，如果请求，浏览器就会报错。</p>
+<h2 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h2><p>jsonp 是 json with padding 的缩写，它不属于 Ajax 请求，但它可以模拟 Ajax 请求。</p>
+<ol>
+<li>将不同源的服务器端请求地址写在 script 标签的 src 属性中</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;www.example.com&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>服务器端响应数据必须是一个函数的调用，真正要发送给客户端的数据需要作为函数调用的参数。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> data = <span class="string">&#x27;fn(&#123;name: &quot;张三&quot;, age: &quot;20&quot;&#125;)&#x27;</span>;</span><br><span class="line">res.send(data);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在客户端全局作用域下定义函数 fn</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params">data</span>) </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>在 fn 函数内部对服务器端返回的数据进行处理</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params">data</span>) </span>&#123; <span class="built_in">console</span>.log(data); &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="JSONP-代码优化"><a href="#JSONP-代码优化" class="headerlink" title="JSONP 代码优化"></a>JSONP 代码优化</h3><hr>
+<ol>
+<li>客户端需要将函数名称通过请求参数传递到服务器端。</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span>&gt;</span>Send s2<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">showName</span>(<span class="params">data</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(data.name);</span></span><br><span class="line">    &#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> btn = $(<span class="string">&#x27;button&#x27;</span>);</span></span><br><span class="line"><span class="javascript">    btn.on(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> scp = <span class="built_in">document</span>.createElement(<span class="string">&#x27;script&#x27;</span>);</span></span><br><span class="line"><span class="javascript">        scp.src = <span class="string">&#x27;http://localhost:3001/test?callback=showName&#x27;</span>;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.body.appendChild(scp);</span></span><br><span class="line"><span class="javascript">        scp.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">document</span>.body.removeChild(scp)</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 服务器端接收参数获取到函数名</span></span><br><span class="line">app.get(<span class="string">&#x27;/test&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;<span class="attr">callback</span>:fnName&#125; = req.query;</span><br><span class="line">    <span class="keyword">const</span> result = fnName + <span class="string">&#x27;(&#123;name:&quot;lisi&quot;&#125;)&#x27;</span>;</span><br><span class="line">    res.end(result);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>将 script 请求的发送变成动态请求。</p>
+</li>
+<li><p>封装 jsonp 函数，方便请求发送。</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">jsonp</span>(<span class="params">&#123;url, data, success&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> script = <span class="built_in">document</span>.createElement(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> params = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span>(data) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> attr <span class="keyword">in</span> data) &#123;</span><br><span class="line">            params += <span class="string">`&amp;<span class="subst">$&#123;attr&#125;</span>=<span class="subst">$&#123;data[attr]&#125;</span>`</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> fnName = <span class="string">&#x27;myJsonp&#x27;</span> + <span class="built_in">Math</span>.random().toString().replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">    <span class="built_in">window</span>[fnName] = success;</span><br><span class="line"></span><br><span class="line">    script.src = <span class="string">`<span class="subst">$&#123;url&#125;</span>?callback=<span class="subst">$&#123;fnName&#125;</span><span class="subst">$&#123;params||<span class="string">&#x27;&#x27;</span>&#125;</span>`</span>;</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line">    script.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">document</span>.body.removeChild(<span class="built_in">this</span>);</span><br><span class="line">        <span class="keyword">delete</span> <span class="built_in">window</span>[fnName];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用示例</span></span><br><span class="line">btn.on(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    jsonp(&#123;</span><br><span class="line">        url: <span class="string">&#x27;http://localhost:3001/test&#x27;</span>,</span><br><span class="line">        data : &#123;</span><br><span class="line">            name : <span class="string">&#x27;wangwu&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        success : <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(data);</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="4">
+<li>服务器端代码优化之 res.jsonp 方法。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">&#x27;/test&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// const &#123;callback:fnName&#125; = req.query;</span></span><br><span class="line">    <span class="comment">// const data = JSON.stringify(&#123;name:&#x27;张三&#x27;&#125;);</span></span><br><span class="line">    <span class="comment">// const result = `$&#123;fnName&#125;($&#123;data&#125;)`;</span></span><br><span class="line">    <span class="comment">// res.end(result);</span></span><br><span class="line"></span><br><span class="line">    res.jsonp(&#123;<span class="attr">name</span>:<span class="string">&#x27;张三&#x27;</span>&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="案例：腾讯天气-JSONP"><a href="#案例：腾讯天气-JSONP" class="headerlink" title="案例：腾讯天气 JSONP"></a>案例：腾讯天气 JSONP</h3><p>访问腾讯天气<a target="_blank" rel="noopener" href="https://tianqi.qq.com/">官网</a> </p>
+<p>通过开发者工具抓取请求 <code>common?source=pc...</code> ，在新选项卡打开，不难发现其返回的是一个函数，函数的参数为对象，其存储了天气信息，且腾讯天气的域名和该请求的域名不同源，是典型的 JSONP 的应用。</p>
+<p>腾讯天气抓包</p>
+<p><img src="C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20200827152014739.png" alt="image-20200827152014739"></p>
+<p>请求返回数据</p>
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200827152116.png"></p>
+<p><strong>腾讯天气的接口文档</strong></p>
+<ul>
+<li>请求地址</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>wis.qq.com<span class="regexp">/weather/</span>common</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>请求方式<ul>
+<li>GET   支持 jsonp</li>
+</ul>
+</li>
+<li>参数</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>必选</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>source</td>
+<td>y</td>
+<td>string</td>
+<td><code>pc</code>  <code>xw</code></td>
+</tr>
+<tr>
+<td>weather_type</td>
+<td>y</td>
+<td>string</td>
+<td><code>forecast_1h</code> ：未来48小时 <br><code>forcast_24h</code> ：未来7天</td>
+</tr>
+<tr>
+<td>province</td>
+<td>y</td>
+<td>string</td>
+<td>省份</td>
+</tr>
+<tr>
+<td>city</td>
+<td>y</td>
+<td>string</td>
+<td>城市</td>
+</tr>
+</tbody></table>
+<ul>
+<li>返回值</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;data&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;alarm&quot;</span>: &#123;&#125;,</span><br><span class="line">        <span class="attr">&quot;forecast_1h&quot;</span>: &#123;</span><br><span class="line">            <span class="attr">&quot;0&quot;</span>: &#123;</span><br><span class="line">                    <span class="attr">&quot;degree&quot;</span>: <span class="string">&quot;33&quot;</span>, <span class="comment">// 温度</span></span><br><span class="line">                    <span class="attr">&quot;update_time&quot;</span>: <span class="string">&quot;20200827150000&quot;</span>,<span class="comment">// 时间</span></span><br><span class="line">                    <span class="attr">&quot;weather&quot;</span>: <span class="string">&quot;雷阵雨&quot;</span>, <span class="comment">// 天气</span></span><br><span class="line">                    <span class="attr">&quot;weather_code&quot;</span>: <span class="string">&quot;04&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;weather_short&quot;</span>: <span class="string">&quot;雷阵雨&quot;</span>, <span class="comment">// 天气简写</span></span><br><span class="line">                    <span class="attr">&quot;wind_direction&quot;</span>: <span class="string">&quot;东风&quot;</span>, <span class="comment">// 风向</span></span><br><span class="line">                    <span class="attr">&quot;wind_power&quot;</span>: <span class="string">&quot;5&quot;</span>	<span class="comment">// 风力</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">&quot;1&quot;</span>: &#123;</span><br><span class="line">                <span class="attr">&quot;degree&quot;</span>: <span class="string">&quot;33&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;update_time&quot;</span>: <span class="string">&quot;20200827150000&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;weather&quot;</span>: <span class="string">&quot;雷阵雨&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;weather_code&quot;</span>: <span class="string">&quot;04&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;weather_short&quot;</span>: <span class="string">&quot;雷阵雨&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;wind_direction&quot;</span>: <span class="string">&quot;东风&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;wind_power&quot;</span>: <span class="string">&quot;5&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">&quot;forecast_24h&quot;</span>: &#123;&#125;,</span><br><span class="line">        <span class="attr">&quot;index&quot;</span>: &#123;&#125;,</span><br><span class="line">        <span class="attr">&quot;limit&quot;</span>: &#123;&#125;,</span><br><span class="line">        <span class="attr">&quot;observe&quot;</span>: &#123;&#125;,</span><br><span class="line">        <span class="attr">&quot;rise&quot;</span>: &#123;&#125;,</span><br><span class="line">        <span class="attr">&quot;tips&quot;</span>: &#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;message&quot;</span>: <span class="string">&quot;OK&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;status&quot;</span>: <span class="number">200</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>完整源码</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css&quot;</span> <span class="attr">integrity</span>=<span class="string">&quot;sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u&quot;</span> <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span> <span class="attr">style</span>=<span class="string">&quot;margin-top:80px&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-8 col-md-offset-2&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">table</span> <span class="attr">class</span>=<span class="string">&quot;table table-striped table-hover&quot;</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">th</span>&gt;</span>时间<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">th</span>&gt;</span>温度<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">th</span>&gt;</span>天气<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">th</span>&gt;</span>风向<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">th</span>&gt;</span>风力<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/jsonp.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/template-web.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/html&quot;</span> <span class="attr">id</span>=<span class="string">&#x27;tpl&#x27;</span>&gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">    </span><span class="template-variable">&#123;&#123;<span class="name"><span class="builtin-name">each</span></span> info&#125;&#125;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><span class="template-variable">&#123;&#123;<span class="name">dateFormat</span>(<span class="name">$value.update_time</span>)&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><span class="template-variable">&#123;&#123;<span class="name">$value.degree</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><span class="template-variable">&#123;&#123;<span class="name">$value.weather</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><span class="template-variable">&#123;&#123;<span class="name">$value.wind_direction</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><span class="template-variable">&#123;&#123;<span class="name">$value.wind_power</span>&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    </span><span class="template-tag">&#123;&#123;/<span class="name"><span class="builtin-name">each</span></span>&#125;&#125;</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> tb = $(<span class="string">&#x27;.table &gt; tbody&#x27;</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    template.defaults.imports.dateFormat = <span class="function">(<span class="params">date</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> year = date.substr(<span class="number">0</span>,<span class="number">4</span>); </span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> mouth = date.substr(<span class="number">4</span>,<span class="number">2</span>); </span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> day = date.substr(<span class="number">6</span>,<span class="number">2</span>); </span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> hour = date.substr(<span class="number">8</span>,<span class="number">2</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> minute = date.substr(<span class="number">10</span>,<span class="number">2</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> second = date.substr(<span class="number">12</span>,<span class="number">2</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;mouth&#125;</span>月<span class="subst">$&#123;day&#125;</span>日  <span class="subst">$&#123;hour&#125;</span>时<span class="subst">$&#123;minute&#125;</span>分`</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    jsonp(&#123;</span><br><span class="line"><span class="javascript">        url : <span class="string">&#x27;https://wis.qq.com/weather/common&#x27;</span>,</span></span><br><span class="line">        data : &#123;</span><br><span class="line"><span class="javascript">            source : <span class="string">&#x27;pc&#x27;</span>,</span></span><br><span class="line"><span class="javascript">            weather_type : <span class="string">&#x27;forecast_1h&#x27;</span>,</span></span><br><span class="line"><span class="javascript">            province : <span class="string">&#x27;浙江省&#x27;</span>,</span></span><br><span class="line"><span class="javascript">            city : <span class="string">&#x27;金华市&#x27;</span>,</span></span><br><span class="line">        &#125;,</span><br><span class="line"><span class="javascript">        success : <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> html = template(<span class="string">&#x27;tpl&#x27;</span>, &#123;<span class="attr">info</span>:data.data.forecast_1h&#125;);</span></span><br><span class="line">            tb.append(html);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jsonp.js</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">jsonp</span>(<span class="params">&#123;url, data, success&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> script = <span class="built_in">document</span>.createElement(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> params = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span>(data) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> attr <span class="keyword">in</span> data) &#123;</span><br><span class="line">            params += <span class="string">`&amp;<span class="subst">$&#123;attr&#125;</span>=<span class="subst">$&#123;data[attr]&#125;</span>`</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> fnName = <span class="string">&#x27;myJsonp&#x27;</span> + <span class="built_in">Math</span>.random().toString().replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">    <span class="built_in">window</span>[fnName] = success;</span><br><span class="line"></span><br><span class="line">    script.src = <span class="string">`<span class="subst">$&#123;url&#125;</span>?callback=<span class="subst">$&#123;fnName&#125;</span><span class="subst">$&#123;params||<span class="string">&#x27;&#x27;</span>&#125;</span>`</span>;</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line">    script.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">document</span>.body.removeChild(<span class="built_in">this</span>);</span><br><span class="line">        <span class="keyword">delete</span> <span class="built_in">window</span>[fnName];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="CORS-跨域资源共享"><a href="#CORS-跨域资源共享" class="headerlink" title="CORS 跨域资源共享"></a>CORS 跨域资源共享</h2><p>CORS：全称为 Cross-origin resource sharing，即跨域资源共享，它允许浏览器向跨域服务器发送 Ajax 请求，克服了 Ajax 只能同源使用的限制。</p>
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200827162921.png"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: <span class="string">&#x27;http://localhost:3000&#x27;</span></span><br><span class="line">Access-Control-Allow-Origin: <span class="string">&#x27;*&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>实例</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对于 /cross 下的所有访问都允许跨域</span></span><br><span class="line">app.use(<span class="string">&#x27;/cross&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 允许访问的客户端</span></span><br><span class="line">    res.header(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>,<span class="string">&#x27;*&#x27;</span>);</span><br><span class="line">    <span class="comment">// 允许客户端的访问方法</span></span><br><span class="line">    res.header(<span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span>, <span class="string">&#x27;get,post&#x27;</span>);</span><br><span class="line">    next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="服务器端代理跨域"><a href="#服务器端代理跨域" class="headerlink" title="服务器端代理跨域"></a>服务器端代理跨域</h2><p>同源政策是浏览器给予Ajax技术的限制，服务器端是不存在同源政策限制。</p>
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200827164647.png"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">&#x27;request&#x27;</span>);</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/mis&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    request(<span class="string">&#x27;http://localhost:3001/cross&#x27;</span>, <span class="function">(<span class="params">body</span>) =&gt;</span> &#123;</span><br><span class="line">        res.send(body);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p><strong>withCredentials属性</strong></p>
+<p>在使用Ajax技术发送跨域请求时，默认情况下不会在请求中携带cookie信息。</p>
+<p><code>withCredentials</code> ：指定在涉及到跨域请求时，是否携带cookie信息，默认值为 false</p>
+<p><code>Access-Control-Allow-Credentials</code> ：true 允许客户端发送请求时携带cookie</p>
+<p>注意：如果允许携带 cookie 时，不能将<code>Access-Control-Allow-Origin</code> 设置为 * ，必须是具体的域名。</p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-11-25");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-08-26T16:00:00.000Z" itemprop="datePublished">2020-08-27</time>
+
+    , 最后修改于&nbsp;<time datetime="2020-11-25T09:26:27.917Z" itemprop="dateModified">2020-11-25</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/blog/categories/FrontEnd/'>FrontEnd</a>
+
+<a class="post-categories-list-item" href='/blog/categories/FrontEnd/BackEnd/'>BackEnd</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/blog/tags/Ajax/" rel="tag">#&nbsp;Ajax</a>
+
+<a class="post-tags-list-item" href="/blog/tags/Node-js/" rel="tag">#&nbsp;Node.js</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/blog/2020/10/10/BackEnd-2020-10-Navicat-connect-oracledb/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Navicat Premium 15 连接本机 OracleDB</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/blog/2020/08/25/BackEnd-2020-8-Ajax-base/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Ajax 编程基础</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="vcomments"></div>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = ''.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = '' === 'true';
+    var verify = '' === 'true';
+    new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        appId: "process.env.VALINEID",
+        appKey: "process.env.VALINEKEY",
+        placeholder: "Just go go",
+        meta: guest_info,
+        pageSize:'10',
+        avatar:'retro',
+        lang:'zh-cn',
+        guest_info: guest_info,
+        visitor: true
+    });
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://qijieh.gitee.io/blog">Qijieh's Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    Hosted on <a target="_blank" href="https://github.com/QiJieH" rel="nofollow noopener noreferrer noopener">Github Pages</a>
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+            <span id="http://qijieh.gitee.io/blog" class="leancloud-visitors" data-flag-title="Qijieh&#39;s Blog">
+    <span></span><!--
+ --><span class="leancloud-visitors-count">0</span><!--
+ --><span> Visitor |</span>
+</span>
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2019;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/blog/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

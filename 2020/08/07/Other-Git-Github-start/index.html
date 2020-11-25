@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="//cdn1.lncld.net">
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>初识 Git | Qijieh&#39;s Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/blog/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/blog/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/blog/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/blog/css/highlight/atelier-heath-light.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/blog/css/highlight/atelier-heath-light.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Qijieh's Blog"><meta name="msapplication-starturl" content="http://qijieh.gitee.io/blog"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Qijieh's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="初识 Git | Qijieh&#39;s Blog"><meta property="og:site_name" content="Qijieh&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="http://qijieh.gitee.io/blog/2020/08/07/Other-Git-Github-start/"><meta property="og:locale" content="zh-CN"><meta name="description" content="Git 是一个版本管理控制系统 VCS ，它可以在任何时间点，将文档的状态作为更新记录保存起来，也可以在任何时间点，将更新记录恢复回来。 - QiJieH - Qijieh&#39;s Blog"><meta name="keywords" content="Git, Github"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200825181855.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807162249.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807162313.png"><meta property="article:published_time" content="2020-08-06T16:00:00.000Z"><meta property="article:modified_time" content="2020-11-25T09:26:27.969Z"><meta property="og:updated_time" content="2020-11-25T09:26:27.969Z"><meta property="article:author" content="QiJieH"><meta property="article:tag" content="Git, Github"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://qijieh.gitee.io/blog/2020/08/07/Other-Git-Github-start/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://qijieh.gitee.io/blog/2020/08/07/Other-Git-Github-start/",
+    "@type": "BlogPosting",
+    "logo": "http://qijieh.gitee.io/blog/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://qijieh.gitee.io/blog/2020/08/07/Other-Git-Github-start/"
+    },
+    "headline": "初识 Git | Qijieh&#39;s Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2020-08-06T16:00:00.000Z",
+    "dateModified": "2020-11-25T09:26:27.969Z",
+    "author": {
+        "@type": "Person",
+        "name": "QiJieH",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/author.jpg"
+        },
+        "description": "hello world."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Qijieh&#39;s Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://qijieh.gitee.io/blog/blog/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Git, Github",
+    "description": "Git 是一个版本管理控制系统 VCS ，它可以在任何时间点，将文档的状态作为更新记录保存起来，也可以在任何时间点，将更新记录恢复回来。 - QiJieH - Qijieh&#39;s Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/blog/">Qijieh&#39;s Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                hello world.
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/blog/" class="navbar-link">首页</a>
+    
+    
+        <a href="/blog/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/blog/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/blog/tags" class="navbar-link">标签</a>
+    
+        <a href="/blog/links" class="navbar-link">友链</a>
+    
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">初识 Git</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/blog/img/author.jpg" src="/blog/img/suka-lazyload.gif" alt="QiJieH's Avatar">
+        <span>2020-08-07</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/blog/categories/Others/">Others</a>
+        
+        
+        
+            <span class="suka-devide-dot"></span>
+<span id="/blog/2020/08/07/Other-Git-Github-start/" class="leancloud-visitors" data-flag-title="初识 Git">
+    <span>view </span>
+    <span class="leancloud-visitors-count">0</span>
+    <span></span>
+</span>
+        
+    </p>
+    <div class="post-header-info-right">
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="post-toc-number">1.</span> <span class="post-toc-text">版本管理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%83%A8%E7%BD%B2%E4%B8%8B%E8%BD%BD"><span class="post-toc-number">2.</span> <span class="post-toc-text">部署下载</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="post-toc-number">3.</span> <span class="post-toc-text">工作流程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%91%BD%E4%BB%A4%E8%AF%AD%E6%B3%95"><span class="post-toc-number">4.</span> <span class="post-toc-text">命令语法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Git%E4%BD%BF%E7%94%A8"><span class="post-toc-number">5.</span> <span class="post-toc-text">Git使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%85%8D%E7%BD%AEGit"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">配置Git</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%8F%90%E4%BA%A4%E6%AD%A5%E9%AA%A4"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">提交步骤</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%81%A2%E5%A4%8D%E8%AE%B0%E5%BD%95"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">恢复记录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%86%E6%94%AF"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">分支</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%88%86%E6%94%AF%E7%BB%86%E5%88%86"><span class="post-toc-number">5.4.1.</span> <span class="post-toc-text">分支细分</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%88%86%E6%94%AF%E5%91%BD%E4%BB%A4"><span class="post-toc-number">5.4.2.</span> <span class="post-toc-text">分支命令</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Git%E8%BF%9B%E9%98%B6"><span class="post-toc-number">6.</span> <span class="post-toc-text">Git进阶</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%9A%82%E6%97%B6%E4%BF%9D%E5%AD%98%E6%9B%B4%E6%94%B9"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">暂时保存更改</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Github"><span class="post-toc-number"></span> <span class="post-toc-text">Github</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B"><span class="post-toc-number">1.</span> <span class="post-toc-text">团队协作开发流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%8E%A8%E9%80%81"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">推送</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%85%8B%E9%9A%86"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">克隆</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%8B%89%E5%8F%96"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">拉取</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81"><span class="post-toc-number">2.</span> <span class="post-toc-text">解决冲突</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%B7%A8%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C"><span class="post-toc-number">3.</span> <span class="post-toc-text">跨团队协作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ssh%E5%85%8D%E7%99%BB%E9%99%86"><span class="post-toc-number">4.</span> <span class="post-toc-text">ssh免登陆</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Gitignore"><span class="post-toc-number">5.</span> <span class="post-toc-text">Gitignore</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200825181855.png"></p>
+<p>Git 是一个版本管理控制系统 <em>VCS</em> ，它可以在任何时间点，将文档的状态作为更新记录保存起来，也可以在任何时间点，将更新记录恢复回来。  </p>
+<a id="more"></a>
+
+<blockquote>
+<p>官方文档</p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/help/articles/4104">Gitee Git Doc</a><br><a target="_blank" rel="noopener" href="https://docs.github.com/cn/github/using-git">Github Git sue</a><br><a target="_blank" rel="noopener" href="https://www.bootcss.com/p/git-guide/">bootcss Git 简易指南</a><br><a target="_blank" rel="noopener" href="https://www.progit.cn/">ProGit 进阶</a> </p>
+</blockquote>
+<h2 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理"></a>版本管理</h2><p>版本管理是一种记录文件变化的方式，以便将来查阅特定版本的内容</p>
+<h2 id="部署下载"><a href="#部署下载" class="headerlink" title="部署下载"></a>部署下载</h2><p><a target="_blank" rel="noopener" href="https://git-scm.com/">Git官网</a></p>
+<h2 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h2><p>工作区：项目在开发者设备上的目录</p>
+<p>暂存区：用于暂时存储需要提交的仓库的文件，使用 <code>git add</code> 命令将文件提交到暂存区</p>
+<p>本地仓库    ：正式存储代码的位置，接收来自暂存区的文件，使用<code>git commit</code> 命令正式提交到仓库，注意在正式提交前务必对暂存区代码进行完整测试。</p>
+<p>远程仓库：存储在公共网络上的代码托管网站。</p>
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807162249.png"></p>
+<h2 id="命令语法"><a href="#命令语法" class="headerlink" title="命令语法"></a>命令语法</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>git --version</code></td>
+<td>查看 Git 版本</td>
+</tr>
+</tbody></table>
+<h2 id="Git使用"><a href="#Git使用" class="headerlink" title="Git使用"></a>Git使用</h2><h3 id="配置Git"><a href="#配置Git" class="headerlink" title="配置Git"></a>配置Git</h3><p>在使用 git 前，需要告诉 git 你是谁，在向 git 仓库提交时需要辨识当前修改的提交者，这是利于多人协作的。</p>
+<ol>
+<li><p>配置提交人姓名：<code>git config --global user.name 提交人姓名</code></p>
+</li>
+<li><p>配置提交人邮箱：<code>git config --global user.email 提交人邮箱</code></p>
+</li>
+<li><p>查看 git 配置信息：<code>git config --list</code></p>
+</li>
+</ol>
+<p>多次输入配置信息会覆盖之前的配置信息</p>
+<p>除了通过使用命令行进行配置外，也可以找到 C:/user 下的 .gitconfig </p>
+<h3 id="提交步骤"><a href="#提交步骤" class="headerlink" title="提交步骤"></a>提交步骤</h3><ol>
+<li><code>git init</code> 初始化 git 仓库</li>
+<li><code>git status</code> 查看文件状态</li>
+<li><code>git add 文件列表</code> 添加/更新 文件到暂存区</li>
+<li><code>git commit -m 提交信息</code> 向仓库提交暂存区</li>
+<li><code>git log</code> 查看提交记录</li>
+</ol>
+<p>每次 修改/增加 工作目录都需要执行 <code>git add </code>密码来加入暂存区</p>
+<p>git 提交规范：</p>
+<ul>
+<li>一次提交只包含一个改动</li>
+<li>在提交到仓库之前，一定要经过完整测试</li>
+<li>commit message 不能忽略，书写提交信息一定要简洁明了，一句点明当前提交改动</li>
+</ul>
+<h3 id="恢复记录"><a href="#恢复记录" class="headerlink" title="恢复记录"></a>恢复记录</h3><p>用暂存区中的文件覆盖工作目录中的文件：<code>git checkout 文件</code></p>
+<p>将文件从暂存区中删除：<code>git rm --cached 文件</code></p>
+<p>将 git 仓库中指定的更新记录恢复，并且覆盖暂存区和工作目录：<code>git reset --hard commitID</code></p>
+<p>通过 <code>git log</code> 来查看commit ID</p>
+<h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><p>分支相当于工作目录的副本，多人协作时，其他人可以通过分支将其从开发主线上分离出来，以免影响开发主线。</p>
+<p>分支的意义：如果没有分支我们可以想象在一个开发流程下我们同时对代码进行新功能添加，bug修复，代码重构，UI更替等等操作，可想而知是十分繁杂凌乱的，通过分支我们可以将不同的模块细分出去，更好的管理开发流程</p>
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807162313.png"></p>
+<h4 id="分支细分"><a href="#分支细分" class="headerlink" title="分支细分"></a>分支细分</h4><ol>
+<li>主分支（master）：第一次向 git 仓库提交更新时会自动产生该分支。</li>
+<li>开发分支（develop）：作为开发的分支，基于 master 分支创建。</li>
+<li>功能分支（feature）：作为开发具体功能的分支，基于开发分支创建。</li>
+</ol>
+<h4 id="分支命令"><a href="#分支命令" class="headerlink" title="分支命令"></a>分支命令</h4><ul>
+<li><p><code>git brach</code> 查看分支列表</p>
+</li>
+<li><p><code>git branch 分支名称</code> 创建分支 </p>
+</li>
+<li><p><code>git checkout 分支名称</code> 切换分支</p>
+</li>
+<li><p><code>git merge 来源分支</code> 合并分支</p>
+</li>
+<li><p><code>git branch -d 分支名称</code> 删除分支（分支被合并后才能删除）<code>-D</code> 强制删除</p>
+</li>
+</ul>
+<p>在切换分支时务必保证暂存区的文件已经commit到仓库，否则暂存区文件会影响到切换分支的工作区。</p>
+<p>在当前分支下时，是无法删除本分支的，只有切换到其他分支才能对分支进行删除操作。</p>
+<h2 id="Git进阶"><a href="#Git进阶" class="headerlink" title="Git进阶"></a>Git进阶</h2><h3 id="暂时保存更改"><a href="#暂时保存更改" class="headerlink" title="暂时保存更改"></a>暂时保存更改</h3><p>在 git 中，可以暂时提取分支上所有的改动并存储，让开发人员得到一个干净的工作副本，临时转向其他工作。</p>
+<p>使用场景：分支临时切换</p>
+<ul>
+<li><code>git stash</code> 存储临时改动</li>
+<li><code>git stash pop</code> 恢复改动</li>
+</ul>
+<h1 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h1><p>在 Git 中有90%的操作都是在本地仓库中进行的，这样已经足以满足个人项目开发的所有需求了。但是往往一个项目是需要多人协作开发的，这时我们就需要一个别人也可以进行访问的远程仓库。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/">Github</a></p>
+<h2 id="团队协作开发流程"><a href="#团队协作开发流程" class="headerlink" title="团队协作开发流程"></a>团队协作开发流程</h2><ul>
+<li>A 在自己的计算机中创建本地仓库</li>
+<li>A 在 github 中创建远程仓库</li>
+<li>A 将本地仓库推送到远程仓库</li>
+<li>B 克隆远程仓库到本地进行开发</li>
+<li>B 将本地仓库开发内容推送到远程仓库</li>
+<li>A 将远程仓库中的最新内容拉取到本地</li>
+</ul>
+<h3 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h3><p>创建新仓库并推送到远程仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;# git-demo&quot;</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git remote add origin https://github.com/QiJieH/git-demo.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+
+
+<p>推送已有仓库至远程仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https://github.com/QiJieH/git-demo.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<p>第一行代码是为远程仓库设置别名 <code>origin</code> ，这个名字是可更改的</p>
+<p>第二行参数是以 <code>master</code> 分支推送至远程仓库 ，<code>-u</code> 参数是记忆当前操作，在下次推送时只需要使用 <code>git push</code> 即可。</p>
+<h3 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a>克隆</h3><p>克隆远程仓库到本地</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> 仓库地址</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果需要推送给A需要在远程仓库的<code>Settings -&gt;  Manage access -&gt; Invate a collaborator</code>来添加协作者</p>
+<p>并复制邀请链接给程序员B</p>
+<p>程序员B 访问邀请链接，并接受邀请</p>
+<p>github 的远程仓库账号存储在了 Windows凭据 下，如果需要切换登录需要手动删除凭据</p>
+<h3 id="拉取"><a href="#拉取" class="headerlink" title="拉取"></a>拉取</h3><p>拉取远程仓库到本地</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull 仓库名称 分支名称</span><br></pre></td></tr></table></figure>
+
+
+
+<p>git pull 是在已经有本地仓库的基础上进行的，他会将本地仓库的版本与远程仓库版本进行比对，更新最新版本的代码。</p>
+<p>git clone 是完全复制下远程仓库，是本地不存在仓库时进行。</p>
+<p>如果远程仓库中的版本高于本地仓库的版本，本地仓库不能向远程仓库提交，只有先拉取远程仓库之后才能提交。</p>
+<h2 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h2><p>在多人协作时，可能会出现两个人对同一个文件的同一个地方进行了修改，就会发生冲突，冲突需要人为解决。</p>
+<p>即只有第一个向远程仓库提交的人才能推送，第二个推送的人因为本地仓库版本低于远程仓库无法提交，只有拉取远程仓库进行提交，但是由于两个人修改了同一个文件的同一个地方，导致了冲突发生</p>
+<p>报错提示</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><br><span class="line"><span class="regexp">//</span> 冲突原文</span><br><span class="line">=======</span><br><span class="line"><span class="regexp">//</span> 修改内容</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; idstringxxxxxxxxxxxxxxxxxxxxxxx</span><br></pre></td></tr></table></figure>
+
+<p>选择处理，删除多余字符，解决冲突</p>
+<h2 id="跨团队协作"><a href="#跨团队协作" class="headerlink" title="跨团队协作"></a>跨团队协作</h2><p>作为非团队成员进行协作时，提交的代码需要审核才能生效</p>
+<p>Fork 需要协作的仓库，会将目标仓库复制到自己的 github 账号下，之后可以进行远程仓库的克隆，然后开始修改，推送。</p>
+<p>完成推送后在远程仓库点击 Pull requests -&gt; New pull request -&gt; Create pull request -&gt; 与原仓库作者送信 -&gt; Create pull request</p>
+<p>这时在原仓库的作者的项目仓库下会有新的 Pull requests 拉取请求，点击之后就可以看见 fork者的合并请求，也可与 fork者进行回复，点击 Files changed 查看修改代码。</p>
+<p>在对话页面点击 Marge pull request 即可应用合并。</p>
+<h2 id="ssh免登陆"><a href="#ssh免登陆" class="headerlink" title="ssh免登陆"></a>ssh免登陆</h2><p>https协议进行远程仓库链接，每次推送操作都要输入账号密码进行验证，但是 Windows 系统为我们提供了凭证，可以让我们不用每次都进行输入验证，但是当在其他操作系统上时就无法这样了。</p>
+<p>所以 Github 提供了另一种链接协议 ssh ，在 ssh 中身份验证通过密钥实现，分为公钥与私钥，只有当公私钥匹配成功才能通过验证。</p>
+<p>生成密钥</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+
+<p>存储在 C:/user/.ssh/</p>
+<p>id_rsa 为私钥，必须存储在开发者系统下</p>
+<p>id_rsa.pub 为公钥，这个公钥则需要存储在 Github 下</p>
+<p>user -&gt; Settings -&gt; SSH and GPG keys -&gt; new ssh key 填写key</p>
+<p>之后再 仓库页面就可以通过 Clone or download 来切换获取 ssh 链接。</p>
+<h2 id="Gitignore"><a href="#Gitignore" class="headerlink" title="Gitignore"></a>Gitignore</h2><p>在工作区添加 .gitignore 文件，在 push 时 GitHub 会忽略 .gitignore 文件中的文件</p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-11-25");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-08-06T16:00:00.000Z" itemprop="datePublished">2020-08-07</time>
+
+    , 最后修改于&nbsp;<time datetime="2020-11-25T09:26:27.969Z" itemprop="dateModified">2020-11-25</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/blog/categories/Others/'>Others</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/blog/tags/Git/" rel="tag">#&nbsp;Git</a>
+
+<a class="post-tags-list-item" href="/blog/tags/Github/" rel="tag">#&nbsp;Github</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/blog/2020/08/09/FontEnd-2020-8-JDM-Banner-background-radio/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">京东移动端Banner背景圆弧实现</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/blog/2020/08/07/Other-MarkdownCheck/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Markdown 语法入门</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="vcomments"></div>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = ''.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = '' === 'true';
+    var verify = '' === 'true';
+    new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        appId: "process.env.VALINEID",
+        appKey: "process.env.VALINEKEY",
+        placeholder: "Just go go",
+        meta: guest_info,
+        pageSize:'10',
+        avatar:'retro',
+        lang:'zh-cn',
+        guest_info: guest_info,
+        visitor: true
+    });
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://qijieh.gitee.io/blog">Qijieh's Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    Hosted on <a target="_blank" href="https://github.com/QiJieH" rel="nofollow noopener noreferrer noopener">Github Pages</a>
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+            <span id="http://qijieh.gitee.io/blog" class="leancloud-visitors" data-flag-title="Qijieh&#39;s Blog">
+    <span></span><!--
+ --><span class="leancloud-visitors-count">0</span><!--
+ --><span> Visitor |</span>
+</span>
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2019;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/blog/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

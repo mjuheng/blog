@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="//cdn1.lncld.net">
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>移动WEB开发之flex布局 | Qijieh&#39;s Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/blog/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/blog/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/blog/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/blog/css/highlight/atelier-heath-light.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/blog/css/highlight/atelier-heath-light.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Qijieh's Blog"><meta name="msapplication-starturl" content="http://qijieh.gitee.io/blog"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Qijieh's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="移动WEB开发之flex布局 | Qijieh&#39;s Blog"><meta property="og:site_name" content="Qijieh&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="http://qijieh.gitee.io/blog/2020/08/07/FontEnd-2020-8-MobileWeb-flex/"><meta property="og:locale" content="zh-CN"><meta name="description" content="flex 布局又称弹性布局，个人最喜欢的布局方式，通过设置元素的 display:flex 属性，可以快速完成页面布局，体验良好，多多益善。 - QiJieH - Qijieh&#39;s Blog"><meta name="keywords" content="CSS, HTML, WebReprint"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200809202945.jpg"><meta property="article:published_time" content="2020-08-06T16:00:00.000Z"><meta property="article:modified_time" content="2020-11-25T09:26:27.952Z"><meta property="og:updated_time" content="2020-11-25T09:26:27.952Z"><meta property="article:author" content="QiJieH"><meta property="article:tag" content="CSS, HTML, WebReprint"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://qijieh.gitee.io/blog/2020/08/07/FontEnd-2020-8-MobileWeb-flex/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://qijieh.gitee.io/blog/2020/08/07/FontEnd-2020-8-MobileWeb-flex/",
+    "@type": "BlogPosting",
+    "logo": "http://qijieh.gitee.io/blog/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://qijieh.gitee.io/blog/2020/08/07/FontEnd-2020-8-MobileWeb-flex/"
+    },
+    "headline": "移动WEB开发之flex布局 | Qijieh&#39;s Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2020-08-06T16:00:00.000Z",
+    "dateModified": "2020-11-25T09:26:27.952Z",
+    "author": {
+        "@type": "Person",
+        "name": "QiJieH",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/author.jpg"
+        },
+        "description": "hello world."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Qijieh&#39;s Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://qijieh.gitee.io/blog/blog/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "CSS, HTML, WebReprint",
+    "description": "flex 布局又称弹性布局，个人最喜欢的布局方式，通过设置元素的 display:flex 属性，可以快速完成页面布局，体验良好，多多益善。 - QiJieH - Qijieh&#39;s Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/blog/">Qijieh&#39;s Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                hello world.
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/blog/" class="navbar-link">首页</a>
+    
+    
+        <a href="/blog/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/blog/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/blog/tags" class="navbar-link">标签</a>
+    
+        <a href="/blog/links" class="navbar-link">友链</a>
+    
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">移动WEB开发之flex布局</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/blog/img/author.jpg" src="/blog/img/suka-lazyload.gif" alt="QiJieH's Avatar">
+        <span>2020-08-07</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/blog/categories/FrontEnd/">FrontEnd</a>
+        
+        
+        
+            <span class="suka-devide-dot"></span>
+<span id="/blog/2020/08/07/FontEnd-2020-8-MobileWeb-flex/" class="leancloud-visitors" data-flag-title="移动WEB开发之flex布局">
+    <span>view </span>
+    <span class="leancloud-visitors-count">0</span>
+    <span></span>
+</span>
+        
+    </p>
+    <div class="post-header-info-right">
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-flex%E5%B8%83%E5%B1%80%E4%BD%93%E9%AA%8C"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. flex布局体验</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-%E4%BC%A0%E7%BB%9F%E5%B8%83%E5%B1%80%E4%B8%8Eflex%E5%B8%83%E5%B1%80"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.1 传统布局与flex布局</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-%E5%88%9D%E4%BD%93%E9%AA%8C"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">1.2 初体验</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-flex%E5%B8%83%E5%B1%80%E5%8E%9F%E7%90%86"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. flex布局原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-%E5%B8%83%E5%B1%80%E5%8E%9F%E7%90%86"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">2.1 布局原理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-%E7%88%B6%E9%A1%B9%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. 父项常见属性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-flex-direction%E8%AE%BE%E7%BD%AE%E4%B8%BB%E8%BD%B4%E7%9A%84%E6%96%B9%E5%90%91"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 flex-direction设置主轴的方向</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-justify-content-%E8%AE%BE%E7%BD%AE%E4%B8%BB%E8%BD%B4%E4%B8%8A%E7%9A%84%E5%AD%90%E5%85%83%E7%B4%A0%E6%8E%92%E5%88%97%E6%96%B9%E5%BC%8F"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2 justify-content 设置主轴上的子元素排列方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-3-flex-wrap%E8%AE%BE%E7%BD%AE%E6%98%AF%E5%90%A6%E6%8D%A2%E8%A1%8C"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3.3 flex-wrap设置是否换行</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-4-align-items-%E8%AE%BE%E7%BD%AE%E4%BE%A7%E8%BD%B4%E4%B8%8A%E7%9A%84%E5%AD%90%E5%85%83%E7%B4%A0%E6%8E%92%E5%88%97%E6%96%B9%E5%BC%8F%EF%BC%88%E5%8D%95%E8%A1%8C-%EF%BC%89"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">3.4 align-items 设置侧轴上的子元素排列方式（单行 ）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-5-align-content-%E8%AE%BE%E7%BD%AE%E4%BE%A7%E8%BD%B4%E4%B8%8A%E7%9A%84%E5%AD%90%E5%85%83%E7%B4%A0%E7%9A%84%E6%8E%92%E5%88%97%E6%96%B9%E5%BC%8F%EF%BC%88%E5%A4%9A%E8%A1%8C%EF%BC%89"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">3.5 align-content  设置侧轴上的子元素的排列方式（多行）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-6-align-content-%E5%92%8Calign-items%E5%8C%BA%E5%88%AB"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">3.6 align-content 和align-items区别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-7-flex-flow-%E5%B1%9E%E6%80%A7%E6%98%AF-flex-direction-%E5%92%8C-flex-wrap-%E5%B1%9E%E6%80%A7%E7%9A%84%E5%A4%8D%E5%90%88%E5%B1%9E%E6%80%A7"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">3.7 flex-flow 属性是 flex-direction 和 flex-wrap 属性的复合属性</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-flex%E5%B8%83%E5%B1%80%E5%AD%90%E9%A1%B9%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. flex布局子项常见属性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-flex-%E5%B1%9E%E6%80%A7"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">4.1  flex 属性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-align-self%E6%8E%A7%E5%88%B6%E5%AD%90%E9%A1%B9%E8%87%AA%E5%B7%B1%E5%9C%A8%E4%BE%A7%E8%BD%B4%E4%B8%8A%E7%9A%84%E6%8E%92%E5%88%97%E6%96%B9%E5%BC%8F"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">4.2 align-self控制子项自己在侧轴上的排列方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-3-order-%E5%B1%9E%E6%80%A7%E5%AE%9A%E4%B9%89%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%8E%92%E5%88%97%E9%A1%BA%E5%BA%8F"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">4.3 order 属性定义项目的排列顺序</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-%E6%90%BA%E7%A8%8B%E7%BD%91%E9%A6%96%E9%A1%B5%E6%A1%88%E4%BE%8B%E5%88%B6%E4%BD%9C"><span class="post-toc-number">5.</span> <span class="post-toc-text">5. 携程网首页案例制作</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p>flex 布局又称弹性布局，个人最喜欢的布局方式，通过设置元素的 display:flex 属性，可以快速完成页面布局，体验良好，多多益善。</p>
+<a id="more"></a>
+
+<h2 id="1-flex布局体验"><a href="#1-flex布局体验" class="headerlink" title="1. flex布局体验"></a>1. flex布局体验</h2><h3 id="1-1-传统布局与flex布局"><a href="#1-1-传统布局与flex布局" class="headerlink" title="1.1 传统布局与flex布局"></a>1.1 传统布局与flex布局</h3><table>
+<thead>
+<tr>
+<th>传统布局</th>
+<th>flex 弹性布局</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>兼容性好</td>
+<td>IE 11 或更低版本，不支持或仅部分支持</td>
+</tr>
+<tr>
+<td>布局繁琐</td>
+<td>操作方便，布局极为简单，移动端应用广泛</td>
+</tr>
+<tr>
+<td>局限性，不能再移动端很好的布局</td>
+<td>PC 端浏览器支持情况较差</td>
+</tr>
+</tbody></table>
+<h3 id="1-2-初体验"><a href="#1-2-初体验" class="headerlink" title="1.2 初体验"></a>1.2 初体验</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>1<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>2<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>3<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">    div &#123;</span><br><span class="line">        display: flex;</span><br><span class="line">        width: 80%;</span><br><span class="line">        height: 300px;</span><br><span class="line">        background-color: skyblue;</span><br><span class="line">        justify-content: space-around;</span><br><span class="line">    &#125;</span><br><span class="line">    div span &#123;</span><br><span class="line"><span class="css">        <span class="comment">/* width: 150px; */</span></span></span><br><span class="line">        height: 100px;</span><br><span class="line"><span class="css">        <span class="selector-tag">background-color</span><span class="selector-pseudo">:royalblue</span>;</span></span><br><span class="line">        margin-right: 5px;</span><br><span class="line">        flex: 1;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-flex布局原理"><a href="#2-flex布局原理" class="headerlink" title="2. flex布局原理"></a>2. flex布局原理</h2><h3 id="2-1-布局原理"><a href="#2-1-布局原理" class="headerlink" title="2.1 布局原理"></a>2.1 布局原理</h3><p><code>flex</code> 是 <code>flexible Box</code> 的缩写，意为“弹性布局”，用来为盒状模型提供最大的灵活性，任何一个容器都可以指定为 <code>flex</code> 布局。</p>
+<ul>
+<li>当我们为父盒子设为 flex 布局以后，子元素的 float、clear 和 vertical-align 属性将失效。</li>
+<li>flex布局又叫伸缩布局 、弹性布局 、伸缩盒布局 、弹性盒布局 </li>
+<li>采用 Flex 布局的元素，称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flexitem），简称”项目”。</li>
+</ul>
+<p><strong>总结</strong>：就是通过给父盒子添加flex属性，来控制子盒子的位置和排列方式</p>
+<h2 id="3-父项常见属性"><a href="#3-父项常见属性" class="headerlink" title="3. 父项常见属性"></a>3. 父项常见属性</h2><ul>
+<li><code>flex-direction</code>：设置主轴的方向</li>
+<li><code>justify-content</code>：设置主轴上的子元素排列方式</li>
+<li><code>flex-wrap</code>：设置子元素是否换行  </li>
+<li><code>align-content</code>：设置侧轴上的子元素的排列方式（多行）</li>
+<li><code>align-items</code>：设置侧轴上的子元素排列方式（单行）</li>
+<li><code>flex-flow</code>：复合属性，相当于同时设置了 <code>flex-direction</code> 和 <code>flex-wrap</code></li>
+</ul>
+<h3 id="3-1-flex-direction设置主轴的方向"><a href="#3-1-flex-direction设置主轴的方向" class="headerlink" title="3.1 flex-direction设置主轴的方向"></a>3.1 flex-direction设置主轴的方向</h3><ul>
+<li>在 flex 布局中，是分为主轴和侧轴两个方向，同样的叫法有 ： 行和列、x 轴和y 轴</li>
+<li>默认主轴方向就是 x 轴方向，水平向右</li>
+<li>默认侧轴方向就是 y 轴方向，水平向下</li>
+</ul>
+<p><strong>注意：</strong> 主轴和侧轴是会变化的，就看 <code>flex-direction</code> 设置谁为主轴，剩下的就是侧轴。而我们的子元素是跟着主轴来排列的</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>row</code></td>
+<td>默认从左到右</td>
+</tr>
+<tr>
+<td><code>row-reverse</code></td>
+<td>从右到左</td>
+</tr>
+<tr>
+<td><code>column</code></td>
+<td>从上到下</td>
+</tr>
+<tr>
+<td><code>column-reverse</code></td>
+<td>从下到上</td>
+</tr>
+</tbody></table>
+<h3 id="3-2-justify-content-设置主轴上的子元素排列方式"><a href="#3-2-justify-content-设置主轴上的子元素排列方式" class="headerlink" title="3.2 justify-content 设置主轴上的子元素排列方式"></a>3.2 justify-content 设置主轴上的子元素排列方式</h3><p><strong>注意：</strong>在使用该属性之前，请确定当前主轴。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flex-start</td>
+<td>默认值 从头部开始 如果主轴是x轴，则从左到右</td>
+</tr>
+<tr>
+<td>flex-end</td>
+<td>从尾部开始排列</td>
+</tr>
+<tr>
+<td>center</td>
+<td>在主轴居中对齐（如果主轴是x轴则水平居中）</td>
+</tr>
+<tr>
+<td>space0around</td>
+<td>平分剩余空间</td>
+</tr>
+<tr>
+<td>space-between</td>
+<td>先两边贴边 再平分剩余空间（重要）</td>
+</tr>
+</tbody></table>
+<h3 id="3-3-flex-wrap设置是否换行"><a href="#3-3-flex-wrap设置是否换行" class="headerlink" title="3.3 flex-wrap设置是否换行"></a>3.3 flex-wrap设置是否换行</h3><ul>
+<li>默认情况下，项目都排在一条线（又称”轴线”）上。<code>flex-wrap</code>属性定义，<code>flex</code> 布局中默认是不换行的。</li>
+<li><code>nowrap</code> 不换行</li>
+<li><code>wrap</code>  换行</li>
+</ul>
+<h3 id="3-4-align-items-设置侧轴上的子元素排列方式（单行-）"><a href="#3-4-align-items-设置侧轴上的子元素排列方式（单行-）" class="headerlink" title="3.4 align-items 设置侧轴上的子元素排列方式（单行 ）"></a>3.4 align-items 设置侧轴上的子元素排列方式（单行 ）</h3><ul>
+<li>该属性是控制子项在侧轴（默认是y轴）上的排列方式  在子项为单项（单行）的时候使用</li>
+<li><code>flex-start</code> 从头部开始</li>
+<li><code>flex-end</code> 从尾部开始</li>
+<li><code>center</code> 居中显示</li>
+<li><code>stretch</code> 拉伸</li>
+</ul>
+<h3 id="3-5-align-content-设置侧轴上的子元素的排列方式（多行）"><a href="#3-5-align-content-设置侧轴上的子元素的排列方式（多行）" class="headerlink" title="3.5 align-content  设置侧轴上的子元素的排列方式（多行）"></a>3.5 align-content  设置侧轴上的子元素的排列方式（多行）</h3><p>设置子项在侧轴上的排列方式 并且只能用于子项出现 换行 的情况（多行），在单行下是没有效果的。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flex-start</td>
+<td>默认值 在侧轴的头部开始排列</td>
+</tr>
+<tr>
+<td>flex-end</td>
+<td>在侧轴尾部开始排列</td>
+</tr>
+<tr>
+<td>center</td>
+<td>在侧轴中间显示</td>
+</tr>
+<tr>
+<td>space-around</td>
+<td>子项在侧轴平分剩余空间</td>
+</tr>
+<tr>
+<td>space-between</td>
+<td>子项在侧轴先两头分布，再平分剩余空间</td>
+</tr>
+<tr>
+<td>stretch</td>
+<td>设置子项元素高度平分父元素高度</td>
+</tr>
+</tbody></table>
+<h3 id="3-6-align-content-和align-items区别"><a href="#3-6-align-content-和align-items区别" class="headerlink" title="3.6 align-content 和align-items区别"></a>3.6 align-content 和align-items区别</h3><ul>
+<li>align-items  适用于单行情况下， 只有上对齐、下对齐、居中和 拉伸</li>
+<li>align-content适应于换行（多行）的情况下（单行情况下无效）， 可以设置 上对齐、下对齐、居中、拉伸以及平均分配剩余空间等属性值。 </li>
+<li>总结就是单行找align-items  多行找 align-content</li>
+</ul>
+<h3 id="3-7-flex-flow-属性是-flex-direction-和-flex-wrap-属性的复合属性"><a href="#3-7-flex-flow-属性是-flex-direction-和-flex-wrap-属性的复合属性" class="headerlink" title="3.7 flex-flow 属性是 flex-direction 和 flex-wrap 属性的复合属性"></a>3.7 flex-flow 属性是 flex-direction 和 flex-wrap 属性的复合属性</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">flex-flow</span><span class="selector-pseudo">:row</span> <span class="selector-tag">wrap</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="4-flex布局子项常见属性"><a href="#4-flex布局子项常见属性" class="headerlink" title="4. flex布局子项常见属性"></a>4. flex布局子项常见属性</h2><ul>
+<li>flex子项目占的份数</li>
+<li>align-self控制子项自己在侧轴的排列方式</li>
+<li>order属性定义子项的排列顺序（前后顺序）</li>
+</ul>
+<h3 id="4-1-flex-属性"><a href="#4-1-flex-属性" class="headerlink" title="4.1  flex 属性"></a>4.1  flex 属性</h3><p>flex 属性定义子项目分配剩余空间，用flex来表示占多少份数。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">    <span class="attribute">flex</span>: &lt;number&gt;; <span class="comment">/* 默认值 0 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="4-2-align-self控制子项自己在侧轴上的排列方式"><a href="#4-2-align-self控制子项自己在侧轴上的排列方式" class="headerlink" title="4.2 align-self控制子项自己在侧轴上的排列方式"></a>4.2 align-self控制子项自己在侧轴上的排列方式</h3><p>align-self 属性允许单个项目有与其他项目不一样的对齐方式，可覆盖 align-items 属性。</p>
+<p>默认值为 auto，表示继承父元素的 align-items 属性，如果没有父元素，则等同于 stretch。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">span</span><span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">      <span class="comment">/* 设置自己在侧轴上的排列方式 */</span></span><br><span class="line">      <span class="attribute">align-self</span>: flex-end;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="4-3-order-属性定义项目的排列顺序"><a href="#4-3-order-属性定义项目的排列顺序" class="headerlink" title="4.3 order 属性定义项目的排列顺序"></a>4.3 order 属性定义项目的排列顺序</h3><p>数值越小，排列越靠前，默认为0。</p>
+<p>注意：和 z-index 不一样。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">    <span class="attribute">order</span>: &lt;number&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-携程网首页案例制作"><a href="#5-携程网首页案例制作" class="headerlink" title="5. 携程网首页案例制作"></a>5. 携程网首页案例制作</h2><p>携程网链接：<a target="_blank" rel="noopener" href="http://m.ctrip.com/">http://m.ctrip.com</a></p>
+<p><strong>1. 技术选型</strong></p>
+<p>方案：我们采取单独制作移动页面方案</p>
+<p>技术：布局采取flex布局</p>
+<p><strong>2. 搭建相关文件夹</strong></p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">—— css</span><br><span class="line"><span class="comment">-- images</span></span><br><span class="line"><span class="comment">-- upload</span></span><br><span class="line"><span class="comment">-- index.html</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 设置视口标签以及引入初始化样式</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, user-scalable=no,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;css/normalize.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;css/index.css&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 常用初始化样式</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">max-width</span>: <span class="number">540px</span>;</span><br><span class="line">  <span class="attribute">min-width</span>: <span class="number">320px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">  <span class="attribute">font</span>: normal <span class="number">14px</span>/<span class="number">1.5</span> Tahoma,<span class="string">&quot;Lucida Grande&quot;</span>,Verdana,<span class="string">&quot;Microsoft Yahei&quot;</span>,STXihei,hei;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#000</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#f2f2f2</span>;</span><br><span class="line">  <span class="attribute">overflow-x</span>: hidden;</span><br><span class="line">  <span class="attribute">-webkit-tap-highlight-color</span>: transparent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>5. 模块名字划分</strong></p>
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200809202945.jpg"></p>
+<blockquote>
+<p>source：<a target="_blank" rel="noopener" href="https://github.com/QiJieH/WebReprint/tree/master/ctrip">携程网移动端静态页面复刻</a> </p>
+</blockquote>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-11-25");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-08-06T16:00:00.000Z" itemprop="datePublished">2020-08-07</time>
+
+    , 最后修改于&nbsp;<time datetime="2020-11-25T09:26:27.952Z" itemprop="dateModified">2020-11-25</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/blog/categories/FrontEnd/'>FrontEnd</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/blog/tags/CSS/" rel="tag">#&nbsp;CSS</a>
+
+<a class="post-tags-list-item" href="/blog/tags/HTML/" rel="tag">#&nbsp;HTML</a>
+
+<a class="post-tags-list-item" href="/blog/tags/WebReprint/" rel="tag">#&nbsp;WebReprint</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/blog/2020/08/07/FontEnd-2020-8-DOM-event-high/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">DOM 事件进阶</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/blog/2020/08/07/FontEnd-2020-8-Project-BlogManageSystem/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">[项目实战] 多人博客管理系统</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="vcomments"></div>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = ''.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = '' === 'true';
+    var verify = '' === 'true';
+    new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        appId: "process.env.VALINEID",
+        appKey: "process.env.VALINEKEY",
+        placeholder: "Just go go",
+        meta: guest_info,
+        pageSize:'10',
+        avatar:'retro',
+        lang:'zh-cn',
+        guest_info: guest_info,
+        visitor: true
+    });
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://qijieh.gitee.io/blog">Qijieh's Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    Hosted on <a target="_blank" href="https://github.com/QiJieH" rel="nofollow noopener noreferrer noopener">Github Pages</a>
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+            <span id="http://qijieh.gitee.io/blog" class="leancloud-visitors" data-flag-title="Qijieh&#39;s Blog">
+    <span></span><!--
+ --><span class="leancloud-visitors-count">0</span><!--
+ --><span> Visitor |</span>
+</span>
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2019;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/blog/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

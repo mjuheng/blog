@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="//cdn1.lncld.net">
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>JQuery 入门（二） | Qijieh&#39;s Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/blog/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/blog/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/blog/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/blog/css/highlight/atelier-heath-light.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/blog/css/highlight/atelier-heath-light.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Qijieh's Blog"><meta name="msapplication-starturl" content="http://qijieh.gitee.io/blog"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Qijieh's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="JQuery 入门（二） | Qijieh&#39;s Blog"><meta property="og:site_name" content="Qijieh&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="http://qijieh.gitee.io/blog/2020/08/18/FontEnd-2020-8-JQuery-Start-2/"><meta property="og:locale" content="zh-CN"><meta name="description" content="JQuery 属性操作 JQuery 文本内容 JQuery 节点操作 JQuery 尺寸位置 - QiJieH - Qijieh&#39;s Blog"><meta name="keywords" content="JavaScript, JQuery"><meta property="article:published_time" content="2020-08-17T16:00:00.000Z"><meta property="article:modified_time" content="2020-11-25T09:26:27.934Z"><meta property="og:updated_time" content="2020-11-25T09:26:27.934Z"><meta property="article:author" content="QiJieH"><meta property="article:tag" content="JavaScript, JQuery"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://qijieh.gitee.io/blog/2020/08/18/FontEnd-2020-8-JQuery-Start-2/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://qijieh.gitee.io/blog/2020/08/18/FontEnd-2020-8-JQuery-Start-2/",
+    "@type": "BlogPosting",
+    "logo": "http://qijieh.gitee.io/blog/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://qijieh.gitee.io/blog/2020/08/18/FontEnd-2020-8-JQuery-Start-2/"
+    },
+    "headline": "JQuery 入门（二） | Qijieh&#39;s Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2020-08-17T16:00:00.000Z",
+    "dateModified": "2020-11-25T09:26:27.934Z",
+    "author": {
+        "@type": "Person",
+        "name": "QiJieH",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/author.jpg"
+        },
+        "description": "hello world."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Qijieh&#39;s Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://qijieh.gitee.io/blog/blog/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "JavaScript, JQuery",
+    "description": "JQuery 属性操作 JQuery 文本内容 JQuery 节点操作 JQuery 尺寸位置 - QiJieH - Qijieh&#39;s Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/blog/">Qijieh&#39;s Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                hello world.
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/blog/" class="navbar-link">首页</a>
+    
+    
+        <a href="/blog/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/blog/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/blog/tags" class="navbar-link">标签</a>
+    
+        <a href="/blog/links" class="navbar-link">友链</a>
+    
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">JQuery 入门（二）</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/blog/img/author.jpg" src="/blog/img/suka-lazyload.gif" alt="QiJieH's Avatar">
+        <span>2020-08-18</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/blog/categories/FrontEnd/">FrontEnd</a>
+        
+        
+        
+            <span class="suka-devide-dot"></span>
+<span id="/blog/2020/08/18/FontEnd-2020-8-JQuery-Start-2/" class="leancloud-visitors" data-flag-title="JQuery 入门（二）">
+    <span>view </span>
+    <span class="leancloud-visitors-count">0</span>
+    <span></span>
+</span>
+        
+    </p>
+    <div class="post-header-info-right">
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JQuery-%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="post-toc-number">1.</span> <span class="post-toc-text">JQuery 属性操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#prop"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">prop()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#attr"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">attr()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#data"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">data()</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JQuery-%E6%96%87%E6%9C%AC%E5%B1%9E%E6%80%A7"><span class="post-toc-number">2.</span> <span class="post-toc-text">JQuery 文本属性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#html"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">html()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#text"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">text()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#val"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">val()</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JQuery-%E8%8A%82%E7%82%B9%E6%93%8D%E4%BD%9C"><span class="post-toc-number">3.</span> <span class="post-toc-text">JQuery 节点操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%81%8D%E5%8E%86%E5%85%83%E7%B4%A0"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">遍历元素</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%A2%9E%E5%88%A0%E5%85%83%E7%B4%A0"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">增删元素</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JQuery-%E5%B0%BA%E5%AF%B8%E6%93%8D%E4%BD%9C"><span class="post-toc-number">4.</span> <span class="post-toc-text">JQuery 尺寸操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JQuery-%E4%BD%8D%E7%BD%AE%E6%93%8D%E4%BD%9C"><span class="post-toc-number">5.</span> <span class="post-toc-text">JQuery 位置操作</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <ul>
+<li>JQuery 属性操作</li>
+<li>JQuery 文本内容</li>
+<li>JQuery 节点操作</li>
+<li>JQuery 尺寸位置</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="JQuery-属性操作"><a href="#JQuery-属性操作" class="headerlink" title="JQuery 属性操作"></a>JQuery 属性操作</h2><p>jQuery 常用属性操作有三种</p>
+<ul>
+<li><code>prop() </code></li>
+<li><code>attr() </code></li>
+<li><code>data()</code></li>
+</ul>
+<h3 id="prop"><a href="#prop" class="headerlink" title="prop()"></a>prop()</h3><p>固有属性操作</p>
+<p>所谓元素固有属性就是元素本身自带的属性，比如 <code>&lt;a&gt;</code> 元素里面的 <code>href</code> ，比如 <code>&lt;input&gt;</code> 元素里面的 <code>type</code>。 </p>
+<p><strong>语法</strong></p>
+<ol>
+<li>获取属性</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prop(<span class="string">&quot;属性&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>设置属性</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prop(<span class="string">&quot;属性&quot;</span>,<span class="string">&quot;属性值&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>prop() 除了普通属性操作，更适合操作表单属性：<code>disabled / checked / selected</code> 等。</p>
+<h3 id="attr"><a href="#attr" class="headerlink" title="attr()"></a>attr()</h3><p>自定义属性操作</p>
+<p>用户自己给元素添加的属性，我们称为自定义属性。 比如给 <code>div</code> 添加 <code>index =“1”</code>。 </p>
+<p><strong>语法</strong></p>
+<ol>
+<li>获取属性</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">attr(<span class="string">&quot;属性&quot;</span>)      		<span class="comment">// 类似原生 getAttribute()</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>设置属性</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">attr(<span class="string">&quot;属性&quot;</span>,<span class="string">&quot;属性值&quot;</span>)			<span class="comment">// setAttribute()</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>attr() 除了普通属性操作，更适合操作自定义属性。（该方法也可以获取 H5 自定义属性）</p>
+<h3 id="data"><a href="#data" class="headerlink" title="data()"></a>data()</h3><p>数据缓存</p>
+<p><code>data()</code> 方法可以在指定的元素上存取数据，并不会修改 DOM 元素结构。一旦页面刷新，之前存放的数据都将被移除。 </p>
+<p><strong>语法</strong></p>
+<ol>
+<li>附加数据</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data(<span class="string">&quot;name&quot;</span>,<span class="string">&quot;value&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>获取数据</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data(<span class="string">&quot;name&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JQuery-文本属性"><a href="#JQuery-文本属性" class="headerlink" title="JQuery 文本属性"></a>JQuery 文本属性</h2><p>jQuery的文本属性值常见操作有三种：<code>html() / text() / val()</code>  分别对应JS中的 <code>innerHTML innerText value</code> 属性。</p>
+<h3 id="html"><a href="#html" class="headerlink" title="html()"></a>html()</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">html()				<span class="comment">//获取</span></span><br><span class="line">html(<span class="string">&quot;content&quot;</span>)		<span class="comment">//修改</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="text"><a href="#text" class="headerlink" title="text()"></a>text()</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">text()				<span class="comment">//获取</span></span><br><span class="line">text(<span class="string">&quot;content&quot;</span>)		<span class="comment">//修改</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="val"><a href="#val" class="headerlink" title="val()"></a>val()</h3><p>表单值操作</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val()				<span class="comment">//获取</span></span><br><span class="line">val(<span class="string">&quot;value&quot;</span>)		<span class="comment">//修改</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="JQuery-节点操作"><a href="#JQuery-节点操作" class="headerlink" title="JQuery 节点操作"></a>JQuery 节点操作</h2><p>jQuery 元素操作主要讲的是用jQuery方法，操作标签的遍历、创建、添加、删除等操作。</p>
+<h3 id="遍历元素"><a href="#遍历元素" class="headerlink" title="遍历元素"></a>遍历元素</h3><p>jQuery 隐式迭代是对同一类元素做了同样的操作。 如果想要给同一类元素做不同操作，就需要用到遍历。</p>
+<p><strong>语法1</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;div&quot;</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">index,domEle</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// code</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>function</code> ：回调函数<ul>
+<li><code>index</code> ：元素索引号</li>
+<li><code>domEle</code> ：DOM 元素对象</li>
+</ul>
+</li>
+</ul>
+<p>此方法用于遍历 jQuery 对象中的每一项，回调函数中元素为 DOM 对象，想要使用 jQuery 方法需要转换 <code>$(domEle)</code> 。</p>
+<p><strong>语法2</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.each(object,<span class="function"><span class="keyword">function</span>(<span class="params">index,domEle</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// code</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>$.each()</code> 方法可以用于遍历任何对象。主要用于数据处理，比如数组，对象。</p>
+<h3 id="增删元素"><a href="#增删元素" class="headerlink" title="增删元素"></a>增删元素</h3><p>jQuery方法操作元素的创建、添加、删除方法很多，则重点使用部分，如下：</p>
+<p><strong>创建</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;&lt;li&gt;&lt;/li&gt;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>内部添加</strong> 父子添加</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.append(<span class="string">&quot;内容&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>把内容放入匹配元素内部的最后面，类似原生 <code>appendChild</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.prepend(<span class="string">&quot;内容&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>把内容放入匹配元素最前面</p>
+<p><strong>外部添加</strong> 兄弟添加</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">element.after(<span class="string">&quot;内容&quot;</span>)			<span class="comment">// 把内容放入目标元素后面</span></span><br><span class="line">element.before(<span class="string">&quot;内容&quot;</span>)		<span class="comment">// 把内容放入目标元素前面</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>删除元素</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">element.remove()		<span class="comment">// 删除匹配元素本身</span></span><br><span class="line">element.empty()			<span class="comment">// 删除匹配元素内子节点</span></span><br><span class="line">element.html(<span class="string">&quot;&quot;</span>)		<span class="comment">// 情况匹配元素内子节点</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="JQuery-尺寸操作"><a href="#JQuery-尺寸操作" class="headerlink" title="JQuery 尺寸操作"></a>JQuery 尺寸操作</h2><p>jQuery 尺寸操作包括元素宽高的获取和设置，且不一样的API对应不一样的盒子模型。</p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>width() / height()</code></td>
+<td>取得匹配元素的宽高度 只算 width / height</td>
+</tr>
+<tr>
+<td><code>innerWidth() / innerHeight()</code></td>
+<td>取得匹配元素的宽高度 包含 padding</td>
+</tr>
+<tr>
+<td><code>outerWidth() / outerHeight()</code></td>
+<td>取得匹配元素的宽高度 包含 padding border</td>
+</tr>
+<tr>
+<td><code>outerWidth(true) / outerHeight(true)</code></td>
+<td>取得匹配元素的宽高度 包含 padding border margin</td>
+</tr>
+</tbody></table>
+<p>有了这套 API 我们将可以快速获取盒子的宽高，至于其他属性想要获取和设置，还要使用 css() 等方法配合</p>
+<h2 id="JQuery-位置操作"><a href="#JQuery-位置操作" class="headerlink" title="JQuery 位置操作"></a>JQuery 位置操作</h2><p>jQuery的位置操作主要有三个： <code>offset()、position()、scrollTop()/scrollLeft() </code>, 具体介绍如下:</p>
+<p><strong><code>offset()</code></strong></p>
+<ul>
+<li>设置或返回被选元素相对于文档的偏移坐标，和父级无关</li>
+<li>该方法有两个属性 <code>left</code> , <code>top</code> 。<code>offset().top</code> 用于获取距离文档顶部的距离，<code>offset().left</code> 用于获取距离文档左侧的距离。</li>
+<li>设置元素偏移 ： <code>offset(&#123;top:10,left:10&#125;)</code></li>
+</ul>
+<p><strong><code>position()</code></strong></p>
+<ul>
+<li>返回被选元素相对于带有定位的父级偏移坐标，如果父级没有定位，这相对于文档。</li>
+<li>该方法有两个属性值 <code>left</code> <code>top</code></li>
+<li>该方法只能获取</li>
+</ul>
+<p><strong><code>scrollTop() / scrollLeft()</code></strong></p>
+<ul>
+<li>设置或返回被选元素被卷去的头部</li>
+<li>设置 <code>scrollTop(100)</code></li>
+</ul>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-11-25");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-08-17T16:00:00.000Z" itemprop="datePublished">2020-08-18</time>
+
+    , 最后修改于&nbsp;<time datetime="2020-11-25T09:26:27.934Z" itemprop="dateModified">2020-11-25</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/blog/categories/FrontEnd/'>FrontEnd</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/blog/tags/JavaScript/" rel="tag">#&nbsp;JavaScript</a>
+
+<a class="post-tags-list-item" href="/blog/tags/JQuery/" rel="tag">#&nbsp;JQuery</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/blog/2020/08/20/FontEnd-2020-8-Js-senior-1/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">JavaScipt高级（一）面向对象</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/blog/2020/08/18/FontEnd-2020-8-Js-Start-7-Object/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">JavaScript基础（七）对象</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="vcomments"></div>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = ''.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = '' === 'true';
+    var verify = '' === 'true';
+    new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        appId: "process.env.VALINEID",
+        appKey: "process.env.VALINEKEY",
+        placeholder: "Just go go",
+        meta: guest_info,
+        pageSize:'10',
+        avatar:'retro',
+        lang:'zh-cn',
+        guest_info: guest_info,
+        visitor: true
+    });
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://qijieh.gitee.io/blog">Qijieh's Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    Hosted on <a target="_blank" href="https://github.com/QiJieH" rel="nofollow noopener noreferrer noopener">Github Pages</a>
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+            <span id="http://qijieh.gitee.io/blog" class="leancloud-visitors" data-flag-title="Qijieh&#39;s Blog">
+    <span></span><!--
+ --><span class="leancloud-visitors-count">0</span><!--
+ --><span> Visitor |</span>
+</span>
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2019;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/blog/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

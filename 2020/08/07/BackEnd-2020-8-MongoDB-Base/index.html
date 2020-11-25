@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="//cdn1.lncld.net">
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>初识 MongoDB | Qijieh&#39;s Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/blog/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/blog/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/blog/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/blog/css/highlight/atelier-heath-light.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/blog/css/highlight/atelier-heath-light.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Qijieh's Blog"><meta name="msapplication-starturl" content="http://qijieh.gitee.io/blog"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Qijieh's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="初识 MongoDB | Qijieh&#39;s Blog"><meta property="og:site_name" content="Qijieh&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="http://qijieh.gitee.io/blog/2020/08/07/BackEnd-2020-8-MongoDB-Base/"><meta property="og:locale" content="zh-CN"><meta name="description" content="MongoDB 是一个基于分布式文件存储非关系数据库。由 C++ 语言编写。旨在为 WEB 应用提供可扩展的高性能数据存储解决方案。 - QiJieH - Qijieh&#39;s Blog"><meta name="keywords" content="MongoDB"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200823161501.png"><meta property="article:published_time" content="2020-08-06T16:00:00.000Z"><meta property="article:modified_time" content="2020-11-25T09:26:27.921Z"><meta property="og:updated_time" content="2020-11-25T09:26:27.921Z"><meta property="article:author" content="QiJieH"><meta property="article:tag" content="MongoDB"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://qijieh.gitee.io/blog/2020/08/07/BackEnd-2020-8-MongoDB-Base/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://qijieh.gitee.io/blog/2020/08/07/BackEnd-2020-8-MongoDB-Base/",
+    "@type": "BlogPosting",
+    "logo": "http://qijieh.gitee.io/blog/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://qijieh.gitee.io/blog/2020/08/07/BackEnd-2020-8-MongoDB-Base/"
+    },
+    "headline": "初识 MongoDB | Qijieh&#39;s Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2020-08-06T16:00:00.000Z",
+    "dateModified": "2020-11-25T09:26:27.921Z",
+    "author": {
+        "@type": "Person",
+        "name": "QiJieH",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/author.jpg"
+        },
+        "description": "hello world."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Qijieh&#39;s Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://qijieh.gitee.io/blog/blog/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "MongoDB",
+    "description": "MongoDB 是一个基于分布式文件存储非关系数据库。由 C++ 语言编写。旨在为 WEB 应用提供可扩展的高性能数据存储解决方案。 - QiJieH - Qijieh&#39;s Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/blog/">Qijieh&#39;s Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                hello world.
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/blog/" class="navbar-link">首页</a>
+    
+    
+        <a href="/blog/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/blog/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/blog/tags" class="navbar-link">标签</a>
+    
+        <a href="/blog/links" class="navbar-link">友链</a>
+    
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">初识 MongoDB</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/blog/img/author.jpg" src="/blog/img/suka-lazyload.gif" alt="QiJieH's Avatar">
+        <span>2020-08-07</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/blog/categories/BackEnd/">BackEnd</a>
+        
+        
+        
+            <span class="suka-devide-dot"></span>
+<span id="/blog/2020/08/07/BackEnd-2020-8-MongoDB-Base/" class="leancloud-visitors" data-flag-title="初识 MongoDB">
+    <span>view </span>
+    <span class="leancloud-visitors-count">0</span>
+    <span></span>
+</span>
+        
+    </p>
+    <div class="post-header-info-right">
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#MongoDB-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="post-toc-number">1.</span> <span class="post-toc-text">MongoDB 基础语法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">数据结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">安装部署</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8%E5%BC%95%E5%AF%BC%E5%AE%89%E8%A3%85"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">使用引导安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%89%E8%A3%85"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">使用命令行安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%B3%BB%E7%BB%9F%E5%8F%98%E9%87%8F"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">添加系统变量</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%AE%BE%E7%BD%AE%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">设置身份验证</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%94%A8%E6%88%B7"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">添加数据库用户</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">连接数据库</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%9C%AA%E5%90%AF%E7%94%A8%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">未启用身份验证</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%90%AF%E7%94%A8%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">启用身份验证</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#API"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">API</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">数据库操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">创建数据库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">删除数据库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BA%E9%9B%86%E5%90%88"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">创建集合</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%A0%E9%99%A4%E9%9B%86%E5%90%88"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">删除集合</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%8F%92%E5%85%A5%E6%96%87%E6%A1%A3"><span class="post-toc-number">1.4.5.</span> <span class="post-toc-text">插入文档</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AF%BC%E5%85%A5%E6%96%87%E6%A1%A3"><span class="post-toc-number">1.4.6.</span> <span class="post-toc-text">导入文档</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%9B%B4%E6%96%B0%E6%96%87%E6%A1%A3"><span class="post-toc-number">1.4.7.</span> <span class="post-toc-text">更新文档</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E6%A1%A3"><span class="post-toc-number">1.4.8.</span> <span class="post-toc-text">删除文档</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3"><span class="post-toc-number">1.4.9.</span> <span class="post-toc-text">查询文档</span></a></li></ol></li></ol></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200823161501.png"></p>
+<p>MongoDB 是一个基于分布式文件存储非关系数据库。由 C++ 语言编写。旨在为 WEB 应用提供可扩展的高性能数据存储解决方案。  </p>
+<a id="more"></a>
+
+<h1 id="MongoDB-基础语法"><a href="#MongoDB-基础语法" class="headerlink" title="MongoDB 基础语法"></a>MongoDB 基础语法</h1><p>官方文档：<a target="_blank" rel="noopener" href="https://docs.mongodb.com/guides/">Getting Started</a></p>
+<p>MongoDB 是一个基于分布式文件存储的数据库。由 C++ 语言编写。旨在为 WEB 应用提供可扩展的高性能数据存储解决方案。</p>
+<p>MongoDB 是一个介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。</p>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>MongDB 所有的数据都是以 json 对象进行存储的</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;notebook&quot;</span>,</span><br><span class="line"> <span class="attr">&quot;qty&quot;</span>: <span class="number">50</span>,</span><br><span class="line"> <span class="attr">&quot;rating&quot;</span>: [ &#123; <span class="attr">&quot;score&quot;</span>: <span class="number">8</span> &#125;, &#123; <span class="attr">&quot;score&quot;</span>: <span class="number">9</span> &#125; ],</span><br><span class="line"> <span class="attr">&quot;size&quot;</span>: &#123; <span class="attr">&quot;height&quot;</span>: <span class="number">11</span>, <span class="attr">&quot;width&quot;</span>: <span class="number">8.5</span>, <span class="attr">&quot;unit&quot;</span>: <span class="string">&quot;in&quot;</span> &#125;,</span><br><span class="line"> <span class="attr">&quot;status&quot;</span>: <span class="string">&quot;A&quot;</span>,</span><br><span class="line"> <span class="attr">&quot;tags&quot;</span>: [ <span class="string">&quot;college-ruled&quot;</span>, <span class="string">&quot;perforated&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在进行数据库结构设计时务必参照 JSON 标准。</p>
+<p>MongoDB术语 参照 SQL术语 理解</p>
+<table>
+<thead>
+<tr>
+<th align="left">SQL术语/概念</th>
+<th align="left">MongoDB术语/概念</th>
+<th align="left">解释/说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">database</td>
+<td align="left">database</td>
+<td align="left">数据库</td>
+</tr>
+<tr>
+<td align="left">table</td>
+<td align="left">collection</td>
+<td align="left">数据库表/集合</td>
+</tr>
+<tr>
+<td align="left">row</td>
+<td align="left">document</td>
+<td align="left">数据记录行/文档</td>
+</tr>
+<tr>
+<td align="left">column</td>
+<td align="left">field</td>
+<td align="left">数据字段/域</td>
+</tr>
+<tr>
+<td align="left">index</td>
+<td align="left">index</td>
+<td align="left">索引</td>
+</tr>
+<tr>
+<td align="left">table joins</td>
+<td align="left"></td>
+<td align="left">表连接,MongoDB不支持</td>
+</tr>
+<tr>
+<td align="left">primary key</td>
+<td align="left">primary key</td>
+<td align="left">主键,MongoDB自动将_id字段设置为主键</td>
+</tr>
+</tbody></table>
+<h2 id="安装部署"><a href="#安装部署" class="headerlink" title="安装部署"></a>安装部署</h2><p>下载中心</p>
+<p><a target="_blank" rel="noopener" href="https://www.mongodb.com/download-center#production">MongoDB Download Center</a></p>
+<p>mongodb 社区版下载</p>
+<p><a target="_blank" rel="noopener" href="https://www.mongodb.com/try/download/community">MongoDB Community</a></p>
+<p>mongodb 图形界面管理工具（可选）</p>
+<p><a target="_blank" rel="noopener" href="https://www.mongodb.com/try/download/compass">MongoDB Compass</a></p>
+<h3 id="使用引导安装"><a href="#使用引导安装" class="headerlink" title="使用引导安装"></a>使用引导安装</h3><p>在命令行操作 mongodb 时请务必使用<strong>管理员权限打开命令行窗口</strong></p>
+<p>所有的安装设置都会在引导界面设置完成，之后通过命令行操作数据库服务</p>
+<ul>
+<li>启动服务</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net <span class="built_in">start</span> mongodb</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>停止服务</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net stop mongodb</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>移除服务</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\MongoDB\Server\<span class="number">4.2</span>\bin\mongo.exe -<span class="literal">-remove</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>连接管理</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\MongoDB\Server\<span class="number">4.2</span>\bin\mongo.exe</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="使用命令行安装"><a href="#使用命令行安装" class="headerlink" title="使用命令行安装"></a>使用命令行安装</h3><p>移除服务后需要手动以命令行方式进行安装</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod -<span class="literal">-logpath</span>=<span class="string">&quot;C:\Program Files\MongoDB\Server\4.2\log\mongod.log&quot;</span> -<span class="literal">-dbpath</span>=<span class="string">&quot;C:\Program Files\MongoDB\Server\4.2\data&quot;</span> -<span class="literal">-install</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="添加系统变量"><a href="#添加系统变量" class="headerlink" title="添加系统变量"></a>添加系统变量</h3><p>虽然这步不是必须的，但是在使用 mongodb 过程中某些命令需要系统变量的支持。</p>
+<p>MongoDB安装目录下的bin路径导入到系统变量Path中。</p>
+<h3 id="设置身份验证"><a href="#设置身份验证" class="headerlink" title="设置身份验证"></a>设置身份验证</h3><p>初次安装时是没有设置身份验证的，任何人都可以访问你的数据库，这样是十分危险的。接下来将为 mongodb 部署强制身份验证。</p>
+<p>在命令行窗口运行以下命令，确保 mongodb 服务在你的系统上存在</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist /FI <span class="string">&quot;IMAGENAME eq mongod.exe&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果显示以下字段，说明 mogodb 服务正在运行</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Image <span class="type">Name</span>                     PID <span class="keyword">Session</span> <span class="type">Name</span>        <span class="keyword">Session</span>#    Mem <span class="keyword">Usage</span></span><br><span class="line">========================= ======== ================ =========== ============</span><br><span class="line">mongod.exe                    <span class="number">8716</span> Console                    <span class="number">1</span>      <span class="number">9</span>,<span class="number">508</span> K</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<ol>
+<li>使用命令行打开运行 mongo.exe</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\MongoDB\Server\<span class="number">4.2</span>\bin\mongo.exe</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>切换到 admin 数据库</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use admin</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>新建超级管理员账户</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(</span><br><span class="line">  &#123;</span><br><span class="line">    user: <span class="string">&quot;superuser&quot;</span>,</span><br><span class="line">    <span class="built_in">pwd</span>: <span class="string">&quot;changeMeToAStrongPassword&quot;</span>,</span><br><span class="line">    roles: [ <span class="string">&quot;root&quot;</span> ]</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>验证是否创建成功</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show users</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>卸载 mongodb 服务</li>
+</ol>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net <span class="built_in">stop</span> mongodb</span><br><span class="line">mongod --<span class="built_in">remove</span></span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>创建 mongodb 服务 注意 -auth 参数</li>
+</ol>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod --logpath=&quot;C:<span class="symbol">\P</span>rogram Files<span class="symbol">\M</span>ongoDB<span class="symbol">\S</span>erver<span class="symbol">\4</span>.2<span class="symbol">\l</span>og<span class="symbol">\m</span>ongod.log&quot; --dbpath=&quot;C:<span class="symbol">\P</span>rogram Files<span class="symbol">\M</span>ongoDB<span class="symbol">\S</span>erver<span class="symbol">\4</span>.2<span class="symbol">\d</span>ata&quot; --install -auth</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果您已成功完成本指南，则已在本地 MongoDB 实例上启用了基本身份验证。</p>
+<h3 id="添加数据库用户"><a href="#添加数据库用户" class="headerlink" title="添加数据库用户"></a>添加数据库用户</h3><p>在添加数据库用户之前您必须拥有超级管理员账号。</p>
+<p>连接到数据库 admin 进行身份验证，之后切换到需要创建管理账户的数据库中使用 <code>db.createUser</code> 进行创建。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mongo</span><span class="selector-class">.exe</span></span><br><span class="line"><span class="selector-tag">use</span> <span class="selector-tag">admin</span></span><br><span class="line"><span class="selector-tag">db</span><span class="selector-class">.auth</span>(&quot;<span class="selector-tag">rootname</span>&quot;,&quot;<span class="selector-tag">rootpwd</span>&quot;)</span><br><span class="line"><span class="selector-tag">use</span> <span class="selector-tag">dba</span></span><br><span class="line"><span class="selector-tag">db</span><span class="selector-class">.createUser</span>(&#123;</span><br><span class="line">	<span class="attribute">user</span>:<span class="string">&quot;dbaadmin&quot;</span>,</span><br><span class="line">	pwd:<span class="string">&quot;admin&quot;</span>,</span><br><span class="line">	roles:[<span class="string">&quot;readWrite&quot;</span>]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>注意只有切换到响应的数据库之后才能进行身份验证或用户创建，否则会出现验证失败和创建失败。</p>
+</blockquote>
+<h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><h3 id="未启用身份验证"><a href="#未启用身份验证" class="headerlink" title="未启用身份验证"></a>未启用身份验证</h3><p>如果你未启用身份验证，您可以容易的使用命令行进入数据库</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:<span class="symbol">\P</span>rogram Files<span class="symbol">\M</span>ongoDB<span class="symbol">\S</span>erver<span class="symbol">\4</span>.2<span class="symbol">\b</span>in<span class="symbol">\m</span>ongo.exe</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>在 Compass 中只需要点击 connect 即可，无需配置</p>
+<h3 id="启用身份验证"><a href="#启用身份验证" class="headerlink" title="启用身份验证"></a>启用身份验证</h3><p>如果你启用了身份验证，在使用 Compass 连接时需要填写 URL ，url的填写规则为</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">mongodb</span>:身份名:身份密码<span class="variable">@host</span>:port/数据库名称</span><br><span class="line"></span><br><span class="line"><span class="attribute">mongodb</span>:<span class="attribute">root</span>:root<span class="variable">@localhost</span>:<span class="number">27017</span>/admin</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在命令行中启动 mongo.exe 切换到正确数据库之后使用 <code>db.auth(&quot;name&quot;,&quot;pwd&quot;)</code> 来进行验证</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mongo.exe</span><br><span class="line"><span class="keyword">use</span> <span class="keyword">admin</span></span><br><span class="line">db.auth(<span class="string">&quot;root&quot;</span>,<span class="string">&quot;root&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>命令行进入 mongo.exe 并不需要验证，但是这样是无法查看或修改任何数据的</p>
+</blockquote>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><p>你可以访问 <a target="_blank" rel="noopener" href="https://docs.mongodb.com/drivers/">MongoDB Drivers</a> 来获取您语言操作数据库的 API</p>
+<p>本文档只介绍 Node.js 对 Mongodb 的连接操作。</p>
+<p>在 node.js 下操作 mongodb 您需要使用到第三方模块 mongoose 您可以通过 npm 管理工具进行下载</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> mongoose</span><br></pre></td></tr></table></figure>
+
+
+
+<p>之后您可以在 js 文件中引入 mongoose 并使用它来连接数据库。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mongoose = <span class="built_in">require</span> (<span class="string">&#x27;mongoose&#x27;</span>)</span><br><span class="line">mongoose.connect(<span class="string">&quot;mongodb://username:userpwd@host:port/dbname</span></span><br><span class="line"><span class="string">                    &#123; useNewUrlParser: true, useUnifiedTopology: true &#125;)</span></span><br><span class="line"><span class="string">    .then(() =&gt; console.log(&#x27;数据库连接成功&#x27;))</span></span><br><span class="line"><span class="string">    .catch(() =&gt; console.log(&#x27;数据库连接失败&#x27;));</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><p>访问 <a target="_blank" rel="noopener" href="https://docs.mongodb.com/drivers/">MongoDB Drivers</a> 来获取您语言操作数据库的 API ，下面我们只介绍使用 mongo.exe 命令行对数据库的操作。</p>
+<h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><p>MongoDB 创建数据库的语法格式如下：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> DataBaseName</span><br></pre></td></tr></table></figure>
+
+<p>这个方法在没有该数据库时会创建该数据库，否则会转到该数据库，注意，如果创建数据库时没有添加该数据库内容，是不会显示该数据库的。</p>
+<p>如果你想查看所有数据库，可以使用 <strong>show dbs</strong> 命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; show dbs</span><br><span class="line">admin   0.000GB</span><br><span class="line">config  0.000GB</span><br><span class="line">local   0.000GB</span><br><span class="line">&gt; </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><p>MongoDB 删除数据库的语法格式如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">db</span><span class="selector-class">.dropDatabase</span>()</span><br></pre></td></tr></table></figure>
+
+<p>您需要使用 use dbname 来切换到需要删除的数据库才能执行删除操作。</p>
+<h3 id="创建集合"><a href="#创建集合" class="headerlink" title="创建集合"></a>创建集合</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">db.createCollection(name, options)</span><br><span class="line"></span><br><span class="line"><span class="comment">// name ：集合命名  options：集合规则</span></span><br><span class="line"></span><br><span class="line">db.createCollection(<span class="string">&quot;mycol&quot;</span>, </span><br><span class="line">&#123; </span><br><span class="line">	<span class="attr">capped :</span> <span class="literal">true</span>, </span><br><span class="line">	<span class="attr">autoIndexId :</span> <span class="literal">true</span>,</span><br><span class="line">	<span class="attr">size :</span> <span class="number">6142800</span>, </span><br><span class="line">	<span class="attr">max :</span> <span class="number">10000</span> </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果要查看已有集合，可以使用 <strong>show collections</strong> 或 <strong>show tables</strong> 命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; show collections</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="删除集合"><a href="#删除集合" class="headerlink" title="删除集合"></a>删除集合</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.collection.<span class="keyword">drop</span>()</span><br><span class="line"></span><br><span class="line">collection 为集合名称 ， 如果要查看已有集合，可以使用 <span class="keyword">show</span> collections 或 <span class="keyword">show</span> <span class="keyword">tables</span> 命令</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="插入文档"><a href="#插入文档" class="headerlink" title="插入文档"></a>插入文档</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;db.COLLECTION_NAME.insertOne(&#123;<span class="string">&#x27;json&#x27;</span>:<span class="string">&#x27;json&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">db.COLLECTION_NAME.insertMany(&#123;<span class="string">&#x27;json&#x27;</span>:<span class="string">&#x27;json&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>以上代码会将花括号内的 json 对象插入到 col 集合中，如果集合不存在数据库会自动创建。</p>
+<h3 id="导入文档"><a href="#导入文档" class="headerlink" title="导入文档"></a>导入文档</h3><p><code>mongoimport -d 数据库名称 -c 集合名称 -file 导入目标文件</code></p>
+<p>使用mongoimport命令需要将MongoDB安装目录下的bin路径导入到系统变量Path中</p>
+<h3 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;db.<span class="module-access"><span class="module"><span class="identifier">COLLECTION_NAME</span>.</span></span>update<span class="constructor">One(&#123;&#x27;<span class="params">json</span>&#x27;:&#x27;<span class="params">value</span>&#x27;&#125;,&#123;$<span class="params">set</span>:&#123;&#x27;<span class="params">new</span> <span class="params">key</span>&#x27;:&#x27;<span class="params">new</span> <span class="params">value</span>&#x27;&#125;&#125;)</span></span><br><span class="line"></span><br><span class="line">&gt;db.<span class="module-access"><span class="module"><span class="identifier">COLLECTION_NAME</span>.</span></span>update<span class="constructor">Many(&#123;&#x27;<span class="params">json</span>&#x27;:&#x27;<span class="params">value</span>&#x27;&#125;,&#123;$<span class="params">set</span>:&#123;&#x27;<span class="params">new</span> <span class="params">key</span>&#x27;:&#x27;<span class="params">new</span> <span class="params">value</span>&#x27;&#125;&#125;)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除匹配的第一条数据</span></span><br><span class="line">&gt;db.<span class="module-access"><span class="module"><span class="identifier">COLLECTION_NAME</span>.</span></span>delete<span class="constructor">One(&#123;&#x27;<span class="params">title</span>&#x27;:&#x27;MongoDB 笔记&#x27;&#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除所以匹配的数据</span></span><br><span class="line">&gt;db.<span class="module-access"><span class="module"><span class="identifier">COLLECTION_NAME</span>.</span></span>delete<span class="constructor">Many(&#123;&#x27;<span class="params">title</span>&#x27;:&#x27;MongoDB 笔记&#x27;&#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除全部</span></span><br><span class="line">&gt;db.<span class="module-access"><span class="module"><span class="identifier">COLLECTION_NAME</span>.</span></span>delete<span class="constructor">Many(&#123;&#125;)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="查询文档"><a href="#查询文档" class="headerlink" title="查询文档"></a>查询文档</h3><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="selector-tag">db</span><span class="selector-class">.COLLECTION_NAME</span><span class="selector-class">.find</span>(&#123;<span class="attribute">key1</span>:value1, <span class="attribute">key2</span>:value2&#125;)<span class="selector-class">.pretty</span>()</span><br><span class="line"><span class="comment">// .pretty() 以易读的方式返回查询数据</span></span><br></pre></td></tr></table></figure>
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-11-25");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-08-06T16:00:00.000Z" itemprop="datePublished">2020-08-07</time>
+
+    , 最后修改于&nbsp;<time datetime="2020-11-25T09:26:27.921Z" itemprop="dateModified">2020-11-25</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/blog/categories/BackEnd/'>BackEnd</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/blog/tags/MongoDB/" rel="tag">#&nbsp;MongoDB</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/blog/2020/08/07/BackEnd-2020-8-Express-Start/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Express 初步使用</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/blog/2020/08/07/FontEnd-2020-8-BOM/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">BOM 浏览器对象模型</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="vcomments"></div>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = ''.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = '' === 'true';
+    var verify = '' === 'true';
+    new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        appId: "process.env.VALINEID",
+        appKey: "process.env.VALINEKEY",
+        placeholder: "Just go go",
+        meta: guest_info,
+        pageSize:'10',
+        avatar:'retro',
+        lang:'zh-cn',
+        guest_info: guest_info,
+        visitor: true
+    });
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://qijieh.gitee.io/blog">Qijieh's Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    Hosted on <a target="_blank" href="https://github.com/QiJieH" rel="nofollow noopener noreferrer noopener">Github Pages</a>
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+            <span id="http://qijieh.gitee.io/blog" class="leancloud-visitors" data-flag-title="Qijieh&#39;s Blog">
+    <span></span><!--
+ --><span class="leancloud-visitors-count">0</span><!--
+ --><span> Visitor |</span>
+</span>
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2019;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/blog/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

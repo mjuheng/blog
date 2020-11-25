@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="//cdn1.lncld.net">
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>初识Oracle分布式数据库 | Qijieh&#39;s Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/blog/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/blog/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/blog/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/blog/css/highlight/atelier-heath-light.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/blog/css/highlight/atelier-heath-light.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Qijieh's Blog"><meta name="msapplication-starturl" content="http://qijieh.gitee.io/blog"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Qijieh's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="初识Oracle分布式数据库 | Qijieh&#39;s Blog"><meta property="og:site_name" content="Qijieh&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="http://qijieh.gitee.io/blog/2020/10/15/BackEnd-2020-10-DDB-simple-guide/"><meta property="og:locale" content="zh-CN"><meta name="description" content="Oracle 分布式数据库什么是分布式数据库数据物理上被存放在网络的多个节点上，逻辑上是一个整体 分布式数据库的独立性分布数据库的独立性指用户不必关心数据如何分割和存储，只需关心他需要什么数据 Oracle 分布式RDBMS本地操作 1sqlplus scott&#x2F;tiger@localhost:1521&#x2F;orcl  远程操作 1sqlplus scott&#x2F;tiger@192.168.1.23:15 - QiJieH - Qijieh&#39;s Blog"><meta name="keywords" content="Oracle"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master/20201015232534.png"><meta property="og:image" content="https://gitee.com/QiJieH/blog-image-bed/raw/master/20201015233849.png"><meta property="article:published_time" content="2020-10-14T16:00:00.000Z"><meta property="article:modified_time" content="2020-11-25T09:26:27.897Z"><meta property="og:updated_time" content="2020-11-25T09:26:27.897Z"><meta property="article:author" content="QiJieH"><meta property="article:tag" content="Oracle"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://qijieh.gitee.io/blog/2020/10/15/BackEnd-2020-10-DDB-simple-guide/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://qijieh.gitee.io/blog/2020/10/15/BackEnd-2020-10-DDB-simple-guide/",
+    "@type": "BlogPosting",
+    "logo": "http://qijieh.gitee.io/blog/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://qijieh.gitee.io/blog/2020/10/15/BackEnd-2020-10-DDB-simple-guide/"
+    },
+    "headline": "初识Oracle分布式数据库 | Qijieh&#39;s Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2020-10-14T16:00:00.000Z",
+    "dateModified": "2020-11-25T09:26:27.897Z",
+    "author": {
+        "@type": "Person",
+        "name": "QiJieH",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/author.jpg"
+        },
+        "description": "hello world."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Qijieh&#39;s Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://qijieh.gitee.io/blog/blog/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Oracle",
+    "description": "Oracle 分布式数据库什么是分布式数据库数据物理上被存放在网络的多个节点上，逻辑上是一个整体 分布式数据库的独立性分布数据库的独立性指用户不必关心数据如何分割和存储，只需关心他需要什么数据 Oracle 分布式RDBMS本地操作 1sqlplus scott/tiger@localhost:1521/orcl  远程操作 1sqlplus scott/tiger@192.168.1.23:15 - QiJieH - Qijieh&#39;s Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/blog/">Qijieh&#39;s Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                hello world.
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/blog/" class="navbar-link">首页</a>
+    
+    
+        <a href="/blog/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/blog/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/blog/tags" class="navbar-link">标签</a>
+    
+        <a href="/blog/links" class="navbar-link">友链</a>
+    
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">初识Oracle分布式数据库</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/blog/img/author.jpg" src="/blog/img/suka-lazyload.gif" alt="QiJieH's Avatar">
+        <span>2020-10-15</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/blog/categories/BackEnd/">BackEnd</a>
+        
+        
+        
+            <span class="suka-devide-dot"></span>
+<span id="/blog/2020/10/15/BackEnd-2020-10-DDB-simple-guide/" class="leancloud-visitors" data-flag-title="初识Oracle分布式数据库">
+    <span>view </span>
+    <span class="leancloud-visitors-count">0</span>
+    <span></span>
+</span>
+        
+    </p>
+    <div class="post-header-info-right">
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Oracle-%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="post-toc-number">1.</span> <span class="post-toc-text">Oracle 分布式数据库</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">什么是分布式数据库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">分布式数据库的独立性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Oracle-%E5%88%86%E5%B8%83%E5%BC%8FRDBMS"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Oracle 分布式RDBMS</span></a></li></ol></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <h2 id="Oracle-分布式数据库"><a href="#Oracle-分布式数据库" class="headerlink" title="Oracle 分布式数据库"></a>Oracle 分布式数据库</h2><h3 id="什么是分布式数据库"><a href="#什么是分布式数据库" class="headerlink" title="什么是分布式数据库"></a>什么是分布式数据库</h3><p>数据物理上被存放在网络的多个节点上，逻辑上是一个整体<br><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master/20201015232534.png"></p>
+<h3 id="分布式数据库的独立性"><a href="#分布式数据库的独立性" class="headerlink" title="分布式数据库的独立性"></a>分布式数据库的独立性</h3><p>分布数据库的独立性指用户不必关心数据如何分割和存储，只需关心他需要什么数据</p>
+<h3 id="Oracle-分布式RDBMS"><a href="#Oracle-分布式RDBMS" class="headerlink" title="Oracle 分布式RDBMS"></a>Oracle 分布式RDBMS</h3><p>本地操作</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlplus scott/tiger@localhost:1521/orcl</span><br></pre></td></tr></table></figure>
+
+<p>远程操作</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlplus scott/tiger@192.168.1.23:1521/orcl</span><br></pre></td></tr></table></figure>
+
+<p><strong>分布操作</strong></p>
+<ul>
+<li>跨节点数据的创建及查询</li>
+<li>跨节点数据更新</li>
+</ul>
+<p><img src="https://gitee.com/QiJieH/blog-image-bed/raw/master/20201015233849.png"></p>
+<p><strong>定义数据库链路 DBLINK</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 创建DBLINK需要相应权限</span></span><br><span class="line"><span class="comment">-- GRANT CREATE DATABASE LINK TO scott</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> <span class="keyword">LINK</span> remoteDB <span class="keyword">CONNECT</span> <span class="keyword">TO</span> scott <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> tiger <span class="keyword">using</span> <span class="string">&#x27;192.168.25.23:1521/orcl&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>修改主机 <code>tnsnames.ora</code> 文件以创建连接的服务名替代使用IP地址</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="attr">REMOTEORCL</span> =</span><br><span class="line">  (<span class="attr">DESCRIPTION</span> =</span><br><span class="line">      (<span class="attr">ADDRESS_LIST</span> =</span><br><span class="line">          (<span class="attr">ADDRESS</span> = (<span class="attr">PROTOCOL</span> = TCP)(<span class="attr">HOST</span> = <span class="number">192.168</span>.<span class="number">1.23</span>)(<span class="attr">PORT</span> = <span class="number">1521</span>))</span><br><span class="line">      )</span><br><span class="line">      (<span class="attr">CONNECT_DATA</span> =</span><br><span class="line">          (<span class="attr">SERVICE_NAME</span> = orcl)</span><br><span class="line">      )</span><br><span class="line">&gt;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;CREATE DATABASE LINK remoteDB CONNECT TO scott IDENTIFIED BY tiger using remoteorcl;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>通过链路查询远端数据库</strong></p>
+<figure class="highlight sql"><figcaption><span>&#123;2&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> ename,dname</span><br><span class="line"><span class="keyword">FROM</span> dept,emp@remoteDB</span><br><span class="line"><span class="keyword">WHERE</span> emp.depton = dept.depton;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用同义词替换远端数据库</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">SYNONYM</span> remoteemp <span class="keyword">FOR</span> emp@remoteDB;</span><br><span class="line"><span class="comment">-- 使用同义词查询</span></span><br><span class="line"><span class="keyword">SELECT</span> ename,dname</span><br><span class="line"><span class="keyword">FROM</span> dept,remoteemp</span><br><span class="line"><span class="keyword">WHERE</span> remoteemp.depton = dept.depton;</span><br></pre></td></tr></table></figure>
+<p>使用同义词替换远端表名后，上述SQL语句已经与本地SQL语句无异，但是其实际上是访问的远端数据库数据，这样就达到了对用户欺骗，造成数据在本机上的效果。</p>
+<p><strong>建立远程表的本地视图</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> allemp <span class="keyword">AS</span></span><br><span class="line">    <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emo</span><br><span class="line">    <span class="keyword">UNION</span></span><br><span class="line">    <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> remoteemp;</span><br></pre></td></tr></table></figure>
+
+<p><strong>分布式数据库的其他操作</strong><br>插入操作：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> remoteemp;</span><br></pre></td></tr></table></figure>
+<p>数据复制：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> emp <span class="keyword">AS</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> remoteemp;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>分布式数据库的跨节点更新</strong></p>
+<ul>
+<li>快照<br>定义快照维护关系表的异步副本，用于主表修改少，但频繁查询的表<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">SNAPSHOT</span> emp</span><br><span class="line">    <span class="keyword">REFRESH</span> <span class="keyword">START</span> <span class="keyword">WITH</span> <span class="keyword">sysdba</span></span><br><span class="line">        <span class="keyword">NEXT</span> next_day(sysdba.<span class="string">&#x27;Monday&#x27;</span>)</span><br><span class="line">    <span class="keyword">AS</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp@maindb;</span><br><span class="line"><span class="comment">-- 注意：快照是定义在备份端，这里的连接应该是客机连接主机的链路</span></span><br></pre></td></tr></table></figure></li>
+<li>触发器<br>在主机上创建触发器，实现数据的同步更新<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">TRIGGER</span> update_emp</span><br><span class="line"><span class="keyword">AFTER</span> <span class="keyword">UPDATE</span> <span class="keyword">ON</span> emp</span><br><span class="line"><span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    <span class="keyword">UPDATE</span> remoteemp <span class="keyword">SET</span> emp.sal = :new.sal</span><br><span class="line">    <span class="keyword">WHERE</span> emp.empno = :new.empno;</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-11-25");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-10-14T16:00:00.000Z" itemprop="datePublished">2020-10-15</time>
+
+    , 最后修改于&nbsp;<time datetime="2020-11-25T09:26:27.897Z" itemprop="dateModified">2020-11-25</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/blog/categories/BackEnd/'>BackEnd</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/blog/tags/Oracle/" rel="tag">#&nbsp;Oracle</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/blog/2020/10/18/BackEnd-2020-10-Javaweb-1-init/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Java Web(一) 开发入门</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/blog/2020/10/10/Other-Eclipse-install-guide/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Eclipse 安装与配置简明指南</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="vcomments"></div>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = ''.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = '' === 'true';
+    var verify = '' === 'true';
+    new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        appId: "process.env.VALINEID",
+        appKey: "process.env.VALINEKEY",
+        placeholder: "Just go go",
+        meta: guest_info,
+        pageSize:'10',
+        avatar:'retro',
+        lang:'zh-cn',
+        guest_info: guest_info,
+        visitor: true
+    });
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://qijieh.gitee.io/blog">Qijieh's Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    Hosted on <a target="_blank" href="https://github.com/QiJieH" rel="nofollow noopener noreferrer noopener">Github Pages</a>
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+            <span id="http://qijieh.gitee.io/blog" class="leancloud-visitors" data-flag-title="Qijieh&#39;s Blog">
+    <span></span><!--
+ --><span class="leancloud-visitors-count">0</span><!--
+ --><span> Visitor |</span>
+</span>
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2019;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/blog/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

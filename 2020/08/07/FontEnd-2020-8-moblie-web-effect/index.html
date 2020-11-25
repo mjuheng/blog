@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="//cdn1.lncld.net">
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>移动端常见网页特效 | Qijieh&#39;s Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/blog/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/blog/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/blog/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/blog/css/highlight/atelier-heath-light.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/blog/css/highlight/atelier-heath-light.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Qijieh's Blog"><meta name="msapplication-starturl" content="http://qijieh.gitee.io/blog"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Qijieh's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="移动端常见网页特效 | Qijieh&#39;s Blog"><meta property="og:site_name" content="Qijieh&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="http://qijieh.gitee.io/blog/2020/08/07/FontEnd-2020-8-moblie-web-effect/"><meta property="og:locale" content="zh-CN"><meta name="description" content="触屏事件移动端浏览器兼容性较好，我们不需要考虑 JS 兼容问题，可以放心使用原生 js 书写效果，但是移动端也有自己独特的地方，比如触屏事件 touch 。 touch 对象代表一个触摸点，触摸点可能是一根手指，也可能是一根触摸笔。触屏事件可以响应用户手指对屏幕或触控板的操作。 常见的触屏事件：    事件 说明    touchstart 触摸到一个 DOM 元素时触发   touchmove  - QiJieH - Qijieh&#39;s Blog"><meta name="keywords" content="Web Design"><meta property="article:published_time" content="2020-08-06T16:00:00.000Z"><meta property="article:modified_time" content="2020-11-25T09:26:27.963Z"><meta property="og:updated_time" content="2020-11-25T09:26:27.963Z"><meta property="article:author" content="QiJieH"><meta property="article:tag" content="Web Design"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://qijieh.gitee.io/blog/2020/08/07/FontEnd-2020-8-moblie-web-effect/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://qijieh.gitee.io/blog/2020/08/07/FontEnd-2020-8-moblie-web-effect/",
+    "@type": "BlogPosting",
+    "logo": "http://qijieh.gitee.io/blog/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://qijieh.gitee.io/blog/2020/08/07/FontEnd-2020-8-moblie-web-effect/"
+    },
+    "headline": "移动端常见网页特效 | Qijieh&#39;s Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2020-08-06T16:00:00.000Z",
+    "dateModified": "2020-11-25T09:26:27.963Z",
+    "author": {
+        "@type": "Person",
+        "name": "QiJieH",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/author.jpg"
+        },
+        "description": "hello world."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Qijieh&#39;s Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://qijieh.gitee.io/blog/blog/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Web Design",
+    "description": "触屏事件移动端浏览器兼容性较好，我们不需要考虑 JS 兼容问题，可以放心使用原生 js 书写效果，但是移动端也有自己独特的地方，比如触屏事件 touch 。 touch 对象代表一个触摸点，触摸点可能是一根手指，也可能是一根触摸笔。触屏事件可以响应用户手指对屏幕或触控板的操作。 常见的触屏事件：    事件 说明    touchstart 触摸到一个 DOM 元素时触发   touchmove  - QiJieH - Qijieh&#39;s Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/blog/">Qijieh&#39;s Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                hello world.
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/blog/" class="navbar-link">首页</a>
+    
+    
+        <a href="/blog/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/blog/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/blog/tags" class="navbar-link">标签</a>
+    
+        <a href="/blog/links" class="navbar-link">友链</a>
+    
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">移动端常见网页特效</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/blog/img/author.jpg" src="/blog/img/suka-lazyload.gif" alt="QiJieH's Avatar">
+        <span>2020-08-07</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/blog/categories/FrontEnd/">FrontEnd</a>
+        
+        
+        
+            <span class="suka-devide-dot"></span>
+<span id="/blog/2020/08/07/FontEnd-2020-8-moblie-web-effect/" class="leancloud-visitors" data-flag-title="移动端常见网页特效">
+    <span>view </span>
+    <span class="leancloud-visitors-count">0</span>
+    <span></span>
+</span>
+        
+    </p>
+    <div class="post-header-info-right">
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A7%A6%E5%B1%8F%E4%BA%8B%E4%BB%B6"><span class="post-toc-number">1.</span> <span class="post-toc-text">触屏事件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%B8%E8%A7%81%E7%89%B9%E6%95%88"><span class="post-toc-number">2.</span> <span class="post-toc-text">移动端常见特效</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%BD%AE%E6%92%AD%E5%9B%BE"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">轮播图</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%BC%80%E5%8F%91%E6%8F%92%E4%BB%B6"><span class="post-toc-number">3.</span> <span class="post-toc-text">移动端常用开发插件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%B8%E7%94%A8%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6"><span class="post-toc-number">4.</span> <span class="post-toc-text">移动端常用开发框架</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <h2 id="触屏事件"><a href="#触屏事件" class="headerlink" title="触屏事件"></a>触屏事件</h2><p>移动端浏览器兼容性较好，我们不需要考虑 JS 兼容问题，可以放心使用原生 js 书写效果，但是移动端也有自己独特的地方，比如触屏事件 <code>touch</code> 。</p>
+<p><code>touch</code> 对象代表一个触摸点，触摸点可能是一根手指，也可能是一根触摸笔。触屏事件可以响应用户手指对屏幕或触控板的操作。</p>
+<p>常见的触屏事件：</p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>touchstart</code></td>
+<td>触摸到一个 DOM 元素时触发</td>
+</tr>
+<tr>
+<td><code>touchmove</code></td>
+<td>在一个 DOM 上滑动时触发</td>
+</tr>
+<tr>
+<td><code>touchend</code></td>
+<td>手指从一个 DOM 元素上移开时触发</td>
+</tr>
+</tbody></table>
+<p><strong>触摸事件对象</strong></p>
+<hr>
+<p><code>touchstart</code> , <code>touchmove</code> ,<code>touchend</code>  三个事件都有各自的事件对象</p>
+<p><code>TouchEvent</code> 是一类描述手指在触摸平面的状态变化的事件。这类事件作用与描述一个或多个触点，使开发者可以检测触点的移动，触点的增加和减少，等等。</p>
+<table>
+<thead>
+<tr>
+<th>属性对象</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>touches</code></td>
+<td>正在触摸屏幕的所有手指的一个列表</td>
+</tr>
+<tr>
+<td><code>targetTouches</code></td>
+<td>正在触摸当前 DOM 元素上的手指的一个列表</td>
+</tr>
+<tr>
+<td><code>changedTouches</code></td>
+<td>手指状态发生了改变的列表，从无到有，从有到无</td>
+</tr>
+</tbody></table>
+<p><strong>移动端拖动元素</strong></p>
+<ul>
+<li><code>touchstarts</code>,<code>touchmove</code>,<code>touchend</code> 可以实现拖动元素</li>
+<li>但是拖动元素需要当前手指的坐标值，我们可以使用 <code>tarfetTouches[0]</code> 里的 <code>pageX</code> 和 <code>pageY</code></li>
+<li>在手指移动时计算出手指移动距离，然后用盒子原来的位置加上手指移动的距离</li>
+</ul>
+<p>实现关键：</p>
+<ol>
+<li>触摸元素 <code>touchstart</code> ：获取手指初始坐标，同时获得盒子原来的位置</li>
+<li>移动手指 <code>touchmove</code> ： 计算手指的滑动距离，并且移动盒子</li>
+<li>离开手指 <code>touchend</code></li>
+</ol>
+<blockquote>
+<p>手指移动也会触发滚动屏幕，所以这里要阻止默认的屏幕滚动 <code>e.preventDefalut()</code></p>
+</blockquote>
+<h2 id="移动端常见特效"><a href="#移动端常见特效" class="headerlink" title="移动端常见特效"></a>移动端常见特效</h2><h3 id="轮播图"><a href="#轮播图" class="headerlink" title="轮播图"></a>轮播图</h3><ul>
+<li><p>自动播放功能</p>
+<ol>
+<li>开启定时器</li>
+<li>移动端移动，可以使用 <code>transale</code> 移动</li>
+<li>添加过渡效果 <code>transition</code></li>
+</ol>
+</li>
+<li><p>无缝滚动</p>
+<ol>
+<li>判断条件应等到图片滚动完毕后再去判断，就是过渡完成后判断</li>
+<li>过渡完成检测事件 <code>transitionend</code></li>
+<li>如果索引号是最后一张，说明已经完成一个流程，此时索引号复原</li>
+<li>注意需要去除过渡效果</li>
+</ol>
+</li>
+<li><p>圆点跟随变化</p>
+<ol>
+<li>把 <code>ol</code> 里面 <code>li</code> 带有 <code>current</code> 类名的选出来去点类名 <code>classList.remove</code></li>
+<li>让当前索引的加上 <code>classList.add</code> <code>current</code> 类</li>
+</ol>
+</li>
+</ul>
+<p><code>classList</code> 属性是 HTML5 新增的一个属性，返回元素的类名。</p>
+<p>该属性用于在元素中添加，移除以及切换 css 类。</p>
+<p>添加类：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.classList.add(<span class="string">&#x27;classname&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>删除类：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.classList.remove(<span class="string">&#x27;classname&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>切换类：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.classList.toggle(<span class="string">&#x27;classname&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;en&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">&quot;viewport&quot;</span> content=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        * &#123;</span><br><span class="line">            margin: <span class="number">0</span>;</span><br><span class="line">            padding: <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ul,ol,li&#123;</span><br><span class="line">            list-style: none;</span><br><span class="line">        &#125;</span><br><span class="line">        .focus&#123;</span><br><span class="line">            width: <span class="number">100</span>%;</span><br><span class="line">            height: auto;</span><br><span class="line">            position: relative;</span><br><span class="line">            overflow: hidden;</span><br><span class="line">        &#125;</span><br><span class="line">        .focus ul&#123;</span><br><span class="line">            width: <span class="number">500</span>%;</span><br><span class="line">            overflow: hidden;</span><br><span class="line">            margin-left: -<span class="number">100</span>%;</span><br><span class="line">        &#125;</span><br><span class="line">        .focus ul li&#123;</span><br><span class="line">            float: left;</span><br><span class="line">            width:<span class="number">20</span>%;</span><br><span class="line">        &#125;</span><br><span class="line">        .focus ul li img&#123;</span><br><span class="line">            width: <span class="number">100</span>%;</span><br><span class="line">        &#125;</span><br><span class="line">        .focus ol&#123;</span><br><span class="line">            position: absolute;</span><br><span class="line">            bottom: 18px;</span><br><span class="line">            right: 5px;</span><br><span class="line">            margin: <span class="number">0</span>;</span><br><span class="line">            z-index: <span class="number">200</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        .focus ol li&#123;</span><br><span class="line">            width: 5px;</span><br><span class="line">            height: 5px;</span><br><span class="line">            background-color: white;</span><br><span class="line">            display: inline-block;</span><br><span class="line">            border-radius: 4px;</span><br><span class="line">            transition: all .3s;</span><br><span class="line">        &#125;</span><br><span class="line">        .focus ol li.current&#123;</span><br><span class="line">            width: 15px;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;focus&quot;</span>&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &lt;li&gt;<span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;05.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">            &lt;li&gt;<span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;03.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">            &lt;li&gt;<span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;04.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">            &lt;li&gt;<span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;05.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">            &lt;li&gt;<span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;03.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">        &lt;ol&gt;</span><br><span class="line">            &lt;li <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;current&quot;</span>&gt;&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;&lt;/li&gt;</span><br><span class="line">        &lt;/ol&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        <span class="keyword">var</span> focus = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.focus&#x27;</span>);</span><br><span class="line">        <span class="keyword">var</span> ul = focus.children[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">var</span> w = focus.offsetWidth;</span><br><span class="line">        <span class="keyword">var</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">var</span> ol = focus.children[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">var</span> timer = <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            person = <span class="literal">false</span>;</span><br><span class="line">            index++;</span><br><span class="line">            ul.style.transition = <span class="string">&#x27;all .3s&#x27;</span>;</span><br><span class="line">            ul.style.transform = <span class="string">&#x27;translateX(&#x27;</span>+ -index*w +<span class="string">&#x27;px)&#x27;</span>;</span><br><span class="line">        &#125;,<span class="number">2000</span>);</span><br><span class="line">        </span><br><span class="line">        ul.addEventListener(<span class="string">&#x27;transitionend&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(index&gt;=<span class="number">3</span>)&#123;</span><br><span class="line">                index = <span class="number">0</span>;</span><br><span class="line">                ul.style.transition = <span class="string">&#x27;none&#x27;</span>;</span><br><span class="line">                ul.style.transform = <span class="string">&#x27;translateX(&#x27;</span>+ -index*w +<span class="string">&#x27;px)&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(index &lt; <span class="number">0</span>)&#123;</span><br><span class="line">                index = <span class="number">2</span>;</span><br><span class="line">                ul.style.transition = <span class="string">&#x27;none&#x27;</span>;</span><br><span class="line">                ul.style.transform = <span class="string">&#x27;translateX(&#x27;</span>+ -index*w +<span class="string">&#x27;px)&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            ol.querySelector(<span class="string">&#x27;.current&#x27;</span>).classList.remove(<span class="string">&#x27;current&#x27;</span>);</span><br><span class="line">            ol.children[index].classList.add(<span class="string">&#x27;current&#x27;</span>);</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> startX = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">var</span> moveX = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">var</span> flag = <span class="literal">false</span>;</span><br><span class="line">        </span><br><span class="line">        ul.addEventListener(<span class="string">&#x27;touchstart&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">            startX = e.targetTouches[<span class="number">0</span>].pageX;</span><br><span class="line">            <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">        &#125;)</span><br><span class="line">        ul.addEventListener(<span class="string">&#x27;touchmove&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">            e.preventDefault();</span><br><span class="line">            moveX = e.targetTouches[<span class="number">0</span>].pageX - startX;</span><br><span class="line">            <span class="keyword">var</span> translateX = -index * w + moveX;</span><br><span class="line">            ul.style.transition = <span class="string">&#x27;none&#x27;</span>;</span><br><span class="line">            ul.style.transform = <span class="string">&#x27;translateX(&#x27;</span>+ translateX +<span class="string">&#x27;px)&#x27;</span>;</span><br><span class="line">            flag = <span class="literal">true</span>;</span><br><span class="line">        &#125;)</span><br><span class="line">        ul.addEventListener(<span class="string">&#x27;touchend&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">            e.preventDefault();</span><br><span class="line">            <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">            <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">Math</span>.abs(moveX) &gt; <span class="number">50</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(moveX &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                        index--;</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        index++;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">var</span> translateX = -index * w;</span><br><span class="line">                    ul.style.transition = <span class="string">&#x27;all .3s&#x27;</span>;</span><br><span class="line">                    ul.style.transform = <span class="string">&#x27;translateX(&#x27;</span>+ translateX +<span class="string">&#x27;px)&#x27;</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">var</span> translateX = -index * w;</span><br><span class="line">                    ul.style.transition = <span class="string">&#x27;all .3s&#x27;</span>;</span><br><span class="line">                    ul.style.transform = <span class="string">&#x27;translateX(&#x27;</span>+ translateX +<span class="string">&#x27;px)&#x27;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            timer = <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                index++;</span><br><span class="line">                ul.style.transition = <span class="string">&#x27;all .3s&#x27;</span>;</span><br><span class="line">                ul.style.transform = <span class="string">&#x27;translateX(&#x27;</span>+ -index*w +<span class="string">&#x27;px)&#x27;</span>;</span><br><span class="line">            &#125;,<span class="number">2000</span>);</span><br><span class="line">            </span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p><strong>click 延时解决方案</strong></p>
+<hr>
+<p>移动端 <code>click</code> 事件会有 300ms 的延时，原因是移动端屏幕双击会缩放页面 （double tap to zoom）</p>
+<p>解决方案：</p>
+<ol>
+<li>禁止用户缩放</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;user-scalable=no&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>利用 <code>touch</code> 事件封装函数解决</li>
+<li>使用 <code>fastclick</code> 插件（见移动端常用开发插件）</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://github.com/ftlabs/fastclick">Github：fastclick</a></p>
+<h2 id="移动端常用开发插件"><a href="#移动端常用开发插件" class="headerlink" title="移动端常用开发插件"></a>移动端常用开发插件</h2><p>移动端要求的是快速开发，所以我们经常会借助一些插件来帮助我们完成操作。</p>
+<p>JS 插件是 js 文件，它遵循一定的规范编写，方便程序展示效果，拥有特定的功能且方便调用。如轮播图和瀑布流插件。</p>
+<p>特点：专门为了解决某个问题而存在，功能单一，体积较小</p>
+<p>插件使用：</p>
+<ol>
+<li>引入 JS 文件。</li>
+<li><strong>查看文档说明。</strong></li>
+</ol>
+<p><strong>Swiper</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.swiper.com.cn/">https://www.swiper.com.cn/</a></p>
+<p><strong>superslide</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.superslide2.com/">https://www.superslide2.com</a></p>
+<p><strong>iscroll</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/cubiq/iscroll">https://github.com/cubiq/iscroll</a></p>
+<p>移动端视频插件 zy.media.js</p>
+<h2 id="移动端常用开发框架"><a href="#移动端常用开发框架" class="headerlink" title="移动端常用开发框架"></a>移动端常用开发框架</h2><p>框架，顾名思义就是一套架构，它会基于自身的特点向用户提供一套较为完整的解决方法。构架的控制权在框架本身，使用者要按照框架所规定的某种规范进行开发</p>
+<p><a target="_blank" rel="noopener" href="https://www.bootcss.com/">Bootstrap中文网</a></p>
+<p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/guide/">Vue.js</a></p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-11-25");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-08-06T16:00:00.000Z" itemprop="datePublished">2020-08-07</time>
+
+    , 最后修改于&nbsp;<time datetime="2020-11-25T09:26:27.963Z" itemprop="dateModified">2020-11-25</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/blog/categories/FrontEnd/'>FrontEnd</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/blog/tags/Web-Design/" rel="tag">#&nbsp;Web Design</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/blog/2020/08/07/FontEnd-2020-8-WEBAPI/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">WEB API</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/blog/2020/08/07/FontEnd-2020-8-pc-web-effect/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">PC端常见网页特效</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="vcomments"></div>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = ''.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = '' === 'true';
+    var verify = '' === 'true';
+    new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        appId: "process.env.VALINEID",
+        appKey: "process.env.VALINEKEY",
+        placeholder: "Just go go",
+        meta: guest_info,
+        pageSize:'10',
+        avatar:'retro',
+        lang:'zh-cn',
+        guest_info: guest_info,
+        visitor: true
+    });
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://qijieh.gitee.io/blog">Qijieh's Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    Hosted on <a target="_blank" href="https://github.com/QiJieH" rel="nofollow noopener noreferrer noopener">Github Pages</a>
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+            <span id="http://qijieh.gitee.io/blog" class="leancloud-visitors" data-flag-title="Qijieh&#39;s Blog">
+    <span></span><!--
+ --><span class="leancloud-visitors-count">0</span><!--
+ --><span> Visitor |</span>
+</span>
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2019;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/blog/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="//cdn1.lncld.net">
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>[项目实战] 多人博客管理系统 | Qijieh&#39;s Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/blog/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/blog/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/blog/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/blog/css/highlight/atelier-heath-light.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/blog/css/highlight/atelier-heath-light.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Qijieh's Blog"><meta name="msapplication-starturl" content="http://qijieh.gitee.io/blog"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Qijieh's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="[项目实战] 多人博客管理系统 | Qijieh&#39;s Blog"><meta property="og:site_name" content="Qijieh&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="http://qijieh.gitee.io/blog/2020/08/07/FontEnd-2020-8-Project-BlogManageSystem/"><meta property="og:locale" content="zh-CN"><meta name="description" content="![](https:&#x2F;&#x2F;gitee.com&#x2F;QiJieH&#x2F;blog-image-bed&#x2F;raw&#x2F;master&#x2F;&#x2F;20200807151042.png &#x3D;700x) 技术栈：node.js + express + mongodb + bootstrap 实现功能：  登录注册 文章管理 用户管理 文章评论   项目仓库地址 ：QiJieH&#x2F;BlogMS - QiJieH - Qijieh&#39;s Blog"><meta name="keywords" content="Node.js, Express, MongoDB, ProjectPractice, Art-template"><meta property="article:published_time" content="2020-08-06T16:00:00.000Z"><meta property="article:modified_time" content="2020-11-25T09:26:27.958Z"><meta property="og:updated_time" content="2020-11-25T09:26:27.958Z"><meta property="article:author" content="QiJieH"><meta property="article:tag" content="Node.js, Express, MongoDB, ProjectPractice, Art-template"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://qijieh.gitee.io/blog/2020/08/07/FontEnd-2020-8-Project-BlogManageSystem/">
+
+    <meta name="generator" content="Hexo 5.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://qijieh.gitee.io/blog/2020/08/07/FontEnd-2020-8-Project-BlogManageSystem/",
+    "@type": "BlogPosting",
+    "logo": "http://qijieh.gitee.io/blog/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://qijieh.gitee.io/blog/2020/08/07/FontEnd-2020-8-Project-BlogManageSystem/"
+    },
+    "headline": "[项目实战] 多人博客管理系统 | Qijieh&#39;s Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2020-08-06T16:00:00.000Z",
+    "dateModified": "2020-11-25T09:26:27.958Z",
+    "author": {
+        "@type": "Person",
+        "name": "QiJieH",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/author.jpg"
+        },
+        "description": "hello world."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Qijieh&#39;s Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://qijieh.gitee.io/blog/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://qijieh.gitee.io/blog/blog/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Node.js, Express, MongoDB, ProjectPractice, Art-template",
+    "description": "![](https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807151042.png =700x) 技术栈：node.js + express + mongodb + bootstrap 实现功能：  登录注册 文章管理 用户管理 文章评论   项目仓库地址 ：QiJieH/BlogMS - QiJieH - Qijieh&#39;s Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/blog/">Qijieh&#39;s Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                hello world.
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/blog/" class="navbar-link">首页</a>
+    
+    
+        <a href="/blog/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/blog/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/blog/tags" class="navbar-link">标签</a>
+    
+        <a href="/blog/links" class="navbar-link">友链</a>
+    
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">[项目实战] 多人博客管理系统</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/blog/img/author.jpg" src="/blog/img/suka-lazyload.gif" alt="QiJieH's Avatar">
+        <span>2020-08-07</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/blog/categories/FrontEnd/">FrontEnd</a><span class="suka-devide-dot"></span><a class="category-link" href="/blog/categories/FrontEnd/BackEnd/">BackEnd</a>
+        
+        
+        
+            <span class="suka-devide-dot"></span>
+<span id="/blog/2020/08/07/FontEnd-2020-8-Project-BlogManageSystem/" class="leancloud-visitors" data-flag-title="[项目实战] 多人博客管理系统">
+    <span>view </span>
+    <span class="leancloud-visitors-count">0</span>
+    <span></span>
+</span>
+        
+    </p>
+    <div class="post-header-info-right">
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98-%E5%A4%9A%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="post-toc-number">1.</span> <span class="post-toc-text">项目实战   多人博客管理系统</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%BF%90%E8%A1%8C%E8%AF%B4%E6%98%8E"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">运行说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">1. 项目环境搭建</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">1.1 项目介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-%E6%A1%88%E4%BE%8B%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">1.2 案例初始化</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-%E7%99%BB%E5%BD%95"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">2. 登录</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">2.1 登录功能实现步骤</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">3. 密码加密</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86-bcrypt"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">3.1 密码加密 bcrypt</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-bcrypt-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">3.2 bcrypt 环境部署</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-3-bcrypt-%E6%B5%8B%E8%AF%95"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">3.3 bcrypt 测试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-4-%E5%AF%86%E7%A0%81%E6%AF%94%E5%AF%B9"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">3.4 密码比对</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-cookie%E4%B8%8Esession"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">4. cookie与session</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-c-amp-s%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">4.1 c&amp;s环境部署</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-%E7%99%BB%E5%BD%95%E6%8B%A6%E6%88%AA"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">4.2 登录拦截</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-3-%E7%99%BB%E5%BD%95%E6%B3%A8%E9%94%80"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">4.3 登录注销</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-%E6%96%B0%E5%A2%9E%E7%94%A8%E6%88%B7"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">5. 新增用户</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-1-%E8%BE%93%E5%85%A5%E9%AA%8C%E8%AF%81-Joi"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">5.1 输入验证 Joi</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-2-%E5%AE%8C%E6%95%B4%E5%AE%9E%E7%8E%B0"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">5.2 完整实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-%E7%94%A8%E6%88%B7%E5%88%97%E8%A1%A8"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">6. 用户列表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-1-%E5%AE%8C%E6%95%B4%E6%98%BE%E7%A4%BA"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">6.1 完整显示</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-2-%E5%88%86%E9%A1%B5%E6%98%BE%E7%A4%BA"><span class="post-toc-number">1.7.2.</span> <span class="post-toc-text">6.2 分页显示</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-3-%E5%AE%8C%E6%95%B4%E5%AE%9E%E7%8E%B0"><span class="post-toc-number">1.7.3.</span> <span class="post-toc-text">6.3 完整实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-4-%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7"><span class="post-toc-number">1.7.4.</span> <span class="post-toc-text">6.4 修改用户</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-%E6%95%B0%E6%8D%AE%E5%88%86%E9%A1%B5"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">7.数据分页</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-mongodb%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B7%BB%E5%8A%A0%E8%B4%A6%E5%8F%B7"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">8.mongodb数据库添加账号</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%B8%8E%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">9.开发环境与生产环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-config"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">10.config</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#11-%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">11.文章评论</span></a></li></ol></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p>![](<a target="_blank" rel="noopener" href="https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807151042.png">https://gitee.com/QiJieH/blog-image-bed/raw/master//20200807151042.png</a> =700x)</p>
+<p>技术栈：<code>node.js</code> + <code>express</code> + <code>mongodb</code> + <code>bootstrap</code></p>
+<p>实现功能：</p>
+<ul>
+<li>登录注册</li>
+<li>文章管理</li>
+<li>用户管理</li>
+<li>文章评论</li>
+</ul>
+<blockquote>
+<p>项目仓库地址 ：<a target="_blank" rel="noopener" href="https://github.com/QiJieH/BlogMS">QiJieH/BlogMS</a></p>
+<a id="more"></a>
+
+<h1 id="项目实战-多人博客管理系统"><a href="#项目实战-多人博客管理系统" class="headerlink" title="项目实战   多人博客管理系统"></a>项目实战   多人博客管理系统</h1></blockquote>
+<p> <strong>快速预览:</strong></p>
+<p>![](<a target="_blank" rel="noopener" href="https://i.loli.net/2020/08/07/o3YrjK1gZlhs74e.png">https://i.loli.net/2020/08/07/o3YrjK1gZlhs74e.png</a> =700x)</p>
+<p>![](<a target="_blank" rel="noopener" href="https://i.loli.net/2020/08/07/IASwVrNeqoE6KCa.png">https://i.loli.net/2020/08/07/IASwVrNeqoE6KCa.png</a> =700x)</p>
+<p>![](<a target="_blank" rel="noopener" href="https://i.loli.net/2020/08/07/AxdSEKN6kg8Q5si.png">https://i.loli.net/2020/08/07/AxdSEKN6kg8Q5si.png</a> =700x)</p>
+<p>![](<a target="_blank" rel="noopener" href="https://i.loli.net/2020/08/07/aqegQXNLhJSEYPc.png">https://i.loli.net/2020/08/07/aqegQXNLhJSEYPc.png</a> =700x)</p>
+<h2 id="运行说明"><a href="#运行说明" class="headerlink" title="运行说明"></a>运行说明</h2><p>请使用 <code>nodemon</code> 开启网站监听。<br>注意初次部署你可能需要自行添加数据库中的用户信息。</p>
+<h2 id="1-项目环境搭建"><a href="#1-项目环境搭建" class="headerlink" title="1. 项目环境搭建"></a>1. 项目环境搭建</h2><p>nodejs + mongodb + express</p>
+<h3 id="1-1-项目介绍"><a href="#1-1-项目介绍" class="headerlink" title="1.1 项目介绍"></a>1.1 项目介绍</h3><ul>
+<li>博客内容展示</li>
+<li>博客管理功能</li>
+</ul>
+<h3 id="1-2-案例初始化"><a href="#1-2-案例初始化" class="headerlink" title="1.2 案例初始化"></a>1.2 案例初始化</h3><ol>
+<li>建立项目文件结构<ul>
+<li>public 静态资源</li>
+<li>model 数据库操作</li>
+<li>route 路由</li>
+<li>views 模板</li>
+</ul>
+</li>
+<li>初始化项目描述文件<ul>
+<li>npm init -y</li>
+</ul>
+</li>
+<li>下载项目依赖的第三方模块<ul>
+<li>npm install express mongoose art-template express-art-template</li>
+</ul>
+</li>
+<li>创建网站服务器</li>
+<li>构建模块化路由</li>
+<li>构建博客管理页面模板</li>
+</ol>
+<h2 id="2-登录"><a href="#2-登录" class="headerlink" title="2. 登录"></a>2. 登录</h2><hr>
+<p>包含一般正常的登录逻辑，即账号密码验证</p>
+<h3 id="2-1-登录功能实现步骤"><a href="#2-1-登录功能实现步骤" class="headerlink" title="2.1 登录功能实现步骤"></a>2.1 登录功能实现步骤</h3><ol>
+<li>创建用户集合，初始化用户<ol>
+<li>连接数据库</li>
+<li>创建用户集合</li>
+<li>初始化用户</li>
+</ol>
+</li>
+<li>为登录表单设置请求地址，请求方式以及表单项name属性</li>
+<li>当用户点击登录按钮时，客户端验证用户是否填写了登录表单</li>
+<li>如果其中一项没有输入，阻止表单提交</li>
+<li>服务器端接收请求参数，验证用户是否填写了表单</li>
+<li>如果其中一项没有输入，为客户端做出响应，阻止程序向下执行</li>
+<li>根据邮箱地址查询用户信息</li>
+<li>如果用户不存在，为客户端做出响应，阻止程序向下运行</li>
+<li>如果用户存在，将用户名和密码进行对比</li>
+<li>对比成功，用户登录成功</li>
+<li>对比失败，用户登录失败</li>
+</ol>
+<h2 id="3-密码加密"><a href="#3-密码加密" class="headerlink" title="3. 密码加密"></a>3. 密码加密</h2><p>在数据库中直接明文存储用户密码是不安全的，一但数据库信息泄露，可能导致恶意登录操作用户账户，所以需要对数据库的用户密码进行加密。</p>
+<h3 id="3-1-密码加密-bcrypt"><a href="#3-1-密码加密-bcrypt" class="headerlink" title="3.1 密码加密 bcrypt"></a>3.1 密码加密 bcrypt</h3><p>哈希加密是单程加密方式：123 =&gt; abcd</p>
+<p>但是这种方式仍有方法破解，攻击者可以通过创建账号密码拿到加密字符，通过字符对比获取到的其他用户数据库存储加密明文密码进行破解。</p>
+<p>在加密的密码中加入随机字符串可以增加解密难度。</p>
+<h3 id="3-2-bcrypt-环境部署"><a href="#3-2-bcrypt-环境部署" class="headerlink" title="3.2 bcrypt 环境部署"></a>3.2 bcrypt 环境部署</h3><p>python 2.7</p>
+<p><a target="_blank" rel="noopener" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p>
+<p>注意添加环境变量</p>
+<p>node-gyp</p>
+<p><code>npm install node-gyp -g</code></p>
+<p>windows-build-tool</p>
+<p><code>npm install --global --production windows-build-tools</code></p>
+<h3 id="3-3-bcrypt-测试"><a href="#3-3-bcrypt-测试" class="headerlink" title="3.3 bcrypt 测试"></a>3.3 bcrypt 测试</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bcrypt = <span class="built_in">require</span>(<span class="string">&#x27;bcrypt&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步同步</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 生成随机字符串</span></span><br><span class="line">    <span class="keyword">const</span> salt = <span class="keyword">await</span> bcrypt.genSalt(<span class="number">10</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(salt);</span><br><span class="line">    <span class="comment">// 加密</span></span><br><span class="line">    <span class="keyword">const</span> result = <span class="keyword">await</span> bcrypt.hash(<span class="string">&#x27;123456&#x27;</span>, salt);</span><br><span class="line">    <span class="built_in">console</span>.log(result);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">run();</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">creatUser</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> salt = <span class="keyword">await</span> bcrypt.genSalt(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">const</span> pass = <span class="keyword">await</span> bcrypt.hash(<span class="string">&#x27;admin&#x27;</span>, salt);</span><br><span class="line">    <span class="keyword">const</span> user = <span class="keyword">await</span> User.create(&#123;</span><br><span class="line">        username : <span class="string">&#x27;QiJieH&#x27;</span>,</span><br><span class="line">        email : <span class="string">&#x27;1279656042@qq.com&#x27;</span>,</span><br><span class="line">        password : pass,</span><br><span class="line">        role : <span class="string">&#x27;admin&#x27;</span>,</span><br><span class="line">        state : <span class="number">0</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">creatUser();</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-4-密码比对"><a href="#3-4-密码比对" class="headerlink" title="3.4 密码比对"></a>3.4 密码比对</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法示例</span></span><br><span class="line"><span class="keyword">let</span> isEqual = <span class="keyword">await</span> bcrypt.compare(<span class="string">&#x27;明文密码&#x27;</span>, <span class="string">&#x27;加密密码&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询用户信息</span></span><br><span class="line"><span class="keyword">let</span> user = <span class="keyword">await</span> User.findOne(&#123;email&#125;);</span><br><span class="line"><span class="keyword">let</span> isVaild = <span class="keyword">await</span> bcrypt.compare(password, user.password)</span><br><span class="line"><span class="keyword">if</span>(user &amp;&amp; isVaild ) &#123;</span><br><span class="line">    res.send(<span class="string">&#x27;登录成功&#x27;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    res.status(<span class="number">400</span>).render(<span class="string">&#x27;./home/error&#x27;</span>, &#123;<span class="attr">msg</span>:<span class="string">&#x27;邮箱地址或密码错误&#x27;</span>&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="4-cookie与session"><a href="#4-cookie与session" class="headerlink" title="4. cookie与session"></a>4. cookie与session</h2><p>cookie: 浏览器在电脑硬盘中开辟的一块空间，主要提供服务器存储数据</p>
+<ul>
+<li>cookie中的数据是以域名的形式进行区分</li>
+<li>cookie具有过期时间</li>
+<li>cookie中的数据会随请求被自动发送到服务器端</li>
+</ul>
+<p>session: 实际上是一个对象，存储在服务器端的内存中，在session对象中也可以存储多条数据，每一条数据都有一个sesssionid作为唯一标识</p>
+<h3 id="4-1-c-amp-s环境部署"><a href="#4-1-c-amp-s环境部署" class="headerlink" title="4.1 c&amp;s环境部署"></a>4.1 c&amp;s环境部署</h3><p>在node.js中需要借助express-session实现session功能</p>
+<p><code>npm install express-session</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> session = <span class="built_in">require</span>(<span class="string">&#x27;express-session&#x27;</span>);</span><br><span class="line">app.use(session(&#123;<span class="attr">secret</span>: <span class="string">&#x27;secret key&#x27;</span>&#125;));</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将用户数据存储到session session会自动将信息存储到客户端</span></span><br><span class="line">req.session.username = user.username;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 公开模板信息</span></span><br><span class="line">req.app.locals.userInfo = user;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-2-登录拦截"><a href="#4-2-登录拦截" class="headerlink" title="4.2 登录拦截"></a>4.2 登录拦截</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">app.use(<span class="string">&#x27;/admin&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(req.url != <span class="string">&#x27;/login&#x27;</span> &amp;&amp; !req.session.username) &#123;</span><br><span class="line">        res.redirect(<span class="string">&#x27;/admin/login&#x27;</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        next();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-3-登录注销"><a href="#4-3-登录注销" class="headerlink" title="4.3 登录注销"></a>4.3 登录注销</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.clearCookie(<span class="string">&#x27;connect.sid&#x27;</span>);</span><br><span class="line">    res.redirect(<span class="string">&#x27;/admin/login&#x27;</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="5-新增用户"><a href="#5-新增用户" class="headerlink" title="5. 新增用户"></a>5. 新增用户</h2><hr>
+<ol>
+<li>为用户列表新增添加按钮链接</li>
+<li>添加一个链接对应的路由，在路由处理函数中渲染新增用户模板</li>
+<li>为新增用户表单指定请求地址，请求方式，为表单项添加name属性</li>
+<li>增加实现添加用户的功能路由</li>
+<li>接收到客户端传递过来的参数</li>
+<li>对请求参数格式进行验证</li>
+<li>验证当前要注册的邮箱地址是否已经注册过</li>
+<li>对密码进行加密处理</li>
+<li>将用户信息添加到数据库</li>
+<li>重定向到用户列表页面</li>
+</ol>
+<h3 id="5-1-输入验证-Joi"><a href="#5-1-输入验证-Joi" class="headerlink" title="5.1 输入验证 Joi"></a>5.1 输入验证 Joi</h3><p>javascript对象的规则描述和验证器</p>
+<p><code>npm install joi</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Joi = <span class="built_in">require</span>(<span class="string">&#x27;joi&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> schema = &#123;</span><br><span class="line">    username :  Joi.string().required().min(<span class="number">2</span>).max(<span class="number">5</span>).error(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;username 未通过&#x27;</span>)),</span><br><span class="line">    birth    :  Joi.number().min(<span class="number">1900</span>).max(<span class="number">2020</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">await</span> Joi.validate(&#123;<span class="attr">username</span>:<span class="string">&#x27;add&#x27;</span>,<span class="attr">birth</span>: <span class="number">1999</span>&#125;, schema);</span><br><span class="line">    &#125;<span class="keyword">catch</span>(e) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(e.message);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;pass&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">run();</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Joi = <span class="built_in">require</span>(<span class="string">&#x27;joi&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> schema = &#123;</span><br><span class="line">    username:   Joi.string().required().min(<span class="number">2</span>).max(<span class="number">12</span>).error(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;用户名不符合规则&#x27;</span>)),</span><br><span class="line">    email   :   Joi.string().email(),</span><br><span class="line">    password:   Joi.string().required().regex(<span class="regexp">/^[a-zA-Z0-9]&#123;6,24&#125;$/</span>).error(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;邮箱格式错误&#x27;</span>)),</span><br><span class="line">    role    :   Joi.string().required().valid(<span class="string">&#x27;normal&#x27;</span>,<span class="string">&#x27;admin&#x27;</span>).error(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;角色值错误&#x27;</span>)),</span><br><span class="line">    state   :   Joi.number().required().valid(<span class="number">0</span>,<span class="number">1</span>).error(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;状态值错误&#x27;</span>))</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">await</span> Joi.validate(req.body, schema);</span><br><span class="line">    &#125;<span class="keyword">catch</span>(e) &#123;</span><br><span class="line">        res.redirect(<span class="string">`/admin/user-edit?message=<span class="subst">$&#123;e.message&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    res.send(req.body);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-2-完整实现"><a href="#5-2-完整实现" class="headerlink" title="5.2 完整实现"></a>5.2 完整实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Joi = <span class="built_in">require</span>(<span class="string">&#x27;joi&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; User &#125; = <span class="built_in">require</span>(<span class="string">&#x27;../../model/user&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> bcrypt = <span class="built_in">require</span>(<span class="string">&#x27;bcrypt&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> schema = &#123;</span><br><span class="line">    username:   Joi.string().required().min(<span class="number">2</span>).max(<span class="number">12</span>).error(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;用户名不符合规则&#x27;</span>)),</span><br><span class="line">    email   :   Joi.string().email().error(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;邮箱不符合规则&#x27;</span>)),</span><br><span class="line">    password:   Joi.string().required().regex(<span class="regexp">/^[a-zA-Z0-9]&#123;6,24&#125;$/</span>).error(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;密码不符合规则&#x27;</span>)),</span><br><span class="line">    role    :   Joi.string().required().valid(<span class="string">&#x27;normal&#x27;</span>,<span class="string">&#x27;admin&#x27;</span>).error(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;角色值错误&#x27;</span>)),</span><br><span class="line">    state   :   Joi.number().required().valid(<span class="number">0</span>,<span class="number">1</span>).error(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;状态值错误&#x27;</span>))</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 验证表单</span></span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">await</span> Joi.validate(req.body, schema);</span><br><span class="line">    &#125;<span class="keyword">catch</span>(e) &#123;</span><br><span class="line">        <span class="keyword">return</span> res.redirect(<span class="string">`/admin/user-edit?message=<span class="subst">$&#123;e.message&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 查询账户存在</span></span><br><span class="line">    <span class="keyword">let</span> user = <span class="keyword">await</span> User.findOne(&#123;<span class="attr">email</span> : req.body.email&#125;);</span><br><span class="line">    <span class="keyword">if</span>(user) &#123;</span><br><span class="line">        <span class="keyword">return</span> res.redirect(<span class="string">`/admin/user-edit?message=邮箱地址已经被占用`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 加密密码</span></span><br><span class="line">    <span class="keyword">const</span> salt = <span class="keyword">await</span> bcrypt.genSalt(<span class="number">10</span>);</span><br><span class="line">    req.body.password = <span class="keyword">await</span> bcrypt.hash(req.body.password, salt);</span><br><span class="line">    <span class="comment">// 添加数据库</span></span><br><span class="line">    <span class="keyword">await</span> User.create(req.body);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    res.redirect(<span class="string">&#x27;/admin/user&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-用户列表"><a href="#6-用户列表" class="headerlink" title="6. 用户列表"></a>6. 用户列表</h2><hr>
+<h3 id="6-1-完整显示"><a href="#6-1-完整显示" class="headerlink" title="6.1 完整显示"></a>6.1 完整显示</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;each users&#125;&#125;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                    &lt;td&gt;&#123;&#123;@$value._id&#125;&#125;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;&#123;&#123;$value.username&#125;&#125;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;&#123;&#123;$value.email&#125;&#125;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;&#123;&#123;$value.role == <span class="string">&#x27;admin&#x27;</span> ? <span class="string">&#x27;管理员&#x27;</span> : <span class="string">&#x27;用户&#x27;</span>&#125;&#125;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;&#123;&#123;$value.state == <span class="number">0</span> ? <span class="string">&#x27;启用&#x27;</span> : <span class="string">&#x27;禁用&#x27;</span>&#125;&#125;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;</span><br><span class="line">                        &lt;a <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;btn btn-default btn-xs&quot;</span> href=<span class="string">&quot;user-edit&quot;</span> role=<span class="string">&quot;button&quot;</span>&gt;</span><br><span class="line">                            &lt;span style=<span class="string">&quot;color: #337ab7;&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;glyphicon glyphicon-edit&quot;</span> aria-hidden=<span class="string">&quot;true&quot;</span>&gt;&lt;/span&gt;</span><br><span class="line">                        &lt;/a&gt;</span><br><span class="line">                        &lt;a <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;btn btn-default btn-xs&quot;</span> href=<span class="string">&quot;#&quot;</span> role=<span class="string">&quot;button&quot;</span>&gt;</span><br><span class="line">                            &lt;span style=<span class="string">&quot;color:#d9534f&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;glyphicon glyphicon-floppy-remove&quot;</span> aria-hidden=<span class="string">&quot;true&quot;</span>&gt;&lt;/span&gt;</span><br><span class="line">                        &lt;/a&gt;</span><br><span class="line">                    &lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">                &#123;&#123;/each&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-2-分页显示"><a href="#6-2-分页显示" class="headerlink" title="6.2 分页显示"></a>6.2 分页显示</h3><p>当数据库中数量非常多时，数据需要分批显示，这时就需要用到数据分页功能</p>
+<p>核心要素：</p>
+<ol>
+<li>当前页，用户通过点击上一页或下一页产生，客户端通过get参数方式传递到服务器端</li>
+<li>总页数，根据总页数判断当前页面是否是最后一页，根据判断结果做响应操作</li>
+</ol>
+<p>mongodb限制查询</p>
+<p><code>limit(2) // 限制查询数量 传入每页数据数量</code></p>
+<p><code>skip() // 跳过查询条目数量 传入每页数据的开始位置</code></p>
+<h3 id="6-3-完整实现"><a href="#6-3-完整实现" class="headerlink" title="6.3 完整实现"></a>6.3 完整实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">res.render(<span class="string">&#x27;admin/user&#x27;</span>, &#123;</span><br><span class="line">        users : users,</span><br><span class="line">        page  : page,</span><br><span class="line">        total : total</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> &lt;!-- Footer page --&gt;</span><br><span class="line">        &lt;nav aria-label=<span class="string">&quot;Page navigation&quot;</span> style=<span class="string">&quot;text-align: center;&quot;</span>&gt;</span><br><span class="line">            &lt;ul <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;pagination&quot;</span>&gt;</span><br><span class="line">                &lt;li style=<span class="string">&quot;display: &lt;%= page-0-1 ? &#x27;inline;&#x27; : &#x27;none;&#x27; %&gt;&quot;</span>&gt;</span><br><span class="line">                    &lt;a href=<span class="string">&quot;/admin/user?page=&lt;%=page-1%&gt;&quot;</span> aria-label=<span class="string">&quot;Previous&quot;</span>&gt;</span><br><span class="line">                        &lt;span aria-hidden=<span class="string">&quot;true&quot;</span>&gt;&amp;laquo;&lt;/span&gt;</span><br><span class="line">                    &lt;/a&gt;</span><br><span class="line">                &lt;/li&gt;</span><br><span class="line">                &lt;% <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">1</span>; i&lt;=total; i++)&#123; %&gt;</span><br><span class="line">                    &lt;li&gt;<span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/admin/user?page=&lt;%=i%&gt;&quot;</span>&gt;</span>&#123;&#123;i&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span>&lt;/li&gt;</span><br><span class="line">                    &lt;%&#125; </span><br><span class="line">                %&gt;</span><br><span class="line">                &lt;li style=<span class="string">&quot;display: &lt;%= page-0+1 &gt; total ? &#x27;none;&#x27; : &#x27;inline;&#x27; %&gt;&quot;</span>&gt;</span><br><span class="line">                    &lt;a href=<span class="string">&quot;/admin/user?page=&lt;%=page-0+1%&gt;&quot;</span> aria-label=<span class="string">&quot;Next&quot;</span>&gt;</span><br><span class="line">                        &lt;span aria-hidden=<span class="string">&quot;true&quot;</span>&gt;&amp;raquo;&lt;/span&gt;</span><br><span class="line">                    &lt;/a&gt;</span><br><span class="line">                &lt;/li&gt;</span><br><span class="line">            &lt;/ul&gt;</span><br><span class="line">        &lt;/nav&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-4-修改用户"><a href="#6-4-修改用户" class="headerlink" title="6.4 修改用户"></a>6.4 修改用户</h3><h2 id="7-数据分页"><a href="#7-数据分页" class="headerlink" title="7.数据分页"></a>7.数据分页</h2><p>mongoose-sex-page</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pagination = <span class="built_in">require</span>(<span class="string">&#x27;mongoose-sex-page&#x27;</span>);</span><br><span class="line">pagination(集合构造函数).page(<span class="number">1</span>).size(<span class="number">20</span>).dispkay(<span class="number">8</span>).exec();</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-mongodb数据库添加账号"><a href="#8-mongodb数据库添加账号" class="headerlink" title="8.mongodb数据库添加账号"></a>8.mongodb数据库添加账号</h2><ol>
+<li><p>以管理员身份运行PowerShell</p>
+</li>
+<li><p>连接数据库mongo</p>
+</li>
+<li><p>查看数据库 show dbs</p>
+</li>
+<li><p>切换到admin数据库 use admin</p>
+</li>
+<li><p>创建超级管理员账号 db.createUser()</p>
+<p><code>db.createUser(&#123;user:&#39;root&#39;,pwd:&#39;LINKSTART&#39;,roles:[&#39;root&#39;]&#125;</code></p>
+</li>
+<li><p>切换到blog数据 use blog</p>
+</li>
+<li><p>创建普通账号 db.createUser()</p>
+<p><code>db.createUser(&#123;user:&#39;blogadmin&#39;,pwd:&#39;admin&#39;,roles:[&#39;readWrite&#39;]&#125;)</code></p>
+</li>
+<li><p>卸载mongodb服务</p>
+<ol>
+<li>停止服务 net stop mongodb</li>
+<li>mongod –remove</li>
+</ol>
+</li>
+<li><p>创建mongodb服务</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod -<span class="literal">-logpath</span>=<span class="string">&quot;C:\Program Files\MongoDB\Server\4.2\log\mongod.log&quot;</span> -<span class="literal">-dbpath</span>=<span class="string">&quot;C:\Program Files\MongoDB\Server\4.2\data&quot;</span> -<span class="literal">-install</span> <span class="literal">-auth</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="10">
+<li>启动mongodb服务</li>
+</ol>
+<p>在项目中使用账号连接数据库</p>
+<p>mongoose.connect(‘mongodb://blogadmin:LINKSTART@localhost:/blog’)</p>
+<h2 id="9-开发环境与生产环境"><a href="#9-开发环境与生产环境" class="headerlink" title="9.开发环境与生产环境"></a>9.开发环境与生产环境</h2><p>环境，就是指项目运行的地方，当项目处于开发阶段，项目运行在开放人员的电脑上，项目所处的环境就是开发环境。当项目开发完成以后，将项目发到真实的网站服务器中运行，项目所处的环境就是生产环境。</p>
+<p>为什么要区分开发环境与生成环境</p>
+<p>因为在不同的环境中，项目的配置是不一样的，需要在项目代码中判断当前项目的运行环境，根据不同的环境应用不同的配置</p>
+<p>将当前环境设置进系统变量之中。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NODE_ENV = development <span class="regexp">//</span> production</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(process.env.NODE_ENV == development)&#123;</span><br><span class="line">    <span class="comment">// 开发环境</span></span><br><span class="line">    <span class="comment">// app.use(morgan(&#x27;dev&#x27;));</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">// 生产环境</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>npm install morgan</p>
+<p><code>app.use(morgan(&#39;dev&#39;));</code></p>
+<h2 id="10-config"><a href="#10-config" class="headerlink" title="10.config"></a>10.config</h2><p>允许开发人员将不同运行环境下的应用配置信息抽离到单独的文件中，模块内部会自动判断当前应用的运行环境，并读取对应的配置信息，极大降低了提供应用配置信息的维护成本，避免了当运行环境重复多次切换时，手动到代码中修改配置信息</p>
+<ol>
+<li><p>npm install config</p>
+</li>
+<li><p>新建 config 文件</p>
+</li>
+<li><p>/config/ 新建 default.json, development.json, production.json</p>
+</li>
+<li><p>require导入</p>
+</li>
+<li><p>使用模块内部提供的get方法获取配置信息</p>
+</li>
+</ol>
+<p>将敏感信息存储在环境变量中</p>
+<h2 id="11-文章评论"><a href="#11-文章评论" class="headerlink" title="11.文章评论"></a>11.文章评论</h2><ol>
+<li>创建评论集合</li>
+<li>判断用户是否登录，如果用户登录，再允许用户提交评论表单</li>
+<li>在服务器端创建文章评论功能对应路由</li>
+<li>在路由请求处理函数中接收客户端传递过来的评论信息</li>
+<li>将评论信息存储在评论集合中</li>
+<li>将页面重定向到文章详情页面</li>
+</ol>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-11-25");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-08-06T16:00:00.000Z" itemprop="datePublished">2020-08-07</time>
+
+    , 最后修改于&nbsp;<time datetime="2020-11-25T09:26:27.958Z" itemprop="dateModified">2020-11-25</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/blog/categories/FrontEnd/'>FrontEnd</a>
+
+<a class="post-categories-list-item" href='/blog/categories/FrontEnd/BackEnd/'>BackEnd</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/blog/tags/Node-js/" rel="tag">#&nbsp;Node.js</a>
+
+<a class="post-tags-list-item" href="/blog/tags/Express/" rel="tag">#&nbsp;Express</a>
+
+<a class="post-tags-list-item" href="/blog/tags/MongoDB/" rel="tag">#&nbsp;MongoDB</a>
+
+<a class="post-tags-list-item" href="/blog/tags/ProjectPractice/" rel="tag">#&nbsp;ProjectPractice</a>
+
+<a class="post-tags-list-item" href="/blog/tags/Art-template/" rel="tag">#&nbsp;Art-template</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/blog/2020/08/07/FontEnd-2020-8-MobileWeb-flex/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">移动WEB开发之flex布局</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/blog/2020/08/07/FontEnd-2020-8-WEBAPI/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">WEB API</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="vcomments"></div>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = ''.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = '' === 'true';
+    var verify = '' === 'true';
+    new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        appId: "process.env.VALINEID",
+        appKey: "process.env.VALINEKEY",
+        placeholder: "Just go go",
+        meta: guest_info,
+        pageSize:'10',
+        avatar:'retro',
+        lang:'zh-cn',
+        guest_info: guest_info,
+        visitor: true
+    });
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://qijieh.gitee.io/blog">Qijieh's Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    Hosted on <a target="_blank" href="https://github.com/QiJieH" rel="nofollow noopener noreferrer noopener">Github Pages</a>
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+            <span id="http://qijieh.gitee.io/blog" class="leancloud-visitors" data-flag-title="Qijieh&#39;s Blog">
+    <span></span><!--
+ --><span class="leancloud-visitors-count">0</span><!--
+ --><span> Visitor |</span>
+</span>
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2019;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/blog/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>
