@@ -1,0 +1,71 @@
+name: Deploy GitHub Pages And Gitee Pages
+on:
+  push:
+    branches:
+      - master
+jobs:
+  # 构建并部署
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 拉取仓库代码
+      - name: Checkout
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+
+      # 构建
+      - name: Build
+        env:
+          # 注意在 Settings->Secrets 配置 VSSUE_CLIENT_ID : OAuth Apps
+          # VSSUEID: ${{ secrets.VSSUE_CLIENT_ID }}
+          # VSSUESECRET: ${{ secrets.VSSUE_CLIENT_SECRET }}
+          VALINEID: ${{ secrets.VALINE_APP_ID }}
+          VALINEKEY: ${{ secrets.VALINE_APP_KEY }}
+        run: npm install
+        run: cd themes/suka
+        run: npm install --production
+        run: cd ../..
+        run: npm run clean && npm run build
+
+      # 部署到分支
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@3.5.9
+        with:
+          # 注意在 Settings->Secrets 配置 ACCESS_TOKEN : Personal access tokens
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          # 需要部署的分支
+          BRANCH: gh-pages
+          # vue项目 build 目录
+          FOLDER: public
+          
+  # 同步 gitee 并 更新 giteepages
+  sync-to-gitee:
+    needs: build-and-deploy
+    runs-on: ubuntu-latest
+    steps:
+      # 克隆项目至 gitee
+      - name: Sync to Gitee
+        uses: wearerequired/git-mirror-action@v1.0.1
+        env:
+            # 注意在 Settings->Secrets 配置 GITEE_RSA_PRIVATE_KEY : id_rsa
+            # 个人设置 -> SSH公钥 -> 上传公钥
+            SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
+        with:
+            # 注意替换为你的 GitHub 源仓库地址 SSH
+            source-repo: "git@github.com:QiJieH/blog.git"
+            # 注意替换为你的 Gitee 目标仓库地址
+            destination-repo: "git@gitee.com:qijieh/blog.git"
+
+      # 更新部署 gitee pages
+      - name: Build Gitee Pages
+        uses: yanglbme/gitee-pages-action@v1.1.3
+        with:
+            # 注意替换为你的 Gitee 用户名
+            gitee-username: QiJieH
+            # 注意在 Settings->Secrets 配置 GITEE_PASSWORD : gitee password
+            gitee-password: ${{ secrets.GITEE_PASSWORD }}
+            # 注意替换为你的 Gitee 仓库
+            gitee-repo: qijieh/blog
+            # 部署分支
+            branch: gh-pages
