@@ -22,11 +22,7 @@ jobs:
           # VSSUESECRET: ${{ secrets.VSSUE_CLIENT_SECRET }}
           VALINEID: ${{ secrets.VALINE_APP_ID }}
           VALINEKEY: ${{ secrets.VALINE_APP_KEY }}
-        run: npm install
-        run: cd themes/suka
-        run: npm install --production
-        run: cd ../..
-        run: npm run clean && npm run build
+        run: npm install && cd themes/suka && npm install --production && cd ../.. && npm run clean && npm run build
 
       # 部署到分支
       - name: Deploy
