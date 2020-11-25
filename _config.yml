@@ -104,7 +104,9 @@ theme: suka
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+- type: 'git'
+  repo: 'git@github.com:QiJieH/blog.git'
+  branch: 'gh-pages'
 
 # Theme config
 suka_theme:
