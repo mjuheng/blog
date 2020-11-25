@@ -1,7 +1,6 @@
 ---
 title: DOM 事件进阶
 date: 2020-08-07
-sidebar: false
 categories:
  - FrontEnd
 tags:
