@@ -18,7 +18,7 @@ head:
   #   To get or check favicons visit: https://realfavicongenerator.net
   favicon:
     # You should use a image/x-icon type icon and configure it here.
-    ico: /img/suka-favicon.ico
+    ico: /img/favicon.ico
     # 16x16 png
     small:
     # 32x32 png
@@ -65,7 +65,7 @@ footer:
   # Another example, you can setup 'Hosted on Coding Pages' as:
   #   custom_text: 'Hosted on <a href="https://pages.coding.me" rel="nofollow noopener noreferrer">Coding Pages</a>'
   # Muilt line footer text is supported.
-  custom_text: 'Hosted on <a href="https://github.com/QiJieH" rel="nofollow noopener noreferrer">Github Pages</a>'
+  custom_text: 'Hosted on <a href="https://github.com/QiJieH/blog" rel="nofollow noopener noreferrer">Github Pages</a>'
 
 # ---------------------------------------------------------------
 # Customize Settings
@@ -73,7 +73,12 @@ footer:
 uiux:
   # Muilt line slogan is supported.
   slogan: 
-    - hello world.
+    - "Talk is cheap, show me the code."
+    # Talk is cheap. Show me the code.
+    # Stay hungry Stay foolish
+    # You build it, You run it.
+    # go big or go home
+    # Eating our own dog food
   # For most link color except post color
   link_color: 
   primary_color:
@@ -81,7 +86,7 @@ uiux:
   bg_color: 
 
 img:
-  avatar: '/img/author.jpg'
+  avatar: '/img/avatar.png'
 
 # ---------------------------------------------------------------
 # Menu Settings
@@ -190,8 +195,8 @@ comment:
     client_id:
     client_secret:
   valine:
-    leancloud_appId: process.env.VALINEID # leancloud application app id
-    leancloud_appKey: process.env.VALINEKEY # leancloud application app key
+    leancloud_appId: 'pTzaoyKfCTw4zkLCI6m5SUz1-gzGzoHsz' # leancloud application app id
+    leancloud_appKey: '5aCoVNPllel3XXlnHpbJ3gtl' # leancloud application app key
     pageSize: 10 # comment list page size
     avatar: retro # gravatar style https://valine.js.org/#/avatar
     lang: zh-cn # i18n

@@ -3,8 +3,8 @@ title: Ajax 编程基础
 date: 2020-08-25
 sidebar: false
 categories:
- - FrontEnd
- - BackEnd
+ - [FrontEnd]
+ - [BackEnd]
 tags:
  - Ajax
  - Node.js

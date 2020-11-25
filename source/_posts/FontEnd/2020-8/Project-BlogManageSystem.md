@@ -3,8 +3,8 @@ title: "[项目实战] 多人博客管理系统"
 date: 2020-08-07
 sidebar: false
 categories:
- - FrontEnd
- - BackEnd
+ - [FrontEnd]
+ - [BackEnd]
 tags:
  - ProjectPractice
  - Node.js

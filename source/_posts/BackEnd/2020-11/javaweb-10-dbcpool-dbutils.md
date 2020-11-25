@@ -3,8 +3,8 @@ title: Java Web(十) 数据库连接池和DBUtils
 date: 2020-11-2
 sidebar: false
 categories:
- - BackEnd
- - FrontEnd
+ - [BackEnd]
+ - [FrontEnd]
 tags:
  - Java Web
  - Java
